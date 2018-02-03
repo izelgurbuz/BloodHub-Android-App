@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">BloodHub</string>
+    <string name="bloodType_prompt">Choose a Blood Type</string>
+
+    <string-array name="bloodType_arrays">
+        <item>ABRh+</item>
+        <item>ABRh-</item>
+        <item>ARh+</item>
+        <item>ARh-</item>
+        <item>BRh+</item>
+        <item>BRh-</item>
+        <item>0Rh+</item>
+        <item>0Rh-</item>
+    </string-array>
+</resources>
