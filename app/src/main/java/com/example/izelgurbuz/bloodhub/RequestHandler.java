@@ -1,4 +1,6 @@
 package com.example.izelgurbuz.bloodhub;
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
@@ -29,7 +31,7 @@ public class RequestHandler {
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(15000);
             conn.setConnectTimeout(15000);
-            conn.setRequestMethod("POST");
+            conn.setRequestMethod("GET");
             conn.setDoInput(true);
             conn.setDoOutput(true);
 
@@ -37,8 +39,11 @@ public class RequestHandler {
 
             BufferedWriter writer = new BufferedWriter(
                     new OutputStreamWriter(os, "UTF-8"));
+
+
             writer.write(getPostDataString(postDataParams));
 
+            Log.e("RequestHandlerPost Data",getPostDataString(postDataParams));
             writer.flush();
             writer.close();
             os.close();
