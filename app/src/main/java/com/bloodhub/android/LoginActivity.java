@@ -1,13 +1,16 @@
-package com.example.izelgurbuz.bloodhub;
+package com.bloodhub.android;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
+
+import com.bloodhub.izelgurbuz.bloodhub.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,6 +40,10 @@ public class LoginActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 userLogin();
+
+
+
+
             }
         });
 
@@ -47,9 +54,11 @@ public class LoginActivity extends AppCompatActivity{
                 //open register screen
                 finish();
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
             }
         });
     }
+
 
     private void userLogin() {
         //first getting the values
@@ -92,22 +101,27 @@ public class LoginActivity extends AppCompatActivity{
                 try {
                     //converting response to json object
                     JSONObject obj = new JSONObject(s);
-
+                    Log.e("JSONOBJEsi:  ", obj.toString(4));
                     //if no error in response
-                    if (!obj.getBoolean("error")) {
-                        Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
+
+                    Log.e("JSONERROR:  ", obj.getString("error"));
+
+                    if (obj.getString("error").equals("FALSE")) {
+                        JSONObject userInstance = obj.getJSONObject("user");
+
+                        //Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
                         //getting the user from the response
-                        JSONObject userJson = obj.getJSONObject("user");
+
 
                         //creating a new user object
                         User user = new User(
-                                userJson.getInt("id"),
-                                userJson.getString("username"),
-                                userJson.getString("email")
+                                userInstance.getInt("id"),
+                                userInstance.getString("username"),
+                                userInstance.getString("email")
 
                         );
-
+                        Log.e("USERNAME:  ", ""+user.getUsername());
                         //storing the user in shared preferences
                         SharedPreferencesManager.getInstance(getApplicationContext()).userLogin(user);
 
@@ -115,7 +129,7 @@ public class LoginActivity extends AppCompatActivity{
                         finish();
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     } else {
-                        Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -139,5 +153,7 @@ public class LoginActivity extends AppCompatActivity{
 
         UserLogin ul = new UserLogin();
         ul.execute();
+
+
     }
 }

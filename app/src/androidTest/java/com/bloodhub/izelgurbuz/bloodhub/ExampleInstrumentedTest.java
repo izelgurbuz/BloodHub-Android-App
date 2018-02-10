@@ -1,4 +1,4 @@
-package com.example.izelgurbuz.bloodhub;
+package com.bloodhub.izelgurbuz.bloodhub;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
