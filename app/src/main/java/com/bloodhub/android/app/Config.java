@@ -1,4 +1,4 @@
-package com.example.izelgurbuz.bloodhub.app;
+package com.bloodhub.android.app;
 
 /**
  * Created by mustafaculban on 3.02.2018.

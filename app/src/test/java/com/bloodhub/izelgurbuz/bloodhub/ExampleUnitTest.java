@@ -1,4 +1,4 @@
-package com.example.izelgurbuz.bloodhub;
+package com.bloodhub.izelgurbuz.bloodhub;
 
 import org.junit.Test;
 

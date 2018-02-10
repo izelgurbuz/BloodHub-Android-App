@@ -1,4 +1,4 @@
-package com.example.izelgurbuz.bloodhub.utils;
+package com.bloodhub.android.utils;
 
 /**
  * Created by mustafaculban on 3.02.2018.
@@ -33,8 +33,8 @@ import java.util.Date;
 import java.util.List;
 
 
-import com.example.izelgurbuz.bloodhub.R;
-import com.example.izelgurbuz.bloodhub.app.Config;
+import com.bloodhub.izelgurbuz.bloodhub.R;
+import com.bloodhub.android.app.Config;
 
 /**
  * Created by Ravi on 31/03/15.

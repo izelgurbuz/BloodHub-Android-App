@@ -1,6 +1,5 @@
-package com.example.izelgurbuz.bloodhub;
+package com.bloodhub.android;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,9 +10,8 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.izelgurbuz.bloodhub.app.Config;
+import com.bloodhub.izelgurbuz.bloodhub.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -42,7 +40,7 @@ public class LoginActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 userLogin();
-                saveFirebaseToken();
+
 
 
 
@@ -61,14 +59,7 @@ public class LoginActivity extends AppCompatActivity{
         });
     }
 
-    private void saveFirebaseToken(){
-        SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
-        String regId = pref.getString("regId", null);
 
-
-
-        Toast.makeText(getApplicationContext(), regId, Toast.LENGTH_SHORT).show();
-    }
     private void userLogin() {
         //first getting the values
         final String username = editTextUsername.getText().toString();
@@ -162,5 +153,7 @@ public class LoginActivity extends AppCompatActivity{
 
         UserLogin ul = new UserLogin();
         ul.execute();
+
+
     }
 }

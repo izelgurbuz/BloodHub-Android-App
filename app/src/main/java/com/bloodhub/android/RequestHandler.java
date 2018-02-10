@@ -1,4 +1,4 @@
-package com.example.izelgurbuz.bloodhub;
+package com.bloodhub.android;
 import android.util.Log;
 
 import java.io.BufferedReader;
@@ -66,9 +66,52 @@ public class RequestHandler {
         return sb.toString();
     }
 
+    public String sendGetRequest(String requestURL, HashMap<String, String> postDataParams) {
+        URL url;
+
+        StringBuilder sb = new StringBuilder();
+        try {
+            url = new URL(requestURL);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setReadTimeout(15000);
+            conn.setConnectTimeout(15000);
+            conn.setRequestMethod("GET");
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            OutputStream os = conn.getOutputStream();
+
+            BufferedWriter writer = new BufferedWriter(
+                    new OutputStreamWriter(os, "UTF-8"));
+
+
+            writer.write(getPostDataString(postDataParams));
+
+            Log.e("RequestHandlerPost Data",getPostDataString(postDataParams));
+            writer.flush();
+            writer.close();
+            os.close();
+            int responseCode = conn.getResponseCode();
+
+            if (responseCode == HttpsURLConnection.HTTP_OK) {
+
+                BufferedReader br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+                sb = new StringBuilder();
+                String response;
+
+                while ((response = br.readLine()) != null) {
+                    sb.append(response);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return sb.toString();
+    }
 
     //this method is converting keyvalue pairs data into a query string as needed to send to the server
-    private String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
+    public String getPostDataString(HashMap<String, String> params) throws UnsupportedEncodingException {
         StringBuilder result = new StringBuilder();
         boolean first = true;
         for (Map.Entry<String, String> entry : params.entrySet()) {

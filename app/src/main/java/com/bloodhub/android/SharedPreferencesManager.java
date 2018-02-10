@@ -1,4 +1,4 @@
-package com.example.izelgurbuz.bloodhub;
+package com.bloodhub.android;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;

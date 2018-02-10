@@ -1,17 +1,15 @@
-package com.example.izelgurbuz.bloodhub;
+package com.bloodhub.android;
 
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import java.lang.Object;
 import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -20,23 +18,17 @@ import java.util.HashMap;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.bloodhub.android.app.Config;
+import com.bloodhub.android.utils.NotificationUtils;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import com.example.izelgurbuz.bloodhub.R;
-import com.example.izelgurbuz.bloodhub.app.Config;
-import com.example.izelgurbuz.bloodhub.utils.NotificationUtils;
-
+import com.bloodhub.izelgurbuz.bloodhub.R;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -52,6 +44,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         //if the user is already logged in we will directly start the profile activity
         if (SharedPreferencesManager.getInstance(this).isLoggedIn()) {

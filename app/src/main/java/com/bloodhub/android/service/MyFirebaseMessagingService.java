@@ -1,24 +1,29 @@
-package com.example.izelgurbuz.bloodhub.service;
+package com.bloodhub.android.service;
 
 /**
  * Created by mustafaculban on 3.02.2018.
  */
 
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.example.izelgurbuz.bloodhub.MainActivity;
-import com.example.izelgurbuz.bloodhub.utils.NotificationUtils;
+import com.bloodhub.android.app.Config;
+import com.bloodhub.android.utils.NotificationUtils;
+import com.bloodhub.android.MainActivity;
+import com.bloodhub.izelgurbuz.bloodhub.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.example.izelgurbuz.bloodhub.app.Config;
 
 /**
  * Created by Ravi Tamada on 08/08/16.
@@ -59,15 +64,31 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     private void handleNotification(String message) {
         if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
             // app is in foreground, broadcast the push message
-            Intent pushNotification = new Intent(Config.PUSH_NOTIFICATION);
-            pushNotification.putExtra("message", message);
-            LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
+//            LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
 
-            // play notification sound
-            NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
-            notificationUtils.playNotificationSound();
+            Intent intent = new Intent( this , MainActivity.class );
+            intent.putExtra("message", message);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            PendingIntent resultIntent = PendingIntent.getActivity( this , 0, intent,
+                    PendingIntent.FLAG_ONE_SHOT);
+
+            Uri notificationSoundURI = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            NotificationCompat.Builder mNotificationBuilder = new NotificationCompat.Builder( this)
+                    .setSmallIcon(R.mipmap.ic_launcher)
+                    .setContentTitle("Android Tutorial Point FCM Tutorial")
+                    .setContentText(message)
+                    .setAutoCancel( true )
+                    .setSound(notificationSoundURI)
+                    .setContentIntent(resultIntent);
+
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            notificationManager.notify(0, mNotificationBuilder.build());
+
         }else{
             // If the app is in background, firebase itself handles the notification
+            Log.e("back", "handleNotification: "+"background" );
         }
     }
 

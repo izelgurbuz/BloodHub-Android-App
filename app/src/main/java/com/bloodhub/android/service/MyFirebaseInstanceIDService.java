@@ -1,4 +1,4 @@
-package com.example.izelgurbuz.bloodhub.service;
+package com.bloodhub.android.service;
 
 /**
  * Created by mustafaculban on 3.02.2018.
@@ -9,10 +9,9 @@ import android.content.SharedPreferences;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+import com.bloodhub.android.app.Config;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
-
-import com.example.izelgurbuz.bloodhub.app.Config;
 
 /**
  * Created by Ravi Tamada on 08/08/16.
@@ -49,4 +48,6 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         editor.putString("regId", token);
         editor.commit();
     }
+
+
 }
