@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bloodhub.izelgurbuz.bloodhub.R;
+import com.bloodhub.android.R;
 import com.bloodhub.android.app.Config;
 
 import org.json.JSONException;

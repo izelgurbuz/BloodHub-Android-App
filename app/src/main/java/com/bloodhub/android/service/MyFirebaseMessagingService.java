@@ -18,7 +18,7 @@ import android.util.Log;
 import com.bloodhub.android.app.Config;
 import com.bloodhub.android.utils.NotificationUtils;
 import com.bloodhub.android.MainActivity;
-import com.bloodhub.izelgurbuz.bloodhub.R;
+import com.bloodhub.android.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 

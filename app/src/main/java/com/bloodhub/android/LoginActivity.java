@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.bloodhub.izelgurbuz.bloodhub.R;
+import com.bloodhub.android.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;

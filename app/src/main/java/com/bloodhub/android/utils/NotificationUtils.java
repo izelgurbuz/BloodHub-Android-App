@@ -33,7 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 
-import com.bloodhub.izelgurbuz.bloodhub.R;
+import com.bloodhub.android.R;
 import com.bloodhub.android.app.Config;
 
 /**

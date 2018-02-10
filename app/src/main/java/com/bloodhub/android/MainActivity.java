@@ -28,7 +28,7 @@ import com.bloodhub.android.app.Config;
 import com.bloodhub.android.utils.NotificationUtils;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import com.bloodhub.izelgurbuz.bloodhub.R;
+import com.bloodhub.android.R;
 
 
 public class MainActivity extends AppCompatActivity {
