@@ -7,9 +7,11 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
+import android.widget.Spinner;
 import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,10 +33,13 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.bloodhub.android.R;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    EditText editTextUsername, editTextEmail, editTextPassword;
+    EditText editTextUsername, editTextEmail, editTextPassword, editTextFirstName, editTextSurName,
+            editTextIdentity, editTextAddress, editTextTelephone;
+    Spinner spinner;
 
+    String bloodType = "";
     private static final String TAG = MainActivity.class.getSimpleName();
     private BroadcastReceiver mRegistrationBroadcastReceiver;
     private TextView txtRegId, txtMessage;
@@ -55,9 +60,14 @@ public class MainActivity extends AppCompatActivity {
         }
 
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
+        editTextFirstName =  (EditText) findViewById(R.id.editTextFirstName);
+        editTextSurName = (EditText) findViewById(R.id.editTextSurName);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextIdentity = (EditText) findViewById(R.id.editTextIdentityNumber);
+        spinner = (Spinner) findViewById(R.id.spinner1);
 
+        editTextAddress = (EditText) findViewById(R.id.editTextAddress);
         txtRegId = (TextView) findViewById(R.id.txt_reg_id);
         txtMessage = (TextView) findViewById(R.id.txt_push_message);
 
@@ -107,7 +117,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
             }
         });
+
+        spinner.setOnItemSelectedListener(this);
+
     }
+
+
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+        // An item was selected. You can retrieve the selected item using
+        bloodType = (String)parent.getItemAtPosition(pos);
+        //Log.e(TAG, "Selected Item: : " + parent.getItemAtPosition(pos));
+
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    }
+
     //public boolean isEmpty(String str) {
       // return str.length() == 0;
 

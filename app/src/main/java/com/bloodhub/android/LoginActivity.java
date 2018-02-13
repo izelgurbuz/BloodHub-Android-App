@@ -42,8 +42,6 @@ public class LoginActivity extends AppCompatActivity{
                 userLogin();
 
 
-
-
             }
         });
 
@@ -108,6 +106,7 @@ public class LoginActivity extends AppCompatActivity{
 
                     if (obj.getString("error").equals("FALSE")) {
                         JSONObject userInstance = obj.getJSONObject("user");
+
 
                         //Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
