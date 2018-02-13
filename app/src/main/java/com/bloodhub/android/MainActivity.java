@@ -32,7 +32,7 @@ import com.google.firebase.messaging.FirebaseMessaging;
 
 import com.bloodhub.android.R;
 
-
+//izii
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     EditText editTextUsername, editTextEmail, editTextPassword, editTextFirstName, editTextSurName,
