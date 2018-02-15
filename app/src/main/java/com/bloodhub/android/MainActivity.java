@@ -30,10 +30,13 @@ import com.bloodhub.android.app.Config;
 import com.bloodhub.android.utils.NotificationUtils;
 import com.google.firebase.messaging.FirebaseMessaging;
 
-import com.bloodhub.android.R;
+/***************/
 
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+
+
+
 
     EditText editTextUsername, editTextEmail, editTextPassword, editTextFirstName, editTextSurName,
             editTextIdentity, editTextAddress, editTextTelephone;
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
