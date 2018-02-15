@@ -14,40 +14,9 @@
     </string-array>
 
 
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="openDrawer">open_drawer</string>
-    <string name="closeDrawer">close_drawer</string>
 
-    <!-- Navigation Drawer menu labels -->
-    <string name="nav_home">Home</string>
-    <string name="nav_map">Map</string>
-    <string name="nav_blog">Blog</string>
-    <string name="nav_sendNotification">Send Notification</string>
-    <string name="nav_profile">Profile</string>
-    <string name="nav_myNotifications">My Notifications</string>
-    <string name="nav_receivedNotifications">Received Notifications</string>
-    <string name="nav_EM5">EM5</string>
-    <string name="nav_contact">Contact</string>
-    <string name="nav_about">About Us</string>
-    <!-- Toolbar titles when navigation menu item is selected -->
-    <string-array name="nav_item_activity_titles">
-        <item>Home</item>
-        <item>Map</item>
-        <item>Blog</item>
-        <item>Send Notification</item>
-        <item>Profile</item>
-        <item>My Notifications</item>
-        <item>Received Notifications</item>
-        <item>EM5</item>
-        <item>Contact</item>
-        <item>About Us</item>
-    </string-array>
+        <string name="navigation_drawer_open">Open navigation drawer</string>
+        <string name="navigation_drawer_close">Close navigation drawer</string>
 
-    <string name="activity_title_about_us">About Us</string>
-    <string name="activity_title_privacy_policy">Privacy Policy</string>
-    <string name="action_clear_all">Clear All</string>
-    <string name="action_logout">Logout</string>
-    <string name="action_mark_all_read">Mark All as Read</string>
-    <string name="privacy_policy">Privacy Policy</string>
-</resources>
+        <string name="action_settings">Settings</string>
+    </resources>
