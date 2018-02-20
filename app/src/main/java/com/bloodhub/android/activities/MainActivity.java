@@ -1,9 +1,7 @@
-package com.bloodhub.android;
+package com.bloodhub.android.activities;
 
 import android.os.StrictMode;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,7 +12,6 @@ import android.os.AsyncTask;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,7 +33,12 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.widget.TextView;
 
+import com.bloodhub.android.Constants;
+import com.bloodhub.android.R;
+import com.bloodhub.android.RequestHandler;
+import com.bloodhub.android.SharedPreferencesManager;
 import com.bloodhub.android.app.Config;
+import com.bloodhub.android.model.User;
 import com.bloodhub.android.utils.NotificationUtils;
 import com.google.firebase.messaging.FirebaseMessaging;
 
@@ -63,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // ADDING MENU START
         Toolbar toolbar;
         //getSupportActionBar().hide();//Ocultar ActivityBar anterior
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -85,6 +88,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // ADDING MENU END
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);

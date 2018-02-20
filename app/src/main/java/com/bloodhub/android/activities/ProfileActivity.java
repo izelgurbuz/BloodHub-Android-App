@@ -1,4 +1,4 @@
-package com.bloodhub.android;
+package com.bloodhub.android.activities;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
@@ -8,8 +8,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bloodhub.android.Constants;
 import com.bloodhub.android.R;
+import com.bloodhub.android.RequestHandler;
+import com.bloodhub.android.SharedPreferencesManager;
 import com.bloodhub.android.app.Config;
+import com.bloodhub.android.model.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -38,6 +42,8 @@ public class ProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+
+
         //if the user is not logged in
         //starting the login activity
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
@@ -65,7 +71,6 @@ public class ProfileActivity extends AppCompatActivity {
         try {
             obj = new JSONObject(ret);
             if (obj.getString("error").equals("FALSE")) {
-                JSONObject userInstance = obj.getJSONObject("success");
                 Toast.makeText(getApplicationContext(), obj.getString("success"), Toast.LENGTH_SHORT).show();
             }
             else{
@@ -89,6 +94,17 @@ public class ProfileActivity extends AppCompatActivity {
             public void onClick(View view) {
                 finish();
                 SharedPreferencesManager.getInstance(getApplicationContext()).logout();
+            }
+        });
+
+        //if user presses on not registered
+        findViewById(R.id.textViewNotification).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open register screen
+                finish();
+                startActivity(new Intent(getApplicationContext(), CreateNotificationActivity.class));
+
             }
         });
     }
