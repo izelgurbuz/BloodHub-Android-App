@@ -133,6 +133,8 @@ public class LoginActivity extends AppCompatActivity{
                         //storing the user in shared preferences
                         SharedPreferencesManager.getInstance(getApplicationContext()).userLogin(user);
 
+
+
                         //starting the profile activity
                         finish();
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));

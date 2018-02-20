@@ -66,6 +66,9 @@ public class ProfileActivity extends AppCompatActivity {
         //getting the current user
         User user = SharedPreferencesManager.getInstance(this).getUser();
 
+
+
+
         String ret = saveFirebaseToken(regId, user.getID());
         JSONObject obj = null;
         try {

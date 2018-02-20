@@ -306,10 +306,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         User user = new User(
                                 userJson.getInt("id"),
                                 userJson.getString("username"),
-                                userJson.getString("email")
+                                userJson.getString("email"),
+                                userJson.getString("surname"),
+                                userJson.getString("firstname"),
+                                userJson.getString("bloodType"),
+                                userJson.getString("birthdate"),
+                                userJson.getString("address")
 
                         );
-
                         //storing the user in shared preferences
                         SharedPreferencesManager.getInstance(getApplicationContext()).userLogin(user);
 
