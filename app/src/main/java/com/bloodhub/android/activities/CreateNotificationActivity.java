@@ -5,9 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bloodhub.android.Constants;
@@ -25,10 +30,20 @@ import java.util.HashMap;
  * Created by izelgurbuz on 3.02.2018.
  */
 
-public class CreateNotificationActivity extends AppCompatActivity{
+public class CreateNotificationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-    EditText editTextUsername, editTextPassword,
+    EditText editTextlocation, editTexthospitalName,
     editTextnameSurname;
+
+    private CheckBox checkBoxSMS, checkBoxPush, checkBoxMail;
+
+    Spinner spinner;
+
+    String Spinnerblood_type , realBlood_Type;
+
+    String notification_type;
+
+    int senderID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,20 +57,59 @@ public class CreateNotificationActivity extends AppCompatActivity{
             startActivity(new Intent(this, LoginActivity.class));
         }
 
+        spinner = (Spinner) findViewById(R.id.blood_spinner);
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.bloodType_arrays, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
+        spinner.setOnItemSelectedListener(this);
+
         User user = SharedPreferencesManager.getInstance(this).getUser();
 
-        editTextUsername = (EditText) findViewById(R.id.editTextUsername);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
+        editTextlocation = (EditText) findViewById(R.id.editTextlocation);
+        editTexthospitalName = (EditText) findViewById(R.id.editTexthospitalName);
         editTextnameSurname = (EditText) findViewById(R.id.editTextnameSurname);
 
         editTextnameSurname.setText(user.getFirstname() + " " + user.getSurname());
 
+        senderID = user.getID();
+
+        checkBoxSMS = (CheckBox) findViewById(R.id.checkbox_sms);
+        checkBoxMail = (CheckBox) findViewById(R.id.checkbox_mail);
+        checkBoxPush = (CheckBox) findViewById(R.id.checkbox_push);
+
         //if user presses on login
         //calling the method login
-        findViewById(R.id.buttonLogin).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.buttonNotification).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                userLogin();
+
+                if(!checkBoxSMS.isChecked() && !checkBoxMail.isChecked() && !checkBoxPush.isChecked()){
+                    checkBoxSMS.setError("You have to select One of the checkboxes");
+
+                }
+                else if (TextUtils.isEmpty(editTextnameSurname.getText())){
+                    editTextnameSurname.setError( "Full Name is required!" );
+                    editTextnameSurname.setHint("Full Name is required!" );
+                    editTextnameSurname.requestFocus();
+                }
+                //validating inputs
+                else if (TextUtils.isEmpty(editTextlocation.getText())) {
+                    editTextlocation.setError("Please enter the Location");
+                    editTextlocation.requestFocus();
+
+                }
+
+                else if (TextUtils.isEmpty(editTexthospitalName.getText())) {
+                    editTexthospitalName.setError("Please enter Hospital Name");
+                    editTexthospitalName.requestFocus();
+                }
+
+                else
+                    sendBloodRequest();
 
 
             }
@@ -73,28 +127,101 @@ public class CreateNotificationActivity extends AppCompatActivity{
         });
     }
 
+    public void onCheckboxClicked(View view) {
+        // Is the view now checked?
+        boolean checked = ((CheckBox) view).isChecked();
 
-    private void userLogin() {
+        // Check which checkbox was clicked
+        switch(view.getId()) {
+            case R.id.checkbox_sms:
+                if (checked) {
+
+                    checkBoxPush.setChecked(false);
+                    checkBoxMail.setChecked(false);
+                    notification_type = "sms";
+
+                }
+                break;
+
+            case R.id.checkbox_push:
+                if (checked) {
+                    checkBoxSMS.setChecked(false);
+                    checkBoxMail.setChecked(false);
+                    notification_type = "push";
+
+
+                }
+                    break;
+            case R.id.checkbox_mail:
+                if (checked){
+                    checkBoxPush.setChecked(false);
+                    checkBoxSMS.setChecked(false);
+                    notification_type = "mail";
+                }
+                break;
+
+        }
+        Log.e("notification_type", notification_type);
+    }
+
+
+    public void onItemSelected(AdapterView<?> parent, View view,
+                               int pos, long id) {
+        // An item was selected. You can retrieve the selected item using
+        Spinnerblood_type = (String) parent.getItemAtPosition(pos);
+        switch (Spinnerblood_type){
+            case "ABRh+":
+                realBlood_Type = "AB%2B";
+                break;
+            case "ABRh-":
+                realBlood_Type = "AB-";
+                break;
+            case "ARh+":
+                realBlood_Type = "A%2B";
+                break;
+            case "ARh-":
+                realBlood_Type = "A-";
+                break;
+            case "BRh+":
+                realBlood_Type = "B%2B";
+                break;
+            case "BRh-":
+                realBlood_Type = "B-";
+                break;
+            case "0Rh+":
+                realBlood_Type = "0%2B";
+                break;
+            case "0Rh-":
+                realBlood_Type = "0-";
+                break;
+
+        }
+        Log.e("kan grubu", realBlood_Type);
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        // Another interface callback
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        CreateNotificationActivity.this.finish();
+    }
+
+    private void sendBloodRequest() {
+
         //first getting the values
-        final String username = editTextUsername.getText().toString();
-        final String password = editTextPassword.getText().toString();
+        final String location = editTextlocation.getText().toString();
+        final String hospital = editTexthospitalName.getText().toString();
+        final String nameSurname = editTextnameSurname.getText().toString();
 
-        //validating inputs
-        if (TextUtils.isEmpty(username)) {
-            editTextUsername.setError("Please enter your username");
-            editTextUsername.requestFocus();
-            return;
-        }
 
-        if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Please enter your password");
-            editTextPassword.requestFocus();
-            return;
-        }
+
 
         //if everything is fine
 
-        class UserLogin extends AsyncTask<Void, Void, String> {
+        class BloodRequest extends AsyncTask<Void, Void, String> {
 
             ProgressBar progressBar;
 
@@ -121,11 +248,12 @@ public class CreateNotificationActivity extends AppCompatActivity{
                     Log.e("JSONERROR:  ", obj.getString("error"));
 
                     if (obj.getString("error").equals("FALSE")) {
-                        JSONObject userInstance = obj.getJSONObject("user");
+                        //JSONObject userInstance = obj.getJSONObject("user");
 
 
-                        //Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getApplicationContext(), obj.getString("success"), Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         //getting the user from the response
 
 
@@ -141,8 +269,8 @@ public class CreateNotificationActivity extends AppCompatActivity{
                         SharedPreferencesManager.getInstance(getApplicationContext()).userLogin(user);
                         */
                         //starting the profile activity
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        //
+                        //startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     } else {
                         Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
                     }
@@ -158,15 +286,20 @@ public class CreateNotificationActivity extends AppCompatActivity{
 
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
-                params.put("email", username);
-                params.put("password", password);
+
+                params.put("name_surname", nameSurname);
+                params.put("notificationType", notification_type);
+                params.put("bloodType", realBlood_Type);
+                params.put("location", location);
+                params.put("hospitalName", hospital);
+                params.put("senderID", senderID+"");
 
                 //returing the response
-                return requestHandler.sendPostRequest(Constants.URL_Login, params);
+                return requestHandler.sendPostRequest(Constants.URL_sendBloodRequest, params);
             }
         }
 
-        UserLogin ul = new UserLogin();
+        BloodRequest ul = new BloodRequest();
         ul.execute();
 
 

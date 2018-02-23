@@ -105,12 +105,13 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //open register screen
-                finish();
+                //finish();
                 startActivity(new Intent(getApplicationContext(), CreateNotificationActivity.class));
 
             }
         });
     }
+
 
     private String saveFirebaseToken(String token, int ID){
         RequestHandler r = new RequestHandler();

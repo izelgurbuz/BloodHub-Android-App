@@ -16,6 +16,8 @@ public class Constants {
 
     public static final String URL_Login=ROOT_URL+"login/"+secret_Key;
 
+    public static final String URL_sendBloodRequest=ROOT_URL+"sendBloodRequest/"+secret_Key;
+
     public static final String URL_ListUsers=ROOT_URL+"getUsers/"+secret_Key;
 
 
