@@ -104,6 +104,16 @@
             android:text="Wanna create Notification \n lets create one"
             android:textAlignment="center"
             android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+        <TextView
+            android:id="@+id/textViewreceivedNotification"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Wanna go to my received Notis Notification \n lets create one"
+            android:textAlignment="center"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+
 
         <Button
             android:id="@+id/buttonLogout"

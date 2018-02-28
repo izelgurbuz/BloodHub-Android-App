@@ -110,6 +110,15 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+        findViewById(R.id.textViewreceivedNotification).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open register screen
+                //finish();
+                startActivity(new Intent(getApplicationContext(), myReceivedNotificationActivity.class));
+
+            }
+        });
     }
 
 
