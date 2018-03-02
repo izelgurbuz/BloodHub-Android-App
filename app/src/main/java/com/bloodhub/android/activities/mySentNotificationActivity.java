@@ -1,5 +1,4 @@
 package com.bloodhub.android.activities;
-
 import android.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
@@ -31,27 +30,25 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static android.R.attr.data;
-import static com.bloodhub.android.R.id.editTextPassword;
-import static com.bloodhub.android.R.id.editTextUsername;
-import static com.bloodhub.android.R.id.msg;
+import static com.bloodhub.android.R.raw.notifications;
 
 /**
- * Created by izelgurbuz on 28.02.2018.
+ * Created by izelgurbuz on 2.03.2018.
  */
 
-public class myReceivedNotificationActivity extends AppCompatActivity {
+public class mySentNotificationActivity extends AppCompatActivity {
 
     int uid;
-    myReceivedNotificationActivity thisclass = this;
+    mySentNotificationActivity thisclass = this;
     LinearLayout lm;
     LinearLayout.LayoutParams params;
     LinkedHashMap<Integer, Notification> notifications = new LinkedHashMap<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_myreceivednotifications);
+        setContentView(R.layout.activity_mysentnotifications);
         lm = (LinearLayout) findViewById(R.id.linearMain);
         // create the layout params that will be used to define how your
         // button will be displayed
@@ -63,13 +60,9 @@ public class myReceivedNotificationActivity extends AppCompatActivity {
         }
         uid = SharedPreferencesManager.getInstance(this).getUser().getID();
 
-        displayReceivedNotifications();
-
-
-
+        displaySentNotifications();
     }
-
-    private void displayReceivedNotifications() {
+    private void displaySentNotifications() {
 
 
 
@@ -101,7 +94,7 @@ public class myReceivedNotificationActivity extends AppCompatActivity {
 
                     if (obj.getString("error").equals("FALSE")) {
 
-                        JSONArray jsonarray = new JSONArray((obj.getString("receivedNotifications")));
+                        JSONArray jsonarray = new JSONArray((obj.getString("sentNotifications")));
                         for (int i = 0; i < jsonarray.length(); i++) {
                             JSONObject jsonobject = jsonarray.getJSONObject(i);
                             int id = jsonobject.getInt("id");
@@ -165,8 +158,8 @@ public class myReceivedNotificationActivity extends AppCompatActivity {
                                     bundle.putString("titlestr", titlestr);
                                     bundle.putInt("patientID",patientID);
                                     bundle.putInt("bloodRequestID",bloodRequestID);
-                                    bundle.putString("class","r");
 
+                                    bundle.putString("class","s");
                                     Intent i = new Intent(thisclass, notificationResponseActivity.class);
                                     i.putExtras(bundle);
                                     //i.putExtra("titlestr", titlestr);
@@ -196,7 +189,7 @@ public class myReceivedNotificationActivity extends AppCompatActivity {
 
                         Toast.makeText(getApplicationContext(), "halelujah", Toast.LENGTH_SHORT).show();
 
-                        Log.e("gulbelea","lala");
+
 
 
                         //finish();
@@ -220,7 +213,7 @@ public class myReceivedNotificationActivity extends AppCompatActivity {
 
 
                 //returing the response
-                return requestHandler.sendPostRequest(Constants.URL_getReceivedNotification, params);
+                return requestHandler.sendPostRequest(Constants.URL_getSentNotification, params);
             }
         }
 
@@ -229,8 +222,6 @@ public class myReceivedNotificationActivity extends AppCompatActivity {
 
 
     }
+
+
 }
-
-
-
-

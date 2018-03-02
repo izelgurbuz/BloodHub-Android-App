@@ -22,5 +22,11 @@ public class Constants {
 
     public static final String URL_ListUsers=ROOT_URL+"getUsers/"+secret_Key;
 
+    public static final String URL_saveReceiverCondition=ROOT_URL+"saveReceiverCondition/"+secret_Key;
+
+    public static final String URL_getSentNotification=ROOT_URL+"getSentNotification/"+secret_Key;
+
+
+
 
 }

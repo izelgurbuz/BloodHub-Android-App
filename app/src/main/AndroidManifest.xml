@@ -40,6 +40,10 @@
             android:theme="@style/AppTheme.NoActionBar"
             />
         <activity
+            android:name=".activities.mySentNotificationActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
+        <activity
             android:name=".activities.notificationResponseActivity"
             android:theme="@style/AppTheme.NoActionBar"
             />

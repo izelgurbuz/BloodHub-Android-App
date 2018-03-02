@@ -19,20 +19,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="" />
-        <Button
-            android:id="@+id/buttonConfirm"
+        <LinearLayout
+            android:id="@+id/linearButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Confirm" />
-        <Button
-            android:id="@+id/buttonReject"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Reject" />
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <Button
+                android:id="@+id/buttonConfirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Confirm" />
+            <Button
+                android:id="@+id/buttonReject"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Reject" />
+        </LinearLayout>
 
     </LinearLayout>
     <ProgressBar

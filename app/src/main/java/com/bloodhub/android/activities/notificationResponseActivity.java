@@ -40,44 +40,73 @@ import static com.bloodhub.android.R.id.textView;
 public class notificationResponseActivity extends AppCompatActivity {
 
     EditText title, msg;
+    int patientID;
+    int bloodRequestID;
+    String msgstr;
+    String titlestr;
+    User user;
+    String classname ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notificationresponse);
+        if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
 
         Bundle b = getIntent().getExtras();
-        String msgstr = b.getString("msgstr");
-        String titlestr = b.getString("titlestr");
+        msgstr = b.getString("msgstr");
+        titlestr = b.getString("titlestr");
+        patientID = b.getInt("patientID");
+        bloodRequestID = b.getInt("bloodRequestID");
+        classname = b.getString("class");
+
         Log.e("titlestr ", titlestr);
+
+        user = SharedPreferencesManager.getInstance(this).getUser();
 
         title = (EditText) findViewById(R.id.title);
         msg = (EditText) findViewById(R.id.msg);
         title.setText(titlestr);
         msg.setText(msgstr);
-        findViewById(R.id.buttonReject).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendNotificationResponse(0);
+        if(classname.equals("r")){
+            findViewById(R.id.buttonReject).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sendNotificationResponse(-1);
 
 
-            }
-        });
-        findViewById(R.id.buttonConfirm).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendNotificationResponse(1);
+                }
+            });
+            findViewById(R.id.buttonConfirm).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    sendNotificationResponse(1);
 
 
-            }
-        });
+                }
+            });
+
+        }
+        else if(classname.equals("s")){
+            LinearLayout layout = findViewById(R.id.linearButton);
+            layout.setVisibility(View.GONE);
+            Button bu = (Button) findViewById(R.id.buttonReject);
+            bu.setVisibility(View.GONE);
+            findViewById(R.id.buttonConfirm).setVisibility(View.GONE);
 
 
+        }
 
     }
 
     private void sendNotificationResponse(int r) {
 
-        int response = r;
+        final int response = r;
+        final int fpatientID = patientID;
+        final int fdonorID= user.getID();
+        final int fbloodRequestID= bloodRequestID;
         class notificationResponse extends AsyncTask<Void, Void, String> {
 
             ProgressBar progressBar;
@@ -108,9 +137,9 @@ public class notificationResponseActivity extends AppCompatActivity {
                         //JSONObject userInstance = obj.getJSONObject("user");
 
 
-                        //Toast.makeText(getApplicationContext(), obj.getString("success"), Toast.LENGTH_SHORT).show();
-                        //finish();
-                        //startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        Toast.makeText(getApplicationContext(), obj.getString("success"), Toast.LENGTH_SHORT).show();
+                        finish();
+                        startActivity(new Intent(getApplicationContext(), myReceivedNotificationActivity.class));
                         //getting the user from the response
 
 
@@ -144,12 +173,16 @@ public class notificationResponseActivity extends AppCompatActivity {
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
 
-                //params.put("name_surname", nameSurname);
+                params.put("choice", response+"");
+                params.put("patientID", fpatientID+"");
+                params.put("donorID", fdonorID+"");
+                params.put("bloodRequestID", fbloodRequestID+"");
+
 
 
                 //returing the response
-                //return requestHandler.sendPostRequest(Constants.URL_sendBloodRequest, params);
-                return "";
+                return requestHandler.sendPostRequest(Constants.URL_saveReceiverCondition, params);
+
             }
         }
 

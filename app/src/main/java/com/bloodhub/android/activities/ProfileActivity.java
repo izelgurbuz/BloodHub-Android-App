@@ -119,6 +119,15 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+        findViewById(R.id.textViewsentNotification).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open register screen
+                //finish();
+                startActivity(new Intent(getApplicationContext(), mySentNotificationActivity.class));
+
+            }
+        });
     }
 
 
