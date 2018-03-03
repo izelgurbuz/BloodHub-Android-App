@@ -128,6 +128,16 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+        findViewById(R.id.textViewEM5).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open register screen
+                //finish();
+                startActivity(new Intent(getApplicationContext(), EmergencyFiveListActivity.class));
+
+            }
+        });
+
     }
 
 

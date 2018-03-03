@@ -47,6 +47,10 @@
             android:name=".activities.notificationResponseActivity"
             android:theme="@style/AppTheme.NoActionBar"
             />
+        <activity
+            android:name=".activities.EmergencyFiveListActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
 
         <!-- Firebase Notifications -->
         <service android:name=".service.MyFirebaseMessagingService">

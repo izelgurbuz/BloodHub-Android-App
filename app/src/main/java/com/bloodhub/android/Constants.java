@@ -26,6 +26,8 @@ public class Constants {
 
     public static final String URL_getSentNotification=ROOT_URL+"getSentNotification/"+secret_Key;
 
+    public static final String URL_getEM5List=ROOT_URL+"getEM5List/"+secret_Key;
+
 
 
 
