@@ -128,6 +128,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+        
         findViewById(R.id.textViewEM5).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
