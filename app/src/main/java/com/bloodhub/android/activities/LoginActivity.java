@@ -1,4 +1,5 @@
 package com.bloodhub.android.activities;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,6 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
-import com.bloodhub.android.SlidingMenuHelper;
 
 /**
  * Created by izelgurbuz on 3.02.2018.
@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity{
             public void onClick(View view) {
                 //open register screen
                 finish();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), RegisterActivity.class));
 
             }
         });
@@ -127,9 +127,11 @@ public class LoginActivity extends AppCompatActivity{
                                 userInstance.getString("firstname"),
                                 userInstance.getString("bloodType"),
                                 userInstance.getString("birthdate"),
-                                userInstance.getString("address")
+                                userInstance.getString("address"),
+                                userInstance.getString("telephone")
 
-                        );
+
+                                );
                         //Log.e("USERNAME:  ", ""+user.getUsername());
                         //storing the user in shared preferences
                         SharedPreferencesManager.getInstance(getApplicationContext()).userLogin(user);

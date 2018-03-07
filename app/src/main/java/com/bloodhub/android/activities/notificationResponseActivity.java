@@ -30,8 +30,6 @@ import java.util.HashMap;
 import java.util.Map;
 import android.support.v7.app.AppCompatActivity;
 
-import static com.bloodhub.android.R.id.editTextnameSurname;
-import static com.bloodhub.android.R.id.textView;
 
 /**
  * Created by izelgurbuz on 28.02.2018.

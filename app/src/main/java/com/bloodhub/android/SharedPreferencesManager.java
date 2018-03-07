@@ -84,8 +84,10 @@ public class SharedPreferencesManager {
                 sharedPreferences.getString("KEY_FIRSTNAME", null),
                 sharedPreferences.getString("KEY_BLOODTYPE", null),
                 sharedPreferences.getString("KEY_BIRTHDATE", null),
-                sharedPreferences.getString("KEY_ADDRESS", null)
-        );
+                sharedPreferences.getString("KEY_ADDRESS", null),
+                sharedPreferences.getString("KEY_TELEPHONE", null)
+
+                );
     }
 
     //this method will logout the user

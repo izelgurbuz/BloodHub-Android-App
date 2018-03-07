@@ -12,7 +12,7 @@ public class User {
 
     //String firstname, String surname,String bloodType,String birthdate,String address,String telephone,String available,String last_login_ip,
     //String last_login_date, String last_login_time, String last_city ,
-    public User(int id, String username,  String email  , String surname, String firstname  , String bloodType, String birthdate, String address){
+    public User(int id, String username,  String email  , String surname, String firstname  , String bloodType, String birthdate, String address,String telephone){
 
         this.username = username;
         this.email = email;
@@ -21,7 +21,7 @@ public class User {
         this.bloodType = bloodType;
         this.birthdate = birthdate;
         this.address= address;
-        //this.telephone = telephone;
+        this.telephone = telephone;
         //this.available = available;
         //this.last_login_ip = last_login_ip;
         //this.last_login_date =last_login_date;

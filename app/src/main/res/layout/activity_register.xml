@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.bloodhub.android.activities.MainActivity"
-    tools:showIn="@layout/app_bar_main">
+    android:orientation="vertical">
 
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -77,6 +75,16 @@
                 android:hint="IdentityNumber"
                 android:inputType="text" />
 
+            <EditText
+                android:id="@+id/editTextTelephone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:fontFamily="sans-serif"
+                android:hint="Telephone Number"
+                android:inputType="text" />
+
 
             <EditText
                 android:id="@+id/editTextAddress"
@@ -108,6 +116,22 @@
                 android:entries="@array/bloodType_arrays"
                 android:prompt="@string/bloodType_prompt" />
 
+            <EditText
+                android:id="@+id/Birthday"
+                android:clickable="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="datetime"
+                android:focusable="false"
+                android:hint="Birthday"/>
+            <EditText
+                android:id="@+id/editTextBirthdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:hint="doğum tarihini yazar mısın"
+                android:inputType="text" />
 
 
             <Button
@@ -154,4 +178,5 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true" />
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
+
