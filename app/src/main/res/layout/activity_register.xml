@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -12,135 +12,139 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
 
 
             <EditText
                 android:id="@+id/editTextUsername"
+                style="@android:style/Widget.Material.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Username"
+                android:hint="@string/username"
                 android:inputType="text" />
 
             <EditText
                 android:id="@+id/editTextFirstName"
+                style="@android:style/Widget.Material.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Firstname"
+                android:hint="@string/firstname"
                 android:inputType="text" />
 
             <EditText
                 android:id="@+id/editTextSurName"
+                style="@android:style/Widget.Material.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Surname"
+                android:hint="@string/surname"
                 android:inputType="text" />
 
             <EditText
                 android:id="@+id/editTextEmail"
+                style="@android:style/Widget.Material.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="Email"
+                android:hint="@string/email"
                 android:inputType="textEmailAddress" />
 
             <EditText
                 android:id="@+id/editTextPassword"
+                style="@android:style/Widget.Material.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:fontFamily="sans-serif"
-                android:hint="Password"
+                android:hint="@string/password"
                 android:inputType="textPassword" />
 
 
             <EditText
                 android:id="@+id/editTextIdentityNumber"
+                style="@android:style/Widget.Material.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:fontFamily="sans-serif"
-                android:hint="IdentityNumber"
-                android:inputType="text" />
+                android:hint="@string/identitynumber"
+                android:inputType="number" />
 
             <EditText
                 android:id="@+id/editTextTelephone"
+                style="@android:style/Widget.Material.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:fontFamily="sans-serif"
-                android:hint="Telephone Number"
-                android:inputType="text" />
+                android:hint="@string/telephone_number"
+                android:inputType="phone" />
 
 
             <EditText
                 android:id="@+id/editTextAddress"
 
-                android:hint="Your Address"
-                android:inputType="textMultiLine"
-                android:lines="8"
-                android:minLines="6"
-                android:gravity="top|left"
-                android:maxLines="10"
-                android:layout_height="wrap_content"
+                style="@android:style/Widget.Material.EditText"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:scrollbars="vertical"
-                />
+                android:gravity="top|start"
+                android:hint="@string/your_address"
+                android:inputType="textMultiLine"
+                android:lines="8"
+                android:maxLines="10"
+                android:minLines="6"
+                android:scrollbars="vertical" />
 
-
-
-            <TextView android:id="@+id/text"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/textViewBloodType"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="BloodType" />
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/blo_type"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
             <Spinner
                 android:id="@+id/spinner1"
-                android:layout_width="match_parent"
+                style="@android:style/Widget.Material.Spinner.Underlined"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/bloodType_arrays"
-                android:prompt="@string/bloodType_prompt" />
+                android:spinnerMode="dialog"
+                />
 
             <EditText
-                android:id="@+id/Birthday"
-                android:clickable="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="datetime"
-                android:focusable="false"
-                android:hint="Birthday"/>
-            <EditText
                 android:id="@+id/editTextBirthdate"
+                style="@android:style/Widget.Material.EditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:hint="doğum tarihini yazar mısın"
-                android:inputType="text" />
+                android:hint="@string/birthday"
+                android:focusable="false"
+                android:inputType="date" />
 
 
             <Button
                 android:id="@+id/buttonRegister"
+                style="@android:style/Widget.Material.Light.Button.Borderless.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Register" />
+                android:background="@color/colorPrimary"
+                android:text="@string/register"
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/textViewLogin"
@@ -148,7 +152,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Already Registered?\nLogin Here"
+                android:text="@string/already_registered_nlogin_here"
                 android:textAlignment="center"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
@@ -156,27 +160,25 @@
                 android:id="@+id/txt_push_message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_centerHorizontal="true"
                 android:layout_marginTop="40dp"
                 android:gravity="center_horizontal"
                 android:textColor="@color/colorPrimary"
-                android:textSize="26dp" />
+                android:textSize="26sp" />
 
             <TextView
                 android:id="@+id/txt_reg_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true" />
+                />
         </LinearLayout>
     </ScrollView>
+
     <ProgressBar
-        android:visibility="gone"
         android:id="@+id/progressBar"
+        style="@android:style/Widget.Material.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:visibility="gone" />
 
-</LinearLayout>
+</RelativeLayout>
 

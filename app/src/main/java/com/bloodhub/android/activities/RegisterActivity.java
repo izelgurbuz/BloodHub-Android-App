@@ -14,13 +14,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+
 import java.text.SimpleDateFormat;
+
 import android.widget.Spinner;
 import android.widget.Toast;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -46,17 +50,11 @@ import com.bloodhub.android.utils.NotificationUtils;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 
-
-
-
-
-public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
-
-
+public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
     EditText editTextUsername, editTextEmail, editTextPassword, editTextFirstName, editTextSurName,
-            editTextIdentity, editTextAddress, editTextTelephone,editTextBirthdate;
+            editTextIdentity, editTextAddress, editTextTelephone, editTextBirthdate;
     Spinner spinner;
 
     String bloodType = "";
@@ -73,8 +71,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
-
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -88,7 +87,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
 
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
-        editTextFirstName =  (EditText) findViewById(R.id.editTextFirstName);
+        editTextFirstName = (EditText) findViewById(R.id.editTextFirstName);
         editTextSurName = (EditText) findViewById(R.id.editTextSurName);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -102,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         txtRegId = (TextView) findViewById(R.id.txt_reg_id);
         txtMessage = (TextView) findViewById(R.id.txt_push_message);
 
-        edittext= (EditText) findViewById(R.id.Birthday);
+        edittext = (EditText) findViewById(R.id.editTextBirthdate);
 
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -118,14 +117,13 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             }
 
 
-
         };
 
         edittext.setOnClickListener(new android.view.View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
+
                 new DatePickerDialog(RegisterActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -133,7 +131,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         });
 
 
-                mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
 
@@ -180,7 +178,14 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             }
         });
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.bloodType_arrays, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
         spinner.setOnItemSelectedListener(this);
+
 
     }
 
@@ -195,8 +200,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
         // An item was selected. You can retrieve the selected item using
-        bloodType = (String)parent.getItemAtPosition(pos);
-        switch (bloodType){
+        bloodType = (String) parent.getItemAtPosition(pos);
+        switch (bloodType) {
             case "ABRh+":
                 real_bloodType = "AB%2B";
                 break;
@@ -250,6 +255,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         else
             txtRegId.setText("Firebase Reg Id is not received yet!");
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -274,7 +280,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void registerUser() {
-
 
 
         final String username = editTextUsername.getText().toString().trim();
@@ -319,7 +324,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             protected String doInBackground(Void... voids) {
                 //creating request handler object
                 RequestHandler requestHandler = new RequestHandler();
-                Log.e("key","girdi");
+                Log.e("key", "girdi");
 
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
@@ -377,7 +382,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                                 userJson.getString("telephone")
 
 
-                                );
+                        );
                         //storing the user in shared preferences
                         SharedPreferencesManager.getInstance(getApplicationContext()).userLogin(user);
 
@@ -397,8 +402,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         RegisterUser ru = new RegisterUser();
         ru.execute();
     }
-
-
 
 
 }

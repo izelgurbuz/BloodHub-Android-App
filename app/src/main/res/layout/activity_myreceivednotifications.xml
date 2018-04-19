@@ -8,11 +8,11 @@
         android:id="@+id/linearMain"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_centerVertical="true"
+        android:layout_centerVertical="false"
         android:orientation="vertical"
         android:padding="10dp">
 
-        </LinearLayout>
+    </LinearLayout>
     <ProgressBar
         android:visibility="gone"
         android:id="@+id/progressBar"

@@ -13,7 +13,6 @@
         <item>0Rh-</item>
     </string-array>
 
-
     <string name="editTextlocation">Location </string>
     <string name="editTexthospitalName"> Hospital Name </string>
 
@@ -45,4 +44,20 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="dont_have_an_account_nregister_here">Dont\' have an account? Register Here</string>
+    <string name="logo">logo</string>
+    <string name="already_registered_nlogin_here">Already Registered? Login Here</string>
+    <string name="register">Register</string>
+    <string name="birthday">Birthday</string>
+    <string name="bloodtype">BloodType</string>
+    <string name="telephone_number">Telephone Number</string>
+    <string name="your_address">Your Address</string>
+    <string name="surname">Surname</string>
+    <string name="firstname">Firstname</string>
+    <string name="email">Email</string>
+    <string name="identitynumber">IdentityNumber</string>
+    <string name="received_notifications">Received Notifications</string>
 </resources>

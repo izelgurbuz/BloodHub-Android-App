@@ -101,7 +101,7 @@ public class ProfileActivity extends AppCompatActivity {
         });
 
         //if user presses on not registered
-        findViewById(R.id.textViewNotification).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.createNotificationButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //open register screen
@@ -110,7 +110,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
-        findViewById(R.id.textViewreceivedNotification).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.viewReceivedNotificationButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //open register screen
@@ -119,7 +119,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
-        findViewById(R.id.textViewsentNotification).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.viewsentNotificationButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //open register screen
@@ -129,7 +129,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         
-        findViewById(R.id.textViewEM5).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.viewEM5Button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //open register screen

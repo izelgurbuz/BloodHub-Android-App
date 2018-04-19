@@ -48,7 +48,6 @@ public class CreateNotificationActivity extends AppCompatActivity implements Ada
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_notification);
 
@@ -115,16 +114,6 @@ public class CreateNotificationActivity extends AppCompatActivity implements Ada
             }
         });
 
-        //if user presses on not registered
-        findViewById(R.id.textViewRegister).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //open register screen
-                finish();
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-
-            }
-        });
     }
 
     public void onCheckboxClicked(View view) {

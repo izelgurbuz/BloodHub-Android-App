@@ -60,13 +60,9 @@ public class EmergencyFiveListActivity extends AppCompatActivity{
 
         displayEM5();
 
-
-
     }
 
     private void displayEM5() {
-
-
 
         class displayEM5 extends AsyncTask<Void, Void, String> {
 
@@ -100,7 +96,6 @@ public class EmergencyFiveListActivity extends AppCompatActivity{
                         ((TextView)findViewById(R.id.textViewEM5List)).setText("Your EM5 List is as below");
 
                         Toast.makeText(getApplicationContext(), em5list.getString("first_name"), Toast.LENGTH_SHORT).show();
-
 
                         LinearLayout ll = new LinearLayout(thisclass);
                         ll.setOrientation(LinearLayout.HORIZONTAL);
@@ -149,11 +144,6 @@ public class EmergencyFiveListActivity extends AppCompatActivity{
                         fifth_name.setPadding(0,10,0,10);
                         ll5.addView(fifth_name);
                         lm.addView(ll5);
-
-
-
-
-
 
                         //starting the profile activity
                         //finish();

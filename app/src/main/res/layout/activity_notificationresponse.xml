@@ -11,14 +11,19 @@
         android:orientation="vertical"
         android:padding="10dp">
 
-        <EditText android:id="@+id/title"
+        <EditText
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="" />
-        <EditText android:id="@+id/msg"
+            android:text=""
+            android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+        <EditText
+            android:id="@+id/msg"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="" />
+            android:text=""
+            android:textAppearance="@android:style/TextAppearance.Material.Medium" />
         <LinearLayout
             android:id="@+id/linearButton"
             android:layout_width="match_parent"
@@ -29,27 +34,33 @@
 
             <Button
                 android:id="@+id/buttonConfirm"
+                style="@android:style/Widget.Material.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Confirm" />
+
             <Button
                 android:id="@+id/buttonReject"
+                style="@android:style/Widget.Material.Button.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
+                android:background="@color/colorPrimary"
                 android:text="Reject" />
         </LinearLayout>
 
     </LinearLayout>
+
     <ProgressBar
-        android:visibility="gone"
         android:id="@+id/progressBar"
+        style="@android:style/Widget.Material.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true" />
+        android:layout_centerVertical="true"
+        android:visibility="gone" />
 
 </LinearLayout>

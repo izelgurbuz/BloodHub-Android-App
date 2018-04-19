@@ -16,17 +16,18 @@
 
         <EditText
             android:id="@+id/editTextnameSurname"
+            style="@android:style/Widget.Material.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
-            android:fontFamily="sans-serif"
             android:hint="Your Full Name Surname"
             android:inputType="text" />
 
 
         <EditText
             android:id="@+id/editTextlocation"
+            style="@android:style/Widget.Material.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -36,6 +37,7 @@
 
         <EditText
             android:id="@+id/editTexthospitalName"
+            style="@android:style/Widget.Material.EditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
@@ -47,14 +49,15 @@
             android:id="@+id/textViewBloodType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="left"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/blo_type"
-            android:layout_gravity="left"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
         <Spinner
             android:id="@+id/blood_spinner"
+            style="@android:style/Widget.Material.Spinner.Underlined"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:entries="@array/bloodType_arrays" />
@@ -64,56 +67,54 @@
             android:id="@+id/textViewNotification"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="left"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/not_type"
-            android:layout_gravity="left"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="horizontal"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content">
 
-            <CheckBox android:id="@+id/checkbox_sms"
+            <CheckBox
+                android:id="@+id/checkbox_sms"
+                style="@android:style/Widget.Material.CompoundButton.CheckBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".33"
-                android:text="@string/sms"
-                android:onClick="onCheckboxClicked"/>
+                android:onClick="onCheckboxClicked"
+                android:text="@string/sms" />
 
-            <CheckBox android:id="@+id/checkbox_push"
+            <CheckBox
+                android:id="@+id/checkbox_push"
+                style="@android:style/Widget.Material.CompoundButton.CheckBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".33"
-                android:text="@string/push"
-                android:onClick="onCheckboxClicked"/>
+                android:onClick="onCheckboxClicked"
+                android:text="@string/push" />
 
-            <CheckBox android:id="@+id/checkbox_mail"
+            <CheckBox
+                android:id="@+id/checkbox_mail"
+                style="@android:style/Widget.Material.CompoundButton.CheckBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".33"
-                android:text="@string/mail"
-                android:onClick="onCheckboxClicked"/>
+                android:onClick="onCheckboxClicked"
+                android:text="@string/mail" />
 
         </LinearLayout>
+
         <Button
             android:id="@+id/buttonNotification"
+            style="@android:style/Widget.Material.Button.Colored"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
             android:text="Send Notification" />
-
-        <TextView
-            android:id="@+id/textViewRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:layout_marginTop="8dp"
-            android:text="Dont' have an account?\nRegister Here"
-            android:textAlignment="center"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
     </LinearLayout>
 

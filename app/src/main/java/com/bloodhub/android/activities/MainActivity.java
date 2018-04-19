@@ -33,8 +33,16 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //if the user is already logged in we will directly start the profile activity
+        if (SharedPreferencesManager.getInstance(this).isLoggedIn()) {
+            finish();
+            startActivity(new Intent(this, ProfileActivity.class));
+            return;
+        }
         setContentView(R.layout.activity_main);
-
+        if(getSupportActionBar()!= null) {
+            getSupportActionBar().hide();
+        }
         findViewById(R.id.textViewRegister).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
