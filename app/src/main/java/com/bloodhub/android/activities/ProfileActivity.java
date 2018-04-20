@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -47,7 +49,7 @@ import javax.net.ssl.HttpsURLConnection;
 public class ProfileActivity extends BaseActivity {
 
     TextView textViewId, textViewUsername, textViewEmail, textViewGender;
-
+    boolean doubleBackToExitPressedOnce = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +103,6 @@ public class ProfileActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 //open register screen
-                finish();
                 startActivity(new Intent(getApplicationContext(), CreateNotificationActivity.class));
 
             }
@@ -110,7 +111,6 @@ public class ProfileActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 //open register screen
-                finish();
                 startActivity(new Intent(getApplicationContext(), myReceivedNotificationActivity.class));
 
             }
@@ -119,7 +119,6 @@ public class ProfileActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 //open register screen
-                finish();
                 startActivity(new Intent(getApplicationContext(), mySentNotificationActivity.class));
 
             }
@@ -129,7 +128,6 @@ public class ProfileActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 //open register screen
-                finish();
                 startActivity(new Intent(getApplicationContext(), EmergencyFiveListActivity.class));
 
             }
@@ -140,7 +138,6 @@ public class ProfileActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 //open register screen
-                finish();
                 startActivity(new Intent(getApplicationContext(), Homepage.class));
 
             }
@@ -150,8 +147,16 @@ public class ProfileActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 //open register screen
-                finish();
                 startActivity(new Intent(getApplicationContext(), Blog.class));
+
+            }
+        });
+
+        findViewById(R.id.eventMapButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open register screen
+                startActivity(new Intent(getApplicationContext(), EventMap.class));
 
             }
         });
@@ -218,6 +223,26 @@ public class ProfileActivity extends BaseActivity {
             e.printStackTrace();
         }
         return sb.toString();
+    }
+
+
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            this.finishAffinity();
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
 
 

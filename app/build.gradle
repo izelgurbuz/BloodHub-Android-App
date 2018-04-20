@@ -25,7 +25,8 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    // Glide image library
+    compile 'com.google.android.gms:play-services-maps:9.6.0'
+
     compile 'com.android.support:design:26.+'
     compile 'com.android.support:support-v4:26.+'
     compile 'com.github.bumptech.glide:glide:3.7.0'

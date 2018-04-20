@@ -13,6 +13,8 @@
         style="@android:style/Widget.Material.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@color/colorAccent"
         android:padding="8dp"
         android:text="@string/register"
         android:textAlignment="center" />
@@ -22,6 +24,8 @@
         style="@android:style/Widget.Material.Button.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="4dp"
+        android:background="@color/colorAccent"
         android:padding="8dp"
         android:text="@string/login"
         android:textAlignment="center" />

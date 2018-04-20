@@ -66,5 +66,6 @@
     <string name="blog">Blog</string>
     <string name="homepage">Homepage</string>
     <string name="logout">Logout</string>
+    <string name="event_map">Event Map</string>
 
 </resources>

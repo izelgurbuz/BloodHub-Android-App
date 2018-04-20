@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -66,7 +67,7 @@ public class BaseActivity extends Activity {
     }
 
     private void addDrawerItems() {
-        String[] drawerItems = {"Home", "My Alerts", "Emergency 5 List", "Received Notifications", "Create New Blood Alert", "Homepage", "Blog"};
+        String[] drawerItems = {"Home", "My Alerts", "Emergency 5 List", "Received Notifications", "Create New Blood Alert", "Homepage", "Blog", "Event Map"};
         mAdapter = new ArrayAdapter<String>(this, R.layout.drawer_item, drawerItems);
         mDrawerList.setAdapter(mAdapter);
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -76,32 +77,28 @@ public class BaseActivity extends Activity {
                 switch (i) {
                     case 0:
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                        finish();
                         break;
                     case 1:
                         startActivity(new Intent(getApplicationContext(), mySentNotificationActivity.class));
-                        finish();
                         break;
                     case 2:
                         startActivity(new Intent(getApplicationContext(), EmergencyFiveListActivity.class));
-                        finish();
 
                         break;
                     case 3:
                         startActivity(new Intent(getApplicationContext(), myReceivedNotificationActivity.class));
-                        finish();
                         break;
                     case 4:
                         startActivity(new Intent(getApplicationContext(), CreateNotificationActivity.class));
-                        finish();
                         break;
                     case 5:
                         startActivity(new Intent(getApplicationContext(), Homepage.class));
-                        finish();
                         break;
                     case 6:
                         startActivity(new Intent(getApplicationContext(), Blog.class));
-                        finish();
+                        break;
+                    case 7:
+                        startActivity(new Intent(getApplicationContext(), EventMap.class));
                         break;
                     default:
                 }
