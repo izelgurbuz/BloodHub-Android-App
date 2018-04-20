@@ -114,8 +114,8 @@ public class BaseActivity extends Activity {
             @Override
             public void onClick(View view) {
                 finish();
-                Log.d("asdasf", "onClick: asd");
-//                SharedPreferencesManager.getInstance(getApplicationContext()).logout();
+                //Log.d("asdasf", "onClick: asd");
+                SharedPreferencesManager.getInstance(getApplicationContext()).logout();
             }
         });
 
