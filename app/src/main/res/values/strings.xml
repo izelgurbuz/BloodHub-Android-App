@@ -60,4 +60,11 @@
     <string name="email">Email</string>
     <string name="identitynumber">IdentityNumber</string>
     <string name="received_notifications">Received Notifications</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="blog">Blog</string>
+    <string name="homepage">Homepage</string>
+    <string name="logout">Logout</string>
+
 </resources>

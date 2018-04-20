@@ -32,7 +32,7 @@ import java.util.Map;
  * Created by mustafaculban on 3.03.2018.
  */
 
-public class EmergencyFiveListActivity extends AppCompatActivity{
+public class EmergencyFiveListActivity extends BaseActivity {
 
     int uid;
     EmergencyFiveListActivity thisclass = this;
@@ -44,6 +44,7 @@ public class EmergencyFiveListActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergencyfivelist);
+        super.onCreateDrawer(savedInstanceState);
         lm = (LinearLayout) findViewById(R.id.linearMain);
         // create the layout params that will be used to define how your
         // button will be displayed

@@ -40,7 +40,7 @@ import static com.bloodhub.android.R.id.msg;
  * Created by izelgurbuz on 28.02.2018.
  */
 
-public class myReceivedNotificationActivity extends AppCompatActivity {
+public class myReceivedNotificationActivity extends BaseActivity {
 
     int uid;
     myReceivedNotificationActivity thisclass = this;
@@ -52,6 +52,7 @@ public class myReceivedNotificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myreceivednotifications);
+        super.onCreateDrawer(savedInstanceState);
         lm = (LinearLayout) findViewById(R.id.linearMain);
         // create the layout params that will be used to define how your
         // button will be displayed

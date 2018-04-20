@@ -7,31 +7,16 @@
     android:layout_height="match_parent">
 
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        tools:context="com.bloodhub.android.activities.Blog">
 
-
-        <LinearLayout
-            android:id="@+id/linearMain"
+        <WebView
+            android:id="@+id/web_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="false"
-            android:orientation="vertical"
-            android:padding="10dp">
-
-        </LinearLayout>
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:visibility="gone" />
-
-    </LinearLayout>
+            android:layout_height="match_parent" />
+    </android.support.constraint.ConstraintLayout>
 
     <ListView
         android:id="@+id/navList"

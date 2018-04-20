@@ -1,10 +1,21 @@
 package com.bloodhub.android.activities;
+
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.annotation.Nullable;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,16 +44,16 @@ import javax.net.ssl.HttpsURLConnection;
  * Created by izelgurbuz on 3.02.2018.
  */
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends BaseActivity {
 
     TextView textViewId, textViewUsername, textViewEmail, textViewGender;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-
+        super.onCreateDrawer(savedInstanceState);
 
         //if the user is not logged in
         //starting the login activity
@@ -57,16 +68,12 @@ public class ProfileActivity extends AppCompatActivity {
         textViewEmail = (TextView) findViewById(R.id.textViewEmail);
         textViewGender = (TextView) findViewById(R.id.textViewGender);
 
-
         SharedPreferences pref = getApplicationContext().getSharedPreferences(Config.SHARED_PREF, 0);
         String regId = pref.getString("regId", null);
 
 
-
         //getting the current user
         User user = SharedPreferencesManager.getInstance(this).getUser();
-
-
 
 
         String ret = saveFirebaseToken(regId, user.getID());
@@ -75,8 +82,7 @@ public class ProfileActivity extends AppCompatActivity {
             obj = new JSONObject(ret);
             if (obj.getString("error").equals("FALSE")) {
                 Toast.makeText(getApplicationContext(), obj.getString("success"), Toast.LENGTH_SHORT).show();
-            }
-            else{
+            } else {
                 Toast.makeText(getApplicationContext(), "Either there is a problem with server or the user token has already been registered.", Toast.LENGTH_SHORT).show();
             }
         } catch (JSONException e) {
@@ -84,28 +90,18 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
 
-
         //setting the values to the textviews
         textViewId.setText(String.valueOf(user.getID()));
         textViewUsername.setText(user.getUsername());
         textViewEmail.setText(user.getEmail());
 
-        //when the user presses logout button
-        //calling the logout method
-        findViewById(R.id.buttonLogout).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                finish();
-                SharedPreferencesManager.getInstance(getApplicationContext()).logout();
-            }
-        });
 
         //if user presses on not registered
         findViewById(R.id.createNotificationButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //open register screen
-                //finish();
+                finish();
                 startActivity(new Intent(getApplicationContext(), CreateNotificationActivity.class));
 
             }
@@ -114,7 +110,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //open register screen
-                //finish();
+                finish();
                 startActivity(new Intent(getApplicationContext(), myReceivedNotificationActivity.class));
 
             }
@@ -123,18 +119,39 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //open register screen
-                //finish();
+                finish();
                 startActivity(new Intent(getApplicationContext(), mySentNotificationActivity.class));
 
             }
         });
-        
+
         findViewById(R.id.viewEM5Button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //open register screen
-                //finish();
+                finish();
                 startActivity(new Intent(getApplicationContext(), EmergencyFiveListActivity.class));
+
+            }
+        });
+
+
+        findViewById(R.id.homepageButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open register screen
+                finish();
+                startActivity(new Intent(getApplicationContext(), Homepage.class));
+
+            }
+        });
+
+        findViewById(R.id.blogButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open register screen
+                finish();
+                startActivity(new Intent(getApplicationContext(), Blog.class));
 
             }
         });
@@ -142,7 +159,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
 
-    private String saveFirebaseToken(String token, int ID){
+    private String saveFirebaseToken(String token, int ID) {
         RequestHandler r = new RequestHandler();
 
         //Toast.makeText(getApplicationContext(), regId, Toast.LENGTH_SHORT).show();
@@ -150,15 +167,15 @@ public class ProfileActivity extends AppCompatActivity {
         //creating request parameters
         HashMap<String, String> paramss = new HashMap<>();
         paramss.put("token", token);
-        paramss.put("uid", ""+ID);
+        paramss.put("uid", "" + ID);
 
         //returing the response
-        String s = r.sendGetRequest(Constants.URL_addFireBaseToken+"&", paramss);
+        String s = r.sendGetRequest(Constants.URL_addFireBaseToken + "&", paramss);
 
         return s;
     }
 
-    private String sendGetRequest(String requestURL, HashMap<String, String> postDataParams){
+    private String sendGetRequest(String requestURL, HashMap<String, String> postDataParams) {
         RequestHandler r = new RequestHandler();
         URL url;
 
@@ -180,7 +197,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             writer.write(r.getPostDataString(postDataParams));
 
-            Log.e("RequestHandlerPost Data",r.getPostDataString(postDataParams));
+            Log.e("RequestHandlerPost Data", r.getPostDataString(postDataParams));
             writer.flush();
             writer.close();
             os.close();
@@ -202,6 +219,8 @@ public class ProfileActivity extends AppCompatActivity {
         }
         return sb.toString();
     }
+
+
 }
 
 

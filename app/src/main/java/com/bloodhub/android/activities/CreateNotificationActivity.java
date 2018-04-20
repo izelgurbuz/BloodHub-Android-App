@@ -30,7 +30,7 @@ import java.util.HashMap;
  * Created by izelgurbuz on 3.02.2018.
  */
 
-public class CreateNotificationActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class CreateNotificationActivity extends BaseActivity implements AdapterView.OnItemSelectedListener {
 
     EditText editTextlocation, editTexthospitalName,
     editTextnameSurname;
@@ -50,6 +50,7 @@ public class CreateNotificationActivity extends AppCompatActivity implements Ada
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_notification);
+        super.onCreateDrawer(savedInstanceState);
 
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             finish();
