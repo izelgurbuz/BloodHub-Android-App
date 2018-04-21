@@ -55,7 +55,9 @@
         <activity
             android:name=".activities.CreateNotificationActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-
+        <activity
+            android:name=".activities.BloodRequestMapPointActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <!-- Firebase Notifications -->
         <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>

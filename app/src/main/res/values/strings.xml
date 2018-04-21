@@ -27,6 +27,7 @@
     <string name="not_type">Notification Type</string>
 
     <string name="blo_type">Blood Type</string>
+    <string name="locationName">Select Location</string>
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_profile2">ProfileActivity2</string>

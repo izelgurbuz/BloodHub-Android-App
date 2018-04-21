@@ -111,7 +111,10 @@ public class myReceivedNotificationActivity extends BaseActivity {
                             String type = jsonobject.getString("type");
                             String title = jsonobject.getString("title");
                             String datestamp = jsonobject.getString("datestamp");
-                            notifications.put(id,new Notification(id, sentUserID,msg, type, title,datestamp));
+                            double latitude = jsonobject.getDouble("latitude");
+                            double longitude = jsonobject.getDouble("longitude");
+                            String placeName = jsonobject.getString("placeName");
+                            notifications.put(id,new Notification(id, sentUserID,msg, type, title,datestamp, latitude, longitude, placeName));
 
 
                         }
@@ -145,6 +148,11 @@ public class myReceivedNotificationActivity extends BaseActivity {
 
                             final int patientID = notification.getSentUserID();
                             final int bloodRequestID = notification.getId();
+                            final double latitude = notification.getLatitude();
+                            final double longitude = notification.getLongitude();
+                            final String placeName = notification.getPlaceName();
+
+
 
                             // Create Button
                             final Button btn = new Button(thisclass);
@@ -166,6 +174,9 @@ public class myReceivedNotificationActivity extends BaseActivity {
                                     bundle.putString("titlestr", titlestr);
                                     bundle.putInt("patientID",patientID);
                                     bundle.putInt("bloodRequestID",bloodRequestID);
+                                    bundle.putDouble("latitude",latitude);
+                                    bundle.putDouble("longitude",longitude);
+                                    bundle.putString("placeName", placeName);
                                     bundle.putString("class","r");
 
                                     Intent i = new Intent(thisclass, notificationResponseActivity.class);

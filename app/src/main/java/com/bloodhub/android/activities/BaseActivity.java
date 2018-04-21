@@ -100,6 +100,7 @@ public class BaseActivity extends Activity {
                     case 7:
                         startActivity(new Intent(getApplicationContext(), EventMap.class));
                         break;
+
                     default:
                 }
             }

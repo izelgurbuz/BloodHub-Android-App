@@ -30,4 +30,6 @@ public class Constants {
 
     public static final String URL_GetEvents = ROOT_URL + "getEvents/" + secret_Key;
 
+    public static final String URL_getBloodLocations = ROOT_URL + "getBloodCenters/" + secret_Key;
+
 }

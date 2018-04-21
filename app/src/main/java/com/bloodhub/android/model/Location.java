@@ -7,26 +7,34 @@ package com.bloodhub.android.model;
 public class Location {
 
     private String placeName;
-    private double latitute;
-    private double longitude;
+    private String latitute;
+    private String longitude;
+    private int id;
+    private String city;
 
-    public Location(){
-
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
+    public Location(int id, String city, String placeName, String latitute, String longitude){
+        this.id = id;
+        this.city = city;
+        this.placeName = placeName;
+        this.latitute = latitute;
         this.longitude = longitude;
     }
 
-    public double getLatitute() {
+    public Location(){}
+
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+
+    public String getLatitute() {
         return latitute;
     }
 
-    public void setLatitute(double latitute) {
+    public void setLatitute(String latitute) {
         this.latitute = latitute;
     }
 
@@ -37,4 +45,21 @@ public class Location {
     public void setPlaceName(String placeName) {
         this.placeName = placeName;
     }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public int getID() {
+        return id;
+    }
+
+    public void setID(int id) {
+        this.id = id;
+    }
+
 }

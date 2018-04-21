@@ -30,8 +30,24 @@
                 android:hint="Your Full Name Surname"
                 android:inputType="text" />
 
+            <TextView
+                android:id="@+id/textViewLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/locationName"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
-            <EditText
+            <Spinner
+                android:id="@+id/city_spinner"
+                style="@android:style/Widget.Material.Spinner.Underlined"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                />
+
+            <!--<EditText
                 android:id="@+id/editTextlocation"
                 style="@android:style/Widget.Material.EditText"
                 android:layout_width="match_parent"
@@ -49,7 +65,7 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:hint="@string/editTexthospitalName"
-                android:inputType="text" />
+                android:inputType="text" />-->
 
             <TextView
                 android:id="@+id/textViewBloodType"
@@ -60,6 +76,7 @@
                 android:layout_marginTop="8dp"
                 android:text="@string/blo_type"
                 android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
 
             <Spinner
                 android:id="@+id/blood_spinner"
