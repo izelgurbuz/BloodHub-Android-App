@@ -67,7 +67,7 @@ public class BaseActivity extends Activity {
     }
 
     private void addDrawerItems() {
-        String[] drawerItems = {"Home", "My Alerts", "Emergency 5 List", "Received Notifications", "Create New Blood Alert", "Homepage", "Blog", "Event Map"};
+        String[] drawerItems = {"Home", "My Alerts", "Emergency 5 List", "Emergency Five Transaction", "Received Notifications", "Create New Blood Alert", "Homepage", "Blog", "Event Map"};
         mAdapter = new ArrayAdapter<String>(this, R.layout.drawer_item, drawerItems);
         mDrawerList.setAdapter(mAdapter);
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -86,18 +86,21 @@ public class BaseActivity extends Activity {
 
                         break;
                     case 3:
-                        startActivity(new Intent(getApplicationContext(), myReceivedNotificationActivity.class));
+                        startActivity(new Intent(getApplicationContext(), EmergencyFiveTransactionActivity.class));
                         break;
                     case 4:
-                        startActivity(new Intent(getApplicationContext(), CreateNotificationActivity.class));
+                        startActivity(new Intent(getApplicationContext(), myReceivedNotificationActivity.class));
                         break;
                     case 5:
-                        startActivity(new Intent(getApplicationContext(), Homepage.class));
+                        startActivity(new Intent(getApplicationContext(), CreateNotificationActivity.class));
                         break;
                     case 6:
-                        startActivity(new Intent(getApplicationContext(), Blog.class));
+                        startActivity(new Intent(getApplicationContext(), Homepage.class));
                         break;
                     case 7:
+                        startActivity(new Intent(getApplicationContext(), Blog.class));
+                        break;
+                    case 8:
                         startActivity(new Intent(getApplicationContext(), EventMap.class));
                         break;
 
@@ -116,6 +119,8 @@ public class BaseActivity extends Activity {
                 SharedPreferencesManager.getInstance(getApplicationContext()).logout();
             }
         });
+
+
 
     }
 

@@ -1,11 +1,15 @@
 package com.bloodhub.android.activities;
 
+import android.Manifest;
 import android.app.ActionBar;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -23,6 +27,7 @@ import com.bloodhub.android.Constants;
 import com.bloodhub.android.R;
 import com.bloodhub.android.RequestHandler;
 import com.bloodhub.android.SharedPreferencesManager;
+import com.bloodhub.android.model.EmergencyFive;
 import com.bloodhub.android.model.Notification;
 import com.bloodhub.android.model.User;
 
@@ -50,7 +55,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
     EmergencyFiveListActivity thisclass = this;
     LinearLayout lm;
     LinearLayout.LayoutParams params;
-    LinkedHashMap<Integer, Notification> notifications = new LinkedHashMap<>();
+    LinkedHashMap<Integer, EmergencyFive> aEM5list = new LinkedHashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -104,18 +109,125 @@ public class EmergencyFiveListActivity extends BaseActivity {
                     Log.e("JSONERROR:  ", obj.getString("error"));
 
                     if (obj.getString("error").equals("FALSE")) {
-                        JSONObject em5list = obj.getJSONObject("em5list"); //,"UTF-8" ;
+                        JSONObject em5list = obj.getJSONObject("em5List"); //,"UTF-8" ;
+                        JSONArray jsonarray = new JSONArray((em5list.getString("people")));
+
+                        for (int i = 0; i < jsonarray.length(); i++) {
+                            JSONObject jsonobject = jsonarray.getJSONObject(i);
+                            aEM5list.put(jsonobject.getInt("id"),
+                                    new EmergencyFive(
+                                            jsonobject.getInt("id"),
+                                            jsonobject.getString("fullname"),
+                                            jsonobject.getString("email"),
+                                            jsonobject.getInt("status"),
+                                            jsonobject.getString("dateOfRequest"),
+                                            jsonobject.getString("transactionDate"),
+                                            jsonobject.getString("telephone")
+
+                                    ));
+
+
+                        }
+
+                        DisplayMetrics displayMetrics = new DisplayMetrics();
+                        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                        int height = displayMetrics.heightPixels;
+                        int width = displayMetrics.widthPixels;
+
+                        for (Map.Entry<Integer, EmergencyFive> entry : aEM5list.entrySet()) {
+
+
+                            int id = entry.getKey();
+                            final EmergencyFive em5Object = entry.getValue();
+
+                            LinearLayout ll = new LinearLayout(thisclass);
+                            ll.setOrientation(LinearLayout.HORIZONTAL);
+
+
+                            // Create TextView
+                            EditText first_name = new EditText(thisclass);
+                            TextView first_status = new TextView(thisclass);
+                            Button phone_call = new Button(thisclass);
+                            first_name.setLayoutParams(new AppBarLayout.LayoutParams(width / 2, height / 8));
+                            first_status.setLayoutParams(new AppBarLayout.LayoutParams(width / 6, first_name.getLayoutParams().height));
+                            phone_call.setLayoutParams(new AppBarLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                            phone_call.getLayoutParams().height = height / 8;
+                            phone_call.getLayoutParams().width = width / 6;
+                            phone_call.setBackgroundResource(R.drawable.phone);
+
+                            phone_call.setVisibility(View.INVISIBLE);
+
+                            Button sendButton = new Button(thisclass);
+                            sendButton.setLayoutParams(new AppBarLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+                            sendButton.setBackgroundResource(R.drawable.send);
+                            sendButton.getLayoutParams().height = height / 8;
+                            sendButton.getLayoutParams().width = width / 6;
+                            int difference = height / 8 - width / 6;
+
+
+                            sendButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    Log.e("telbuton", "butona tiklandi");
+                                    //method("first", uid);
+                                }
+
+                            });
+                            String status = em5Object.getStatus() == 1 ? "Confirmed" : (em5Object.getStatus() == -1 ? "Rejected" : "Waiting");
+                            first_status.setText(status);
+
+                            //for phone number to be visible
+                            if (em5Object.getStatus() == 1) {
+                                phone_call.setVisibility(View.VISIBLE);
+                                phone_call.setOnClickListener(new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        Log.e("telbutton", "button basildi");
+                                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + em5Object.getTelephone()));
+
+                                        if (ActivityCompat.checkSelfPermission(thisclass, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {}
+                                        startActivity(intent);
+
+                                   }
+
+                                 });
+                                //   } catch (JSONException e) {
+                                //  e.printStackTrace();
+                            }
+
+                            first_name.setText(em5Object.getFullname() + "   " + em5Object.getEmail() );
+                            first_name.setPadding(0,0,0,0);
+                            first_status.setPadding(0,difference/2,0,difference/2);
+                            sendButton.setPadding(0,difference/2,0,difference/2);
+
+                            first_name.setBackgroundResource(R.drawable.rect_text_edit);
+                            first_status.setBackgroundResource(R.drawable.rect_text_edit);
+                            // phone_call.setBackgroundResource(R.drawable.rect_text_edit);
+                            ll.addView(first_name);
+                            ll.addView(first_status);
+                            ll.addView(sendButton);
+                            ll.addView(phone_call);
+
+
+
+
+
+
+                            lm.addView(ll);
+
+
+
+                        }
                         
-                        ((TextView)findViewById(R.id.textViewEM5List)).setText("Your EM5 List is as below");
+                        /*((TextView)findViewById(R.id.textViewEM5List)).setText("Your EM5 List is as below");
 
                         Toast.makeText(getApplicationContext(), em5list.getString("first_name"), Toast.LENGTH_SHORT).show();
 
                         LinearLayout ll = new LinearLayout(thisclass);
                         ll.setOrientation(LinearLayout.HORIZONTAL);
-                        DisplayMetrics displayMetrics = new DisplayMetrics();
-                        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-                        int height = displayMetrics.heightPixels;
-                        int width = displayMetrics.widthPixels;
+
+
+
 
 
                         // Create TextView
@@ -130,6 +242,8 @@ public class EmergencyFiveListActivity extends BaseActivity {
                         sendButton.getLayoutParams().height=height/8;
                         sendButton.getLayoutParams().width=width/6;
                         int difference= height/8 - width/6;
+
+
                         sendButton.setOnClickListener(new View.OnClickListener(){
                           @Override
                          public void onClick(View view) {
@@ -149,10 +263,10 @@ public class EmergencyFiveListActivity extends BaseActivity {
                              //   }
 
                            // });
-                     //   } catch (JSONException e) {
-                  //  e.printStackTrace();
-                }
-                first_name.setText(em5list.getString("first_name") + "   " + em5list.getString("first_email") );
+                            //   } catch (JSONException e) {
+                            //  e.printStackTrace();
+                        }
+                        first_name.setText(em5list.getString("first_name") + "   " + em5list.getString("first_email") );
                         first_name.setPadding(0,0,0,0);
                         first_status.setPadding(0,difference/2,0,difference/2);
                         sendButton.setPadding(0,difference/2,0,difference/2);
@@ -213,6 +327,9 @@ public class EmergencyFiveListActivity extends BaseActivity {
                         ll5.addView(fifth_name);
                         lm.addView(ll5);
 
+                        */
+
+
                         //starting the profile activity
                         //finish();
                         //startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
@@ -246,7 +363,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
 
     }
 
-    private void userLogin(String email, int uid) {
+    private void approveOrReject(String email, int uid) {
 
 
         //if everything is fine

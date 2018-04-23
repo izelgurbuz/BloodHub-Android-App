@@ -152,6 +152,8 @@ public class notificationResponseActivity extends AppCompatActivity {
 
 
                         Toast.makeText(getApplicationContext(), obj.getString("success"), Toast.LENGTH_SHORT).show();
+                        if(response == -1)
+                            finish();
                         //finish();
                         //startActivity(new Intent(getApplicationContext(), myReceivedNotificationActivity.class));
                         //getting the user from the response

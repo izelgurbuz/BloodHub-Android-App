@@ -18,6 +18,6 @@ public class Homepage extends BaseActivity {
         mWebView = (WebView) findViewById(R.id.web_view);
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        mWebView.loadUrl("http://cs491-2.mustafaculban.net/");
+        mWebView.loadUrl("http://cs491-2.mustafaculban.net/?isInsideApp=true");
     }
 }

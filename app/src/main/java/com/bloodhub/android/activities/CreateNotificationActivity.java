@@ -254,8 +254,8 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
     private void sendBloodRequest() {
 
         //first getting the values
-        final String location = editTextlocation.getText().toString();
-        final String hospital = editTexthospitalName.getText().toString();
+        //final String location = editTextlocation.getText().toString();
+        //final String hospital = editTexthospitalName.getText().toString();
         final String nameSurname = editTextnameSurname.getText().toString();
 
 
