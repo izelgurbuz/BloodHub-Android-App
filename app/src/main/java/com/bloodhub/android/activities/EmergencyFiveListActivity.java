@@ -4,16 +4,21 @@ import android.Manifest;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -22,6 +27,8 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.RelativeLayout;
+import android.widget.RelativeLayout.LayoutParams;
 
 import com.bloodhub.android.Constants;
 import com.bloodhub.android.R;
@@ -30,6 +37,7 @@ import com.bloodhub.android.SharedPreferencesManager;
 import com.bloodhub.android.model.EmergencyFive;
 import com.bloodhub.android.model.Notification;
 import com.bloodhub.android.model.User;
+import com.bloodhub.android.views.FabView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -41,6 +49,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static android.R.attr.button;
+import static com.bloodhub.android.R.id.add;
 import static com.bloodhub.android.R.id.editTextPassword;
 import static com.bloodhub.android.R.id.editTextUsername;
 import static com.bloodhub.android.R.id.middle;
@@ -56,6 +65,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
     LinearLayout lm;
     LinearLayout.LayoutParams params;
     LinkedHashMap<Integer, EmergencyFive> aEM5list = new LinkedHashMap<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +83,8 @@ public class EmergencyFiveListActivity extends BaseActivity {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
         }
+
+
 
         uid = SharedPreferencesManager.getInstance(this).getUser().getID();
 
@@ -168,6 +180,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             sendButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
+
                                     Log.e("telbuton", "butona tiklandi");
                                     //method("first", uid);
                                 }
@@ -185,20 +198,21 @@ public class EmergencyFiveListActivity extends BaseActivity {
                                         Log.e("telbutton", "button basildi");
                                         Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + em5Object.getTelephone()));
 
-                                        if (ActivityCompat.checkSelfPermission(thisclass, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {}
+                                        if (ActivityCompat.checkSelfPermission(thisclass, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                                        }
                                         startActivity(intent);
 
-                                   }
+                                    }
 
-                                 });
+                                });
                                 //   } catch (JSONException e) {
                                 //  e.printStackTrace();
                             }
 
-                            first_name.setText(em5Object.getFullname() + "   " + em5Object.getEmail() );
-                            first_name.setPadding(0,0,0,0);
-                            first_status.setPadding(0,difference/2,0,difference/2);
-                            sendButton.setPadding(0,difference/2,0,difference/2);
+                            first_name.setText(em5Object.getFullname() + "   " + em5Object.getEmail());
+                            first_name.setPadding(0, 0, 0, 0);
+                            first_status.setPadding(0, difference / 2, 0, difference / 2);
+                            sendButton.setPadding(0, difference / 2, 0, difference / 2);
 
                             first_name.setBackgroundResource(R.drawable.rect_text_edit);
                             first_status.setBackgroundResource(R.drawable.rect_text_edit);
@@ -209,16 +223,45 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             ll.addView(phone_call);
 
 
-
-
-
-
                             lm.addView(ll);
 
 
-
                         }
-                        
+                        if(jsonarray.length() <5){
+                            Button addNewButton = new Button(thisclass);
+                            addNewButton.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
+                            //addNewButton.setBackgroundResource(R.drawable.send);
+                            //addNewButton.setGravity(Gravity.RIGHT | Gravity.BOTTOM);
+                            addNewButton.setText("+");
+                            addNewButton.setTextColor(Color.WHITE);
+                            addNewButton.setBackgroundColor(Color.RED);
+
+                            //addNewButton.setBackground(getResources().getDrawable(R.drawable.ic_add_white_24px));
+                            //addNewButton.setBackgroundColor(Color.RED);
+                            addNewButton.getLayoutParams().height = height / 15;
+                            addNewButton.getLayoutParams().width = width / 10;
+                            //addNewButton.setGravity(Gravity.RIGHT |Gravity.BOTTOM);
+                            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) addNewButton.getLayoutParams();
+                            params.addRule(RelativeLayout.ALIGN_RIGHT | RelativeLayout.ALIGN_BOTTOM);
+
+                            addNewButton.setLayoutParams(params);
+
+                            addNewButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    startActivity(new Intent(getApplicationContext(), createAEmergencyFivePersonActivity.class));
+                                    finish();
+                                    Log.e("telbuton", "addNewButton tiklandi");
+                                    //method("first", uid);
+                                }
+
+                            });
+                            LinearLayout l = new LinearLayout(thisclass);
+                            l.setOrientation(LinearLayout.HORIZONTAL);
+                            l.addView(addNewButton);
+
+                            lm.addView(l);
+                        }
                         /*((TextView)findViewById(R.id.textViewEM5List)).setText("Your EM5 List is as below");
 
                         Toast.makeText(getApplicationContext(), em5list.getString("first_name"), Toast.LENGTH_SHORT).show();
@@ -434,6 +477,25 @@ public class EmergencyFiveListActivity extends BaseActivity {
         ul.execute();
 
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.emerg5, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }
 

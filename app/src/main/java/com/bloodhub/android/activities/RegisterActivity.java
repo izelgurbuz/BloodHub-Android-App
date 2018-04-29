@@ -181,7 +181,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void updateLabel() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "ddMMyyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         edittext.setText(sdf.format(myCalendar.getTime()));
@@ -354,7 +354,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                     JSONObject obj = new JSONObject(s);
 
                     //if no error in response
-                    if (!obj.getBoolean("error")) {
+                    if (obj.getString("error").equals("FALSE")) {
                         //Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
                         //getting the user from the response

@@ -32,6 +32,9 @@ public class Constants {
 
     public static final String URL_approvePersonalEM5ListRequest = ROOT_URL + "approvePersonalEM5ListRequest/" + secret_Key;
 
+    public static final String URL_addToUsersEM5List = ROOT_URL + "addToUsersEM5List/" + secret_Key;
+
+
     public static final String URL_GetEvents = ROOT_URL + "getEvents/" + secret_Key;
 
     public static final String URL_getBloodLocations = ROOT_URL + "getBloodCenters/" + secret_Key;
