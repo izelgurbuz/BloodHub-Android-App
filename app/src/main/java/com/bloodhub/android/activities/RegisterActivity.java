@@ -13,7 +13,9 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -28,17 +30,21 @@ import com.bloodhub.android.R;
 import com.bloodhub.android.RequestHandler;
 import com.bloodhub.android.SharedPreferencesManager;
 import com.bloodhub.android.app.Config;
+import com.bloodhub.android.model.Location;
 import com.bloodhub.android.model.User;
 import com.bloodhub.android.utils.NotificationUtils;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
@@ -47,6 +53,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     EditText editTextUsername, editTextEmail, editTextPassword, editTextFirstName, editTextSurName,
             editTextIdentity, editTextAddress, editTextTelephone, editTextBirthdate;
     Spinner spinner;
+    Spinner citySpinner;
 
     String bloodType = "";
     String real_bloodType = "";
@@ -58,6 +65,13 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     EditText edittext;
 
 
+    ArrayAdapter<CharSequence> cityAdapter;
+
+    String selectedLocationName;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +79,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
+        citySpinner = (Spinner) findViewById(R.id.city_spinner);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -75,6 +91,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             startActivity(new Intent(this, ProfileActivity.class));
             return;
         }
+        selectedLocationName = "";
 
 
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
@@ -92,7 +109,18 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         txtRegId = (TextView) findViewById(R.id.txt_reg_id);
         txtMessage = (TextView) findViewById(R.id.txt_push_message);
 
+
+
         edittext = (EditText) findViewById(R.id.editTextBirthdate);
+
+
+        cityAdapter = ArrayAdapter.createFromResource(this, R.array.sehirler_arr, android.R.layout.simple_spinner_item);
+        cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        citySpinner.setAdapter(cityAdapter);
+
+
+        citySpinner.setFocusable(true);
+
 
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -154,10 +182,17 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             public void onClick(View view) {
                 //if user pressed on button register
                 //here we will register the user to server
+                if (selectedLocationName == "" || selectedLocationName.equalsIgnoreCase("Please Select One")){
 
-                registerUser();
+                    findViewById(R.id.city_spinner).requestFocus();
+                    findViewById(R.id.city_spinner).performClick();
+                }
+                else
+                    registerUser();
             }
         });
+
+
 
         findViewById(R.id.textViewLogin).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,6 +212,59 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
         spinner.setOnItemSelectedListener(this);
 
+
+        citySpinner.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager imm=(InputMethodManager)getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editTextSurName.getWindowToken(), 0);
+                return false;
+            }
+        }) ;
+
+        findViewById(R.id.spinner1).setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager imm=(InputMethodManager)getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editTextSurName.getWindowToken(), 0);
+                return false;
+            }
+        }) ;
+
+        findViewById(R.id.register_scroolview).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editTextSurName.getWindowToken(), 0);
+
+                return false;
+            }
+        });
+
+
+        citySpinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int pos, long id) {
+
+                selectedLocationName = (String) parent.getItemAtPosition(pos);
+
+                Log.e("sehir",selectedLocationName);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+                selectedLocationName = (String) arg0.getItemAtPosition(0);
+            }
+        });
+
+        Log.e("sehir",selectedLocationName);
 
     }
 
@@ -327,6 +415,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 params.put("identityNum", identity);
                 params.put("bloodType", real_bloodType);
                 params.put("address", address);
+                params.put("city", selectedLocationName);
                 params.put("telephone", telephone);
                 params.put("birthdate", birthdate);
 
@@ -393,6 +482,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         RegisterUser ru = new RegisterUser();
         ru.execute();
     }
+
+
 
 
 }

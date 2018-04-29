@@ -7,6 +7,7 @@
     android:orientation="vertical">
 
     <ScrollView
+        android:id="@+id/register_scroolview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -87,6 +88,24 @@
                 android:layout_marginTop="8dp"
                 android:hint="@string/telephone_number"
                 android:inputType="phone" />
+
+
+            <TextView
+                android:id="@+id/textViewUserCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/user_city"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+            <Spinner
+                android:id="@+id/city_spinner"
+                style="@android:style/Widget.Material.Spinner.Underlined"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:maxHeight="48dp" />
+            />
 
 
             <EditText

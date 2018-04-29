@@ -39,5 +39,8 @@ public class Constants {
 
     public static final String URL_getBloodLocations = ROOT_URL + "getBloodCenters/" + secret_Key;
 
+    public static final String URL_getCities = ROOT_URL + "getCities/" + secret_Key;
+
+
 
 }
