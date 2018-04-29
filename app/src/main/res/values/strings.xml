@@ -116,6 +116,8 @@
     <string name="blo_type">Blood Type</string>
     <string name="locationName">Select Location</string>
 
+    <string name="user_birthdate_reg">Select Your Birthdate</string>
+
 
     <string name="user_city">Select your City</string>
 
