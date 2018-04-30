@@ -163,11 +163,12 @@
     <string name="blog">Blog</string>
     <string name="homepage">Homepage</string>
     <string name="logout">Logout</string>
-    <string name="event_map">Event Map</string>
+    <string name="event_map">Event\nMap</string>
     <string name="options_main">Option Main</string>
     <string name="options_1">Opt 1</string>
     <string name="options_2">Opt 2</string>
     <string name="options_3">Opt 3</string>
     <string name="options_4">Opt 4</string>
+    <string name="em5_transaction">Emergency 5 Transaction</string>
 
 </resources>

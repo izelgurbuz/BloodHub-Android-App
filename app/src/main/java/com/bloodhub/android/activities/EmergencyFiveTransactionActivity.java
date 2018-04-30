@@ -8,10 +8,13 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -62,8 +65,14 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
         lm = (LinearLayout) findViewById(R.id.em5TransactionlinearMain);
         // create the layout params that will be used to define how your
         // button will be displayed
+
         params = new LinearLayout.LayoutParams(
+<<<<<<< HEAD
                 ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT,1.0f);
+=======
+                ActionBar.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lm.setLayoutParams(params);
+>>>>>>> origin/design-rev
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
@@ -109,6 +118,7 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                     if (obj.getString("error").equals("FALSE")) {
 
                         JSONObject JSONem5list = obj.getJSONObject("em5List"); //,"UTF-8" ;
+
                         JSONArray jsonarray = new JSONArray((JSONem5list.getString("people")));
 
                         int j=0;
@@ -120,10 +130,28 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                             ll.setBackgroundResource(R.drawable.my_transaction_layout);
 
                             ll.setOrientation(LinearLayout.HORIZONTAL);
+<<<<<<< HEAD
                             ll.setPadding(10,10,10,10);
+=======
+                            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT
+                            );
+
+                            param.setMargins(0, 12, 0, 12);
+                            ll.setLayoutParams(param);
+>>>>>>> origin/design-rev
 
                             TextView name = new TextView(thisclass);
                             name.setText(jsonobject.getString("fullname"));
+                            param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    1.0f
+                            );
+                            name.setLayoutParams(param);
+                            name.setTextSize(16);
+                            name.setGravity(Gravity.CENTER_VERTICAL);
                             ll.addView(name);
                             name.setPadding(20,20,20,20);
                             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
@@ -149,10 +177,22 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                             TextView status = new TextView(thisclass);
                             status.setText(statustext);
                             final String statusstr= statustext;
+<<<<<<< HEAD
                             if(statustext.equals("Confirmed"))
                                 status.setTextColor(Color.GREEN);
                             else
                                 status.setTextColor(Color.BLACK);
+=======
+                            param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    2.0f
+                            );
+                            status.setLayoutParams(param);
+                            status.setTextSize(12);
+                            status.setGravity(Gravity.CENTER_VERTICAL);
+                            ll.addView(status);
+>>>>>>> origin/design-rev
 
                             ll.addView(status);
                             status.setLayoutParams(param);
@@ -166,12 +206,29 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                             final ImageButton btn = new ImageButton(thisclass);
                             // Give button an ID
                             btn.setId(j + 1);
+<<<<<<< HEAD
                             //btn.setText("->");
                             // set the layoutParams on the button
                             btn.setLayoutParams(params);
                             btn.setImageResource(R.drawable.ic_menu_send);
                             btn.setBackgroundResource(R.drawable.my_transaction_button);
 
+=======
+                            btn.setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_forward));
+                            btn.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
+                            // set the layoutParams on the button
+                            param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    2.0f
+                            );
+                            param.setMargins(0, 4, 0, 4);
+
+
+                            btn.setLayoutParams(param);
+>>>>>>> origin/design-rev
 
                             final int index = j;
                             // Set click listener for button
@@ -191,7 +248,7 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                                     i.putExtras(bundle);
                                     //i.putExtra("titlestr", titlestr);
                                     startActivity(i);
-                                    finish();
+//                                    finish();
 
                                     //Add button to LinearLayout defined in XML
                                     Toast.makeText(getApplicationContext(),
@@ -293,8 +350,7 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                         }*/
 
 
-
-                        Toast.makeText(getApplicationContext(), "halelujah", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "halelujah", Toast.LENGTH_SHORT).show();
 
                         Log.e("gulbelea","lala");
 

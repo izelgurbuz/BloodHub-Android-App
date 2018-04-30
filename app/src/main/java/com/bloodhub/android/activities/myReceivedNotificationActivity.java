@@ -11,7 +11,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -64,7 +66,12 @@ public class myReceivedNotificationActivity extends BaseActivity {
         // create the layout params that will be used to define how your
         // button will be displayed
         params = new LinearLayout.LayoutParams(
+<<<<<<< HEAD
                 ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT,1.0f);
+=======
+                ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+        lm.setLayoutParams(params);
+>>>>>>> origin/design-rev
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
@@ -138,13 +145,28 @@ public class myReceivedNotificationActivity extends BaseActivity {
 
                             LinearLayout ll = new LinearLayout(thisclass);
                             ll.setOrientation(LinearLayout.HORIZONTAL);
+<<<<<<< HEAD
                             //ll.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                             ll.setBackgroundResource(R.drawable.my_transaction_layout);
                             ll.setPadding(10,10,10,10);
+=======
+                            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT
+                            );
+
+                            param.setMargins(0, 12, 0, 12);
+                            ll.setLayoutParams(param);
+>>>>>>> origin/design-rev
 
                             // Create TextView
                             TextView title = new TextView(thisclass);
                             title.setText(notification.getTitle());
+                            param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                                    1.0f
+                            );
                             Log.e("notifi"+id, notification.getDatestamp());
                             title.setPadding(10,10,10,10);
                             /*LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
@@ -167,6 +189,7 @@ public class myReceivedNotificationActivity extends BaseActivity {
 
 
                             final String titlestr= notification.getTitle();
+<<<<<<< HEAD
                             final TextView letter = new TextView(thisclass);
                             letter.setText(titlestr.charAt(0)+"");
                             letter.setTextColor(Color.RED);
@@ -180,6 +203,11 @@ public class myReceivedNotificationActivity extends BaseActivity {
 
 
                             ll.addView(letter);
+=======
+                            title.setLayoutParams(param);
+                            title.setTextSize(16);
+                            title.setGravity(Gravity.CENTER_VERTICAL);
+>>>>>>> origin/design-rev
                             ll.addView(title);
 
 
@@ -204,9 +232,25 @@ public class myReceivedNotificationActivity extends BaseActivity {
                             final ImageButton btn = new ImageButton(thisclass);
                             // Give button an ID
                             btn.setId(j + 1);
+<<<<<<< HEAD
                             //btn.setText("->");
+=======
+                            btn.setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_forward));
+                            btn.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                            btn.setPadding(0, 12, 0, 12);
+>>>>>>> origin/design-rev
                             // set the layoutParams on the button
-                            btn.setLayoutParams(params);
+                            param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                                    5.0f
+                            );
+                            param.setMargins(0, 4, 0, 4);
+
+
+                            btn.setLayoutParams(param);
+
 
                             btn.setImageResource(R.drawable.ic_menu_send);
                             btn.setBackgroundResource(R.drawable.my_transaction_button);

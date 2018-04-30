@@ -57,6 +57,7 @@ import static com.bloodhub.android.R.id.add;
 import static com.bloodhub.android.R.id.editTextPassword;
 import static com.bloodhub.android.R.id.editTextUsername;
 import static com.bloodhub.android.R.id.middle;
+import static com.bloodhub.android.R.id.select_dialog_listview;
 
 /**
  * Created by mustafaculban on 3.03.2018.
@@ -66,7 +67,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
 
     int uid;
     EmergencyFiveListActivity thisclass = this;
-    LinearLayout lm;
+    LinearLayout lm, buttonll;
     LinearLayout.LayoutParams params;
     LinkedHashMap<Integer, EmergencyFive> aEM5list = new LinkedHashMap<>();
 
@@ -77,12 +78,17 @@ public class EmergencyFiveListActivity extends BaseActivity {
         setContentView(R.layout.activity_emergencyfivelist);
         super.onCreateDrawer(savedInstanceState);
         lm = (LinearLayout) findViewById(R.id.linearMain);
+        buttonll = (LinearLayout) findViewById(R.id.buttonll);
         // create the layout params that will be used to define how your
         // button will be displayed
 
         params = new LinearLayout.LayoutParams(
+<<<<<<< HEAD
                 ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT,1.0f);
 
+=======
+                ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+>>>>>>> origin/design-rev
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
@@ -158,13 +164,21 @@ public class EmergencyFiveListActivity extends BaseActivity {
 
                             LinearLayout ll = new LinearLayout(thisclass);
                             ll.setOrientation(LinearLayout.HORIZONTAL);
+<<<<<<< HEAD
                             ll.setBackgroundResource(R.drawable.my_transaction_layout);
 
+=======
+                            ll.setLayoutParams(new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT
+                            ));
+>>>>>>> origin/design-rev
 
                             // Create TextView
                             TextView first_name = new TextView(thisclass);
                             TextView first_status = new TextView(thisclass);
                             ImageButton phone_call = new ImageButton(thisclass);
+<<<<<<< HEAD
 
                             first_name.setPadding(20,20,20,20);
                             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
@@ -206,6 +220,23 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             //sendButton.setOnClickListener(new View.OnClickListener() {
                               //  @Override
                                 //public void onClick(View view) {
+=======
+                            phone_call.setLayoutParams(new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    2.0f));
+                            phone_call.setBackgroundResource(R.drawable.call_icon);
+                            phone_call.setPadding(10, 10, 10, 10);
+                            phone_call.setVisibility(View.INVISIBLE);
+
+                            Button sendButton = new Button(thisclass);
+                            sendButton.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 2.0f));
+                            sendButton.setBackgroundResource(R.drawable.send_button);
+                            sendButton.setPadding(10, 10, 10, 10);
+                            sendButton.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+>>>>>>> origin/design-rev
 
                                   //  Log.e("telbuton", "butona tiklandi");
                                     //method("first", uid);
@@ -214,6 +245,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
                            // });
                             String status = em5Object.getStatus() == 1 ? "Confirmed" : (em5Object.getStatus() == -1 ? "Rejected" : "Waiting");
                             first_status.setText(status);
+                            first_status.setGravity(Gravity.CENTER);
 
                             //for phone number to be visible
                             if (em5Object.getStatus() == 1) {
@@ -240,7 +272,27 @@ public class EmergencyFiveListActivity extends BaseActivity {
 
                             first_name.setText(em5Object.getFullname()  );
 
+<<<<<<< HEAD
 
+=======
+                            first_name.setText(em5Object.getFullname() + "   " + em5Object.getEmail());
+                            first_name.setLayoutParams(new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    1.0f
+                            ));
+                            first_name.setPadding(4, 4, 4, 4);
+                            first_name.setTextSize(16);
+                            first_name.setBackgroundResource(R.drawable.rect_text_edit);
+                            first_status.setBackgroundResource(R.drawable.rect_text_edit);
+                            first_status.setLayoutParams(new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    2.0f
+                            ));
+                            first_status.setTextSize(12);
+                            // phone_call.setBackgroundResource(R.drawable.rect_text_edit);
+>>>>>>> origin/design-rev
                             ll.addView(first_name);
                             ll.addView(first_status);
                             //ll.addView(sendButton);
@@ -257,10 +309,17 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             //addNewButton.setBackgroundResource(R.drawable.send);
                             //addNewButton.setGravity(Gravity.RIGHT | Gravity.BOTTOM);
                             addNewButton.setText("+");
+                            addNewButton.setTextSize(18);
                             addNewButton.setTextColor(Color.WHITE);
 
                             //addNewButton.setBackground(getResources().getDrawable(R.drawable.ic_add_white_24px));
                             //addNewButton.setBackgroundColor(Color.RED);
+<<<<<<< HEAD
+=======
+                            //addNewButton.setGravity(Gravity.RIGHT |Gravity.BOTTOM);
+                            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) addNewButton.getLayoutParams();
+                            params.addRule(RelativeLayout.ALIGN_RIGHT | RelativeLayout.ALIGN_BOTTOM);
+>>>>>>> origin/design-rev
 
                             //addNewButton.setLayoutParams(params);
                             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -289,6 +348,10 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             addBtnLyt.addView(addNewButton);
                             lm.addView(addBtnLyt);
 
+<<<<<<< HEAD
+=======
+                            buttonll.addView(l);
+>>>>>>> origin/design-rev
                         }
                         /*((TextView)findViewById(R.id.textViewEM5List)).setText("Your EM5 List is as below");
 
@@ -410,6 +473,8 @@ public class EmergencyFiveListActivity extends BaseActivity {
                         textViewEM5List.setTextColor(Color.BLACK);
                         lm.addView(textViewEM5List);
                         Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), createAEmergencyFivePersonActivity.class));
+                        finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

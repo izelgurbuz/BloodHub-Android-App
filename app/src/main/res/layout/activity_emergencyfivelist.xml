@@ -8,9 +8,10 @@
     android:layout_height="match_parent">
 
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
         <LinearLayout
@@ -21,9 +22,48 @@
             android:padding="20dp">
 
 
+<<<<<<< HEAD
+=======
+            <TextView
+                android:id="@+id/textViewEM5List"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Emergency Five List"
+                android:textAlignment="center"
+                android:textAppearance="@android:style/TextAppearance.Material.Headline" />
+>>>>>>> origin/design-rev
 
 
-           <!-- <com.bloodhub.android.views.FabView
+            <!-- <com.bloodhub.android.views.FabView
+                android:id="@+id/fab_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="20dp"
+                fab:cFillColor="@color/fabColor"
+                fab:cStrokeColor="@color/fabStrokeColor"
+                fab:cStrokeWidth="2"
+                fab:cSize="NORMAL"
+                fab:cRadius="100"
+                fab:cDrawable="@drawable/ic_add_white_24px"
+                />-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/buttonll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/linearMain"
+            android:layout_toStartOf="@+id/linearMain"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <!-- <com.bloodhub.android.views.FabView
                 android:id="@+id/fab_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -41,7 +81,6 @@
         </LinearLayout>
 
 
-
         <ProgressBar
             android:id="@+id/progressBar"
             style="@android:style/Widget.Material.ProgressBar"
@@ -52,7 +91,7 @@
             android:visibility="gone" />
 
 
-    </RelativeLayout>
+    </LinearLayout>
 
 
 

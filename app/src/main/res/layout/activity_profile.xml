@@ -10,39 +10,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/viewsentNotificationButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imageView4"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal"
-                    android:contentDescription="alert @android:string/fingerprint_icon_content_description"
-                    android:padding="10dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/notification_icon" />
-
-                <TextView
-
+<<<<<<< HEAD
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="My Alerts"
@@ -50,27 +24,20 @@
                     android:textAppearance="@android:style/TextAppearance.Material.Large"
                    />
             </LinearLayout>
+=======
+>>>>>>> origin/design-rev
 
             <LinearLayout
-                android:id="@+id/viewEM5Button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_weight="2"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/imageView5"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center"
-                    android:padding="10dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/emergency5_icon" />
-
-                <TextView
-
+                <LinearLayout
+                    android:id="@+id/viewsentNotificationButton"
                     android:layout_width="match_parent"
+<<<<<<< HEAD
                     android:layout_height="wrap_content"
                     android:text="Emergency 5 List"
                     android:textAlignment="center"
@@ -111,29 +78,70 @@
                     android:textAlignment="center"
                     android:textAppearance="@android:style/TextAppearance.Material.Large"
                     />
+=======
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView4"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:contentDescription="alert @android:string/fingerprint_icon_content_description"
+                        android:padding="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/notification_icon" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="My Alerts"
+                        android:textAlignment="center"
+                        android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/viewEM5Button"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView5"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center"
+                        android:padding="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/emergency5_icon" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Emergency 5 List"
+                        android:textAlignment="center"
+                        android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                </LinearLayout>
+>>>>>>> origin/design-rev
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/createNotificationButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_columnSpan="1"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_weight="2"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal"
-                    android:padding="10dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/create_notification_icon" />
-
-                <TextView
-
+                <LinearLayout
+                    android:id="@+id/viewReceivedNotificationButton"
                     android:layout_width="match_parent"
+<<<<<<< HEAD
                     android:layout_height="wrap_content"
                     android:text="Create New Blood Alert"
                     android:textAlignment="center"
@@ -174,63 +182,138 @@
                     android:textAlignment="center"
                     android:textAppearance="@android:style/TextAppearance.Material.Large"
                     />
+=======
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView3"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:padding="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/received_not_icon" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/received_notifications"
+                        android:textAlignment="center"
+                        android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/createNotificationButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_columnSpan="1"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:padding="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/create_notification_icon" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Create New Blood Alert"
+                        android:textAlignment="center"
+                        android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                </LinearLayout>
+>>>>>>> origin/design-rev
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/blogButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_weight="2"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/imageView7"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal"
-                    android:padding="10dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/blog_icon" />
-
-                <TextView
-
+                <LinearLayout
+                    android:id="@+id/homepageButton"
                     android:layout_width="match_parent"
+<<<<<<< HEAD
                     android:layout_height="wrap_content"
                     android:text="@string/blog"
                     android:textAlignment="center"
                     android:textAppearance="@android:style/TextAppearance.Material.Large"
                     />
-            </LinearLayout>
-        </LinearLayout>
+=======
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:baselineAligned="false"
-            android:orientation="horizontal">
+                    <ImageView
+                        android:id="@+id/imageView6"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:padding="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/homepage_icon" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/homepage"
+                        android:textAlignment="center"
+                        android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/blogButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:padding="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/blog_icon" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/blog"
+                        android:textAlignment="center"
+                        android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                </LinearLayout>
+>>>>>>> origin/design-rev
+            </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/eventMapButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:orientation="vertical">
+                android:layout_weight="2"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
-                <ImageView
-                    android:id="@+id/imageView8"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_gravity="center_horizontal"
-                    android:padding="10dp"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/event_map_icon" />
-
-                <TextView
-
+                <LinearLayout
+                    android:id="@+id/eventMapButton"
                     android:layout_width="match_parent"
+<<<<<<< HEAD
                     android:layout_height="wrap_content"
                     android:text="@string/event_map"
                     android:textAlignment="center"
@@ -245,25 +328,76 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical"></LinearLayout>
+=======
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
 
-        </LinearLayout>
+                    <ImageView
+                        android:id="@+id/imageView8"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:padding="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/event_map_icon" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/event_map"
+                        android:textAlignment="center"
+                        android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/em5TransactionButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imageView9"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_gravity="center_horizontal"
+                        android:padding="10dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/emergency5transcation_icon" />
+
+                    <TextView
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/em5_transaction"
+                        android:textAlignment="center"
+                        android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                </LinearLayout>
+>>>>>>> origin/design-rev
+
+            </LinearLayout>
 
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone">
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
 
-            <TableRow>
+                <TableRow>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="Id"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Id"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
+<<<<<<< HEAD
                 <TextView
                     android:id="@+id/textViewId"
                     android:layout_width="wrap_content"
@@ -272,91 +406,100 @@
                     android:text="1"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     />
+=======
+                    <TextView
+                        android:id="@+id/textViewId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="1"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+>>>>>>> origin/design-rev
 
-            </TableRow>
+                </TableRow>
 
-            <TableRow>
+                <TableRow>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="@string/username"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="@string/username"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-                <TextView
-                    android:id="@+id/textViewUsername"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="probelalkhan"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                    <TextView
+                        android:id="@+id/textViewUsername"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="probelalkhan"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-            </TableRow>
+                </TableRow>
 
-            <TableRow>
+                <TableRow>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="Email"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Email"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-                <TextView
-                    android:id="@+id/textViewEmail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="probelalkhan@gmail.com"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                    <TextView
+                        android:id="@+id/textViewEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="probelalkhan@gmail.com"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-            </TableRow>
+                </TableRow>
 
-            <TableRow>
+                <TableRow>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="Gender"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Gender"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-                <TextView
-                    android:id="@+id/textViewGender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp"
-                    android:text="Male"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                    <TextView
+                        android:id="@+id/textViewGender"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="Male"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
-            </TableRow>
-
-
-        </TableLayout>
+                </TableRow>
 
 
-        <Button
-            android:id="@+id/buttonLogout"
-            style="@android:style/Widget.Material.Button.Colored"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            android:text="Logout"
-            android:textColor="@android:color/white"
-            android:visibility="gone" />
+            </TableLayout>
 
-    </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonLogout"
+                style="@android:style/Widget.Material.Button.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="Logout"
+                android:textColor="@android:color/white"
+                android:visibility="gone" />
+
+        </LinearLayout>
     </ScrollView>
 
     <ListView
         android:id="@+id/navList"
         android:layout_width="200dp"
         android:layout_height="match_parent"
-        android:descendantFocusability="blocksDescendants"
-        android:choiceMode="singleChoice"
         android:layout_gravity="left|start"
-        android:background="#ffeeeeee" />
+        android:background="#ffeeeeee"
+        android:choiceMode="singleChoice"
+        android:descendantFocusability="blocksDescendants" />
 
 
 </android.support.v4.widget.DrawerLayout>
