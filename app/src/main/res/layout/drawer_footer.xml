@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<Button xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_logout_button"
+    style="@android:style/Widget.Material.Button.Colored"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:focusable="false"
+    android:gravity="center_vertical"
+    android:minHeight="?android:attr/listPreferredItemHeightSmall"
+    android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+    android:paddingLeft="?android:attr/listPreferredItemPaddingEnd"
+    android:paddingRight="?android:attr/listPreferredItemPaddingStart"
+    android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+    android:text="@string/logout"
+    android:textAlignment="center"
+    android:textAppearance="@android:style/TextAppearance.Material.Large.Inverse"
+    android:background="@color/colorPrimary"/>

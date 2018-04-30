@@ -1,63 +1,59 @@
 package com.bloodhub.android.activities;
 
 import android.app.DatePickerDialog;
-import android.os.StrictMode;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
+import android.os.StrictMode;
+import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import java.text.SimpleDateFormat;
 import android.widget.Spinner;
-import android.widget.Toast;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Calendar;
-import java.util.Locale;
-
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
-import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bloodhub.android.Constants;
 import com.bloodhub.android.R;
 import com.bloodhub.android.RequestHandler;
 import com.bloodhub.android.SharedPreferencesManager;
 import com.bloodhub.android.app.Config;
+import com.bloodhub.android.model.Location;
 import com.bloodhub.android.model.User;
 import com.bloodhub.android.utils.NotificationUtils;
 import com.google.firebase.messaging.FirebaseMessaging;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
 
 
-
-
-
-public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener  {
-
-
+public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 
     EditText editTextUsername, editTextEmail, editTextPassword, editTextFirstName, editTextSurName,
-            editTextIdentity, editTextAddress, editTextTelephone,editTextBirthdate;
+            editTextIdentity, editTextAddress, editTextTelephone, editTextBirthdate;
     Spinner spinner;
+    Spinner citySpinner;
 
     String bloodType = "";
     String real_bloodType = "";
@@ -69,12 +65,22 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     EditText edittext;
 
 
+    ArrayAdapter<CharSequence> cityAdapter;
+
+    String selectedLocationName;
+
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
 
-
+        citySpinner = (Spinner) findViewById(R.id.city_spinner);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
@@ -85,10 +91,11 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             startActivity(new Intent(this, ProfileActivity.class));
             return;
         }
+        selectedLocationName = "";
 
 
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
-        editTextFirstName =  (EditText) findViewById(R.id.editTextFirstName);
+        editTextFirstName = (EditText) findViewById(R.id.editTextFirstName);
         editTextSurName = (EditText) findViewById(R.id.editTextSurName);
         editTextEmail = (EditText) findViewById(R.id.editTextEmail);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
@@ -102,7 +109,18 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         txtRegId = (TextView) findViewById(R.id.txt_reg_id);
         txtMessage = (TextView) findViewById(R.id.txt_push_message);
 
-        edittext= (EditText) findViewById(R.id.Birthday);
+
+
+        edittext = (EditText) findViewById(R.id.editTextBirthdate);
+
+
+        cityAdapter = ArrayAdapter.createFromResource(this, R.array.sehirler_arr, android.R.layout.simple_spinner_item);
+        cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        citySpinner.setAdapter(cityAdapter);
+
+
+        citySpinner.setFocusable(true);
+
 
 
         final DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
@@ -118,14 +136,13 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             }
 
 
-
         };
 
         edittext.setOnClickListener(new android.view.View.OnClickListener() {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
+
                 new DatePickerDialog(RegisterActivity.this, date, myCalendar
                         .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                         myCalendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -133,7 +150,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         });
 
 
-                mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
 
@@ -165,10 +182,17 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             public void onClick(View view) {
                 //if user pressed on button register
                 //here we will register the user to server
+                if (selectedLocationName == "" || selectedLocationName.equalsIgnoreCase("Please Select One")){
 
-                registerUser();
+                    findViewById(R.id.city_spinner).requestFocus();
+                    findViewById(R.id.city_spinner).performClick();
+                }
+                else
+                    registerUser();
             }
         });
+
+
 
         findViewById(R.id.textViewLogin).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -180,12 +204,72 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             }
         });
 
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.bloodType_arrays, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spinner.setAdapter(adapter);
+
         spinner.setOnItemSelectedListener(this);
+
+
+        citySpinner.setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager imm=(InputMethodManager)getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editTextSurName.getWindowToken(), 0);
+                return false;
+            }
+        }) ;
+
+        findViewById(R.id.spinner1).setOnTouchListener(new View.OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                InputMethodManager imm=(InputMethodManager)getApplicationContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editTextSurName.getWindowToken(), 0);
+                return false;
+            }
+        }) ;
+
+        findViewById(R.id.register_scroolview).setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(editTextSurName.getWindowToken(), 0);
+
+                return false;
+            }
+        });
+
+
+        citySpinner.setOnItemSelectedListener( new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view,
+                                       int pos, long id) {
+
+                selectedLocationName = (String) parent.getItemAtPosition(pos);
+
+                Log.e("sehir",selectedLocationName);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> arg0) {
+
+                selectedLocationName = (String) arg0.getItemAtPosition(0);
+            }
+        });
+
+        Log.e("sehir",selectedLocationName);
 
     }
 
     private void updateLabel() {
-        String myFormat = "MM/dd/yy"; //In which you need put here
+        String myFormat = "ddMMyyyy"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
         edittext.setText(sdf.format(myCalendar.getTime()));
@@ -195,8 +279,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {
         // An item was selected. You can retrieve the selected item using
-        bloodType = (String)parent.getItemAtPosition(pos);
-        switch (bloodType){
+        bloodType = (String) parent.getItemAtPosition(pos);
+        switch (bloodType) {
             case "ABRh+":
                 real_bloodType = "AB%2B";
                 break;
@@ -250,6 +334,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         else
             txtRegId.setText("Firebase Reg Id is not received yet!");
     }
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -274,7 +359,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     }
 
     private void registerUser() {
-
 
 
         final String username = editTextUsername.getText().toString().trim();
@@ -319,7 +403,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
             protected String doInBackground(Void... voids) {
                 //creating request handler object
                 RequestHandler requestHandler = new RequestHandler();
-                Log.e("key","girdi");
+                Log.e("key", "girdi");
 
                 //creating request parameters
                 HashMap<String, String> params = new HashMap<>();
@@ -331,6 +415,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 params.put("identityNum", identity);
                 params.put("bloodType", real_bloodType);
                 params.put("address", address);
+                params.put("city", selectedLocationName);
                 params.put("telephone", telephone);
                 params.put("birthdate", birthdate);
 
@@ -358,7 +443,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                     JSONObject obj = new JSONObject(s);
 
                     //if no error in response
-                    if (!obj.getBoolean("error")) {
+                    if (obj.getString("error").equals("FALSE")) {
                         //Toast.makeText(getApplicationContext(), obj.getString("message"), Toast.LENGTH_SHORT).show();
 
                         //getting the user from the response
@@ -377,7 +462,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                                 userJson.getString("telephone")
 
 
-                                );
+                        );
                         //storing the user in shared preferences
                         SharedPreferencesManager.getInstance(getApplicationContext()).userLogin(user);
 

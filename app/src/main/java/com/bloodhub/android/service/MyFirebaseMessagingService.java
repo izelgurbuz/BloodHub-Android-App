@@ -15,6 +15,8 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.bloodhub.android.activities.EmergencyFiveTransactionActivity;
+import com.bloodhub.android.activities.myReceivedNotificationActivity;
 import com.bloodhub.android.app.Config;
 import com.bloodhub.android.utils.NotificationUtils;
 import com.bloodhub.android.activities.MainActivity;
@@ -45,7 +47,8 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
             Log.e(TAG, "Notification Body: " + remoteMessage.getNotification().getBody());
-            handleNotification(remoteMessage.getNotification().getBody());
+            Log.e("CLICK ACT", remoteMessage.getNotification().getClickAction());
+            handleNotification(remoteMessage.getNotification().getBody(), remoteMessage.getNotification().getClickAction());
         }
 
         // Check if message contains a data payload.
@@ -61,12 +64,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         }
     }
 
-    private void handleNotification(String message) {
+    private void handleNotification(String message, String click_action) {
         if (!NotificationUtils.isAppIsInBackground(getApplicationContext())) {
             // app is in foreground, broadcast the push message
 //            LocalBroadcastManager.getInstance(this).sendBroadcast(pushNotification);
+            Intent intent =  new Intent(this, MainActivity.class );
 
-            Intent intent = new Intent( this , MainActivity.class );
+
             intent.putExtra("message", message);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             PendingIntent resultIntent = PendingIntent.getActivity( this , 0, intent,
@@ -105,10 +109,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             String timestamp = data.getString("timestamp");
             JSONObject payload = data.getJSONObject("payload");
 
+            if(payload.optString("click_action").equalsIgnoreCase("EmergencyFiveTransactionActivity")){
+                Log.e("em55","EmergencyFiveTransactionActivity");
+            }
+
             Log.e(TAG, "title: " + title);
             Log.e(TAG, "message: " + message);
             Log.e(TAG, "isBackground: " + isBackground);
-            Log.e(TAG, "payload: " + payload.toString());
+            Log.e(TAG, "payload: " + payload.optString("click_action"));
             Log.e(TAG, "imageUrl: " + imageUrl);
             Log.e(TAG, "timestamp: " + timestamp);
 
@@ -123,8 +131,21 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 NotificationUtils notificationUtils = new NotificationUtils(getApplicationContext());
                 notificationUtils.playNotificationSound();
             } else {
+                Intent resultIntent;
                 // app is in background, show the notification in notification tray
-                Intent resultIntent = new Intent(getApplicationContext(), MainActivity.class);
+                if(payload.optString("click_action").equalsIgnoreCase("EmergencyFiveTransactionActivity")){
+                    resultIntent = new Intent(getApplicationContext(), EmergencyFiveTransactionActivity.class);
+
+                }
+                else if(payload.optString("click_action").equalsIgnoreCase("myReceivedNotificationActivity")){
+                    resultIntent = new Intent(getApplicationContext(), myReceivedNotificationActivity.class);
+                }
+
+                else{
+                    resultIntent = new Intent(getApplicationContext(), MainActivity.class);
+                }
+                //resultIntent = new Intent(getApplicationContext(), MainActivity.class);
+                Log.e(TAG, "resultIntent: " +  resultIntent.getAction());
                 resultIntent.putExtra("message", message);
 
                 // check for image attachment

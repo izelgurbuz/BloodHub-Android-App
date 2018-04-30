@@ -1,15 +1,20 @@
 package com.bloodhub.android.activities;
 import android.app.ActionBar;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -36,7 +41,7 @@ import static com.bloodhub.android.R.raw.notifications;
  * Created by izelgurbuz on 2.03.2018.
  */
 
-public class mySentNotificationActivity extends AppCompatActivity {
+public class mySentNotificationActivity extends BaseActivity {
 
     int uid;
     mySentNotificationActivity thisclass = this;
@@ -49,11 +54,17 @@ public class mySentNotificationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mysentnotifications);
+        super.onCreateDrawer(savedInstanceState);
         lm = (LinearLayout) findViewById(R.id.linearMain);
         // create the layout params that will be used to define how your
         // button will be displayed
         params = new LinearLayout.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+<<<<<<< HEAD
+                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT, 1.0f);
+=======
+                ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+        lm.setLayoutParams(params);
+>>>>>>> origin/design-rev
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
@@ -120,13 +131,65 @@ public class mySentNotificationActivity extends AppCompatActivity {
 
                             LinearLayout ll = new LinearLayout(thisclass);
                             ll.setOrientation(LinearLayout.HORIZONTAL);
+<<<<<<< HEAD
+                            ll.setBackgroundResource(R.drawable.my_transaction_layout);
+                            ll.setPadding(10,10,10,10);
+=======
+                            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT
+                            );
+
+                            param.setMargins(0, 12, 0, 12);
+                            ll.setLayoutParams(param);
+
+>>>>>>> origin/design-rev
 
                             // Create TextView
                             TextView title = new TextView(thisclass);
                             title.setText(notification.getTitle());
+                            param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                                    1.0f
+                            );
                             Log.e("notifi"+id, notification.getDatestamp());
+                            title.setPadding(10,10,10,10);
+                            /*LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                                    ActionBar.LayoutParams.WRAP_CONTENT,
+                                    ActionBar.LayoutParams.WRAP_CONTENT,
+                                    1.0f
+                            );*/
+                            DisplayMetrics displayMetrics = new DisplayMetrics();
+                            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                            int height = displayMetrics.heightPixels;
+                            int width = displayMetrics.widthPixels;
+                            title.setWidth(width*2/3);
+                            title.setLayoutParams(params);
+
+
+                            title.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Small);
+                            title.setTextColor(Color.DKGRAY);
 
                             final String titlestr= notification.getTitle();
+<<<<<<< HEAD
+                            final TextView letter = new TextView(thisclass);
+                            letter.setText(titlestr.charAt(0)+"");
+                            letter.setTextColor(Color.RED);
+                            letter.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            //letter.setBackgroundResource(R.drawable.my_letter_button);
+                            //letter.setWidth(1);
+
+                            letter.setLayoutParams(params);
+
+
+
+                            ll.addView(letter);
+=======
+                            title.setLayoutParams(param);
+                            title.setTextSize(16);
+                            title.setGravity(Gravity.CENTER_VERTICAL);
+>>>>>>> origin/design-rev
                             ll.addView(title);
 
                             // Create TextView
@@ -139,12 +202,32 @@ public class mySentNotificationActivity extends AppCompatActivity {
                             final int bloodRequestID = notification.getId();
 
                             // Create Button
-                            final Button btn = new Button(thisclass);
+                            final ImageButton btn = new ImageButton(thisclass);
                             // Give button an ID
                             btn.setId(j + 1);
-                            btn.setText("->");
+<<<<<<< HEAD
+                            //btn.setText("->");
                             // set the layoutParams on the button
                             btn.setLayoutParams(params);
+                            btn.setImageResource(R.drawable.ic_menu_send);
+                            btn.setBackgroundResource(R.drawable.my_transaction_button);
+=======
+
+                            btn.setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_forward));
+                            btn.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                            btn.setPadding(0, 12, 0, 12);
+                            // set the layoutParams on the button
+                            param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                                    5.0f
+                            );
+                            param.setMargins(0, 4, 0, 4);
+
+
+                            btn.setLayoutParams(param);
+>>>>>>> origin/design-rev
 
                             final int index = j;
                             // Set click listener for button

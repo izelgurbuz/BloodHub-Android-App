@@ -34,7 +34,17 @@ public class LoginActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //if the user is already logged in we will directly start the profile activity
+        if (SharedPreferencesManager.getInstance(this).isLoggedIn()) {
+            finish();
+            startActivity(new Intent(this, ProfileActivity.class));
+            return;
+        }
         setContentView(R.layout.activity_login);
+        if(getActionBar()!= null) {
+            getActionBar().hide();
+        }
+
         editTextUsername = (EditText) findViewById(R.id.editTextUsername);
         editTextPassword = (EditText) findViewById(R.id.editTextPassword);
 

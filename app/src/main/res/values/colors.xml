@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#d32f2f</color>
+    <color name="colorPrimaryDark">#9a0007</color>
+    <color name="colorAccent">#512da8</color>
+    <color name="text_color_primary">#ffffff</color>
+    <color name="omfm_expanded_background_sample">#CCE9E9E9</color>
+    <color name="appBarColor">#ff1c75bc</color>
+    <color name="statusBarColor">#ff1d649d</color>
+    <color name="layoutStandardBackground">#ffe6e6e6</color>
+    <color name="fabColor">#d32f2f</color>
+    <color name="fabStrokeColor">#dadada</color>
+    <color name="fabSelected">#ffffff</color>
+    <color name="sweetprimary">#f73b3b</color>
+    <color name="sweetgrey">#ccc1c1</color>
+
+    <color name="black">#000000</color>
+
+
 </resources>

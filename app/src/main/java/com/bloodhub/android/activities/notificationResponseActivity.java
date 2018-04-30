@@ -44,6 +44,10 @@ public class notificationResponseActivity extends AppCompatActivity {
     String titlestr;
     User user;
     String classname ;
+    double latitude, longitude;
+    String placeName;
+
+    notificationResponseActivity thisclass = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +62,10 @@ public class notificationResponseActivity extends AppCompatActivity {
         titlestr = b.getString("titlestr");
         patientID = b.getInt("patientID");
         bloodRequestID = b.getInt("bloodRequestID");
+        latitude = b.getDouble("latitude");
+        longitude = b.getDouble("longitude");
         classname = b.getString("class");
+        placeName = b.getString("placeName");
 
         Log.e("titlestr ", titlestr);
 
@@ -81,6 +88,15 @@ public class notificationResponseActivity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     sendNotificationResponse(1);
+                    Bundle bundle = new Bundle();
+                    bundle.putDouble("latitude", latitude);
+                    bundle.putDouble("longitude", longitude);
+                    bundle.putString("placeName", placeName);
+                    Intent i = new Intent(thisclass, BloodRequestMapPointActivity.class);
+                    i.putExtras(bundle);
+                    //i.putExtra("titlestr", titlestr);
+                    startActivity(i);
+                    finish();
 
 
                 }
@@ -136,8 +152,10 @@ public class notificationResponseActivity extends AppCompatActivity {
 
 
                         Toast.makeText(getApplicationContext(), obj.getString("success"), Toast.LENGTH_SHORT).show();
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), myReceivedNotificationActivity.class));
+                        if(response == -1)
+                            finish();
+                        //finish();
+                        //startActivity(new Intent(getApplicationContext(), myReceivedNotificationActivity.class));
                         //getting the user from the response
 
 
