@@ -14,11 +14,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.bloodhub.android.R;
 import com.bloodhub.android.SharedPreferencesManager;
+
+import static com.bloodhub.android.R.mipmap.bldlogo;
 
 
 public class BaseActivity extends Activity {
@@ -67,6 +70,7 @@ public class BaseActivity extends Activity {
     }
 
     private void addDrawerItems() {
+
         String[] drawerItems = {"Home", "My Alerts", "Emergency 5 List", "Emergency Five Transaction", "Received Notifications", "Create New Blood Alert", "Homepage", "Blog", "Event Map"};
         mAdapter = new ArrayAdapter<String>(this, R.layout.drawer_item, drawerItems);
         mDrawerList.setAdapter(mAdapter);
