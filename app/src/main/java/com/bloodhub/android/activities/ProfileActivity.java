@@ -164,6 +164,15 @@ public class ProfileActivity extends BaseActivity {
             }
         });
 
+        findViewById(R.id.em5TransactionButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open register screen
+                startActivity(new Intent(getApplicationContext(), EmergencyFiveTransactionActivity.class));
+
+            }
+        });
+
     }
 
 

@@ -60,9 +60,8 @@
                 android:background="@color/colorPrimary"
                 android:padding="12dp"
                 android:text="@string/login"
-                android:textColor="@android:color/white"
                 android:textAlignment="center"
-                />
+                android:textColor="@android:color/white" />
 
             <TextView
                 android:id="@+id/textViewRegister"

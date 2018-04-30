@@ -8,9 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -57,7 +60,8 @@ public class myReceivedNotificationActivity extends BaseActivity {
         // create the layout params that will be used to define how your
         // button will be displayed
         params = new LinearLayout.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+                ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
+        lm.setLayoutParams(params);
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
@@ -131,13 +135,28 @@ public class myReceivedNotificationActivity extends BaseActivity {
 
                             LinearLayout ll = new LinearLayout(thisclass);
                             ll.setOrientation(LinearLayout.HORIZONTAL);
+                            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT
+                            );
+
+                            param.setMargins(0, 12, 0, 12);
+                            ll.setLayoutParams(param);
 
                             // Create TextView
                             TextView title = new TextView(thisclass);
                             title.setText(notification.getTitle());
+                            param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                                    1.0f
+                            );
                             Log.e("notifi"+id, notification.getDatestamp());
 
                             final String titlestr= notification.getTitle();
+                            title.setLayoutParams(param);
+                            title.setTextSize(16);
+                            title.setGravity(Gravity.CENTER_VERTICAL);
                             ll.addView(title);
 
                             // Create TextView
@@ -155,12 +174,24 @@ public class myReceivedNotificationActivity extends BaseActivity {
 
 
                             // Create Button
-                            final Button btn = new Button(thisclass);
+                            final ImageButton btn = new ImageButton(thisclass);
                             // Give button an ID
                             btn.setId(j + 1);
-                            btn.setText("->");
+                            btn.setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_forward));
+                            btn.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                            btn.setPadding(0, 12, 0, 12);
                             // set the layoutParams on the button
-                            btn.setLayoutParams(params);
+                            param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                                    5.0f
+                            );
+                            param.setMargins(0, 4, 0, 4);
+
+
+                            btn.setLayoutParams(param);
+
 
                             final int index = j;
                             // Set click listener for button

@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -53,6 +54,7 @@ import static com.bloodhub.android.R.id.add;
 import static com.bloodhub.android.R.id.editTextPassword;
 import static com.bloodhub.android.R.id.editTextUsername;
 import static com.bloodhub.android.R.id.middle;
+import static com.bloodhub.android.R.id.select_dialog_listview;
 
 /**
  * Created by mustafaculban on 3.03.2018.
@@ -62,7 +64,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
 
     int uid;
     EmergencyFiveListActivity thisclass = this;
-    LinearLayout lm;
+    LinearLayout lm, buttonll;
     LinearLayout.LayoutParams params;
     LinkedHashMap<Integer, EmergencyFive> aEM5list = new LinkedHashMap<>();
 
@@ -73,12 +75,12 @@ public class EmergencyFiveListActivity extends BaseActivity {
         setContentView(R.layout.activity_emergencyfivelist);
         super.onCreateDrawer(savedInstanceState);
         lm = (LinearLayout) findViewById(R.id.linearMain);
+        buttonll = (LinearLayout) findViewById(R.id.buttonll);
         // create the layout params that will be used to define how your
         // button will be displayed
 
         params = new LinearLayout.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
-
+                ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT);
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
@@ -154,29 +156,27 @@ public class EmergencyFiveListActivity extends BaseActivity {
 
                             LinearLayout ll = new LinearLayout(thisclass);
                             ll.setOrientation(LinearLayout.HORIZONTAL);
-
+                            ll.setLayoutParams(new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT
+                            ));
 
                             // Create TextView
                             EditText first_name = new EditText(thisclass);
                             TextView first_status = new TextView(thisclass);
-                            Button phone_call = new Button(thisclass);
-                            first_name.setLayoutParams(new AppBarLayout.LayoutParams(width / 2, height / 8));
-                            first_status.setLayoutParams(new AppBarLayout.LayoutParams(width / 6, first_name.getLayoutParams().height));
-                            phone_call.setLayoutParams(new AppBarLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                            phone_call.getLayoutParams().height = height / 8;
-                            phone_call.getLayoutParams().width = width / 6;
-                            phone_call.setBackgroundResource(R.drawable.phone);
-
+                            ImageButton phone_call = new ImageButton(thisclass);
+                            phone_call.setLayoutParams(new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    2.0f));
+                            phone_call.setBackgroundResource(R.drawable.call_icon);
+                            phone_call.setPadding(10, 10, 10, 10);
                             phone_call.setVisibility(View.INVISIBLE);
 
                             Button sendButton = new Button(thisclass);
-                            sendButton.setLayoutParams(new AppBarLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                            sendButton.setBackgroundResource(R.drawable.send);
-                            sendButton.getLayoutParams().height = height / 8;
-                            sendButton.getLayoutParams().width = width / 6;
-                            int difference = height / 8 - width / 6;
-
-
+                            sendButton.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT, 2.0f));
+                            sendButton.setBackgroundResource(R.drawable.send_button);
+                            sendButton.setPadding(10, 10, 10, 10);
                             sendButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View view) {
@@ -188,6 +188,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             });
                             String status = em5Object.getStatus() == 1 ? "Confirmed" : (em5Object.getStatus() == -1 ? "Rejected" : "Waiting");
                             first_status.setText(status);
+                            first_status.setGravity(Gravity.CENTER);
 
                             //for phone number to be visible
                             if (em5Object.getStatus() == 1) {
@@ -210,12 +211,21 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             }
 
                             first_name.setText(em5Object.getFullname() + "   " + em5Object.getEmail());
-                            first_name.setPadding(0, 0, 0, 0);
-                            first_status.setPadding(0, difference / 2, 0, difference / 2);
-                            sendButton.setPadding(0, difference / 2, 0, difference / 2);
-
+                            first_name.setLayoutParams(new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    1.0f
+                            ));
+                            first_name.setPadding(4, 4, 4, 4);
+                            first_name.setTextSize(16);
                             first_name.setBackgroundResource(R.drawable.rect_text_edit);
                             first_status.setBackgroundResource(R.drawable.rect_text_edit);
+                            first_status.setLayoutParams(new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    2.0f
+                            ));
+                            first_status.setTextSize(12);
                             // phone_call.setBackgroundResource(R.drawable.rect_text_edit);
                             ll.addView(first_name);
                             ll.addView(first_status);
@@ -233,13 +243,12 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             //addNewButton.setBackgroundResource(R.drawable.send);
                             //addNewButton.setGravity(Gravity.RIGHT | Gravity.BOTTOM);
                             addNewButton.setText("+");
+                            addNewButton.setTextSize(18);
                             addNewButton.setTextColor(Color.WHITE);
                             addNewButton.setBackgroundColor(Color.RED);
 
                             //addNewButton.setBackground(getResources().getDrawable(R.drawable.ic_add_white_24px));
                             //addNewButton.setBackgroundColor(Color.RED);
-                            addNewButton.getLayoutParams().height = height / 15;
-                            addNewButton.getLayoutParams().width = width / 10;
                             //addNewButton.setGravity(Gravity.RIGHT |Gravity.BOTTOM);
                             RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) addNewButton.getLayoutParams();
                             params.addRule(RelativeLayout.ALIGN_RIGHT | RelativeLayout.ALIGN_BOTTOM);
@@ -260,7 +269,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             l.setOrientation(LinearLayout.HORIZONTAL);
                             l.addView(addNewButton);
 
-                            lm.addView(l);
+                            buttonll.addView(l);
                         }
                         /*((TextView)findViewById(R.id.textViewEM5List)).setText("Your EM5 List is as below");
 
@@ -379,6 +388,8 @@ public class EmergencyFiveListActivity extends BaseActivity {
                     } else {
                         ((TextView)findViewById(R.id.textViewEM5List)).setText("You dont have EM5 List . \n Lets create one...");
                         Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(getApplicationContext(), createAEmergencyFivePersonActivity.class));
+                        finish();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

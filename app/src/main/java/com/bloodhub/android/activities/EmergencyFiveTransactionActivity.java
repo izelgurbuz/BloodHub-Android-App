@@ -6,11 +6,15 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -57,8 +61,10 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
         lm = (LinearLayout) findViewById(R.id.em5TransactionlinearMain);
         // create the layout params that will be used to define how your
         // button will be displayed
+
         params = new LinearLayout.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+                ActionBar.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lm.setLayoutParams(params);
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
@@ -104,6 +110,7 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                     if (obj.getString("error").equals("FALSE")) {
 
                         JSONObject JSONem5list = obj.getJSONObject("em5List"); //,"UTF-8" ;
+
                         JSONArray jsonarray = new JSONArray((JSONem5list.getString("people")));
 
                         int j=0;
@@ -113,15 +120,38 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
 
                             LinearLayout ll = new LinearLayout(thisclass);
                             ll.setOrientation(LinearLayout.HORIZONTAL);
+                            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.WRAP_CONTENT
+                            );
+
+                            param.setMargins(0, 12, 0, 12);
+                            ll.setLayoutParams(param);
 
                             TextView name = new TextView(thisclass);
                             name.setText(jsonobject.getString("fullname"));
+                            param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    1.0f
+                            );
+                            name.setLayoutParams(param);
+                            name.setTextSize(16);
+                            name.setGravity(Gravity.CENTER_VERTICAL);
                             ll.addView(name);
 
                             String statustext = jsonobject.getInt("status") == 1 ? "Confirmed" : (jsonobject.getInt("status") == -1 ? "Rejected" : "Waiting");
                             TextView status = new TextView(thisclass);
                             status.setText(statustext);
                             final String statusstr= statustext;
+                            param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    2.0f
+                            );
+                            status.setLayoutParams(param);
+                            status.setTextSize(12);
+                            status.setGravity(Gravity.CENTER_VERTICAL);
                             ll.addView(status);
 
                             final String fullName= jsonobject.getString("fullname");
@@ -131,12 +161,23 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
 
 
                             // Create Button
-                            final Button btn = new Button(thisclass);
+                            final ImageButton btn = new ImageButton(thisclass);
                             // Give button an ID
                             btn.setId(j + 1);
-                            btn.setText("->");
+                            btn.setImageDrawable(getResources().getDrawable(R.drawable.ic_arrow_forward));
+                            btn.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            btn.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+
                             // set the layoutParams on the button
-                            btn.setLayoutParams(params);
+                            param = new LinearLayout.LayoutParams(
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    ViewGroup.LayoutParams.MATCH_PARENT,
+                                    2.0f
+                            );
+                            param.setMargins(0, 4, 0, 4);
+
+
+                            btn.setLayoutParams(param);
 
                             final int index = j;
                             // Set click listener for button
@@ -156,7 +197,7 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                                     i.putExtras(bundle);
                                     //i.putExtra("titlestr", titlestr);
                                     startActivity(i);
-                                    finish();
+//                                    finish();
 
                                     //Add button to LinearLayout defined in XML
                                     Toast.makeText(getApplicationContext(),
@@ -258,8 +299,7 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                         }*/
 
 
-
-                        Toast.makeText(getApplicationContext(), "halelujah", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "halelujah", Toast.LENGTH_SHORT).show();
 
                         Log.e("gulbelea","lala");
 
