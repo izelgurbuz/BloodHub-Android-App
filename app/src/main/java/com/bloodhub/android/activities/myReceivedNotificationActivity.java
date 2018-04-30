@@ -1,16 +1,20 @@
 package com.bloodhub.android.activities;
 
 import android.app.ActionBar;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -32,6 +36,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static android.R.attr.data;
+import static android.R.attr.drawable;
+import static android.R.attr.name;
+import static com.bloodhub.android.R.id.drawer_layout;
 import static com.bloodhub.android.R.id.editTextPassword;
 import static com.bloodhub.android.R.id.editTextUsername;
 import static com.bloodhub.android.R.id.msg;
@@ -57,7 +64,7 @@ public class myReceivedNotificationActivity extends BaseActivity {
         // create the layout params that will be used to define how your
         // button will be displayed
         params = new LinearLayout.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT,1.0f);
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
@@ -131,14 +138,52 @@ public class myReceivedNotificationActivity extends BaseActivity {
 
                             LinearLayout ll = new LinearLayout(thisclass);
                             ll.setOrientation(LinearLayout.HORIZONTAL);
+                            //ll.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            ll.setBackgroundResource(R.drawable.my_transaction_layout);
+                            ll.setPadding(10,10,10,10);
 
                             // Create TextView
                             TextView title = new TextView(thisclass);
                             title.setText(notification.getTitle());
                             Log.e("notifi"+id, notification.getDatestamp());
+                            title.setPadding(10,10,10,10);
+                            /*LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                                    ActionBar.LayoutParams.WRAP_CONTENT,
+                                    ActionBar.LayoutParams.WRAP_CONTENT,
+                                    1.0f
+                            );*/
+                            DisplayMetrics displayMetrics = new DisplayMetrics();
+                            getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+                            int height = displayMetrics.heightPixels;
+                            int width = displayMetrics.widthPixels;
+                            title.setWidth(width*1/3);
+                            title.setLayoutParams(params);
+
+
+
+
+                            title.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Small);
+                            title.setTextColor(Color.GRAY);
+
 
                             final String titlestr= notification.getTitle();
+                            final TextView letter = new TextView(thisclass);
+                            letter.setText(titlestr.charAt(0)+"");
+                            letter.setTextColor(Color.RED);
+                            letter.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+                            //letter.setBackgroundResource(R.drawable.my_letter_button);
+                            //letter.setWidth(1);
+
+                            letter.setLayoutParams(params);
+
+
+
+                            ll.addView(letter);
                             ll.addView(title);
+
+
+
 
                             // Create TextView
                             TextView msg = new TextView(thisclass);
@@ -154,14 +199,17 @@ public class myReceivedNotificationActivity extends BaseActivity {
 
 
 
+
                             // Create Button
-                            final Button btn = new Button(thisclass);
+                            final ImageButton btn = new ImageButton(thisclass);
                             // Give button an ID
                             btn.setId(j + 1);
-                            btn.setText("->");
+                            //btn.setText("->");
                             // set the layoutParams on the button
                             btn.setLayoutParams(params);
 
+                            btn.setImageResource(R.drawable.ic_menu_send);
+                            btn.setBackgroundResource(R.drawable.my_transaction_button);
                             final int index = j;
                             // Set click listener for button
                             btn.setOnClickListener(new View.OnClickListener() {

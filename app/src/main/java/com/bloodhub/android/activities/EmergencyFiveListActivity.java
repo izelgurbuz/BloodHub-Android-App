@@ -23,6 +23,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -49,6 +50,9 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static android.R.attr.button;
+import static android.R.attr.name;
+import static android.util.LayoutDirection.LTR;
+import static android.util.LayoutDirection.RTL;
 import static com.bloodhub.android.R.id.add;
 import static com.bloodhub.android.R.id.editTextPassword;
 import static com.bloodhub.android.R.id.editTextUsername;
@@ -77,7 +81,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
         // button will be displayed
 
         params = new LinearLayout.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT,1.0f);
 
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             finish();
@@ -154,49 +158,72 @@ public class EmergencyFiveListActivity extends BaseActivity {
 
                             LinearLayout ll = new LinearLayout(thisclass);
                             ll.setOrientation(LinearLayout.HORIZONTAL);
+                            ll.setBackgroundResource(R.drawable.my_transaction_layout);
 
 
                             // Create TextView
-                            EditText first_name = new EditText(thisclass);
+                            TextView first_name = new TextView(thisclass);
                             TextView first_status = new TextView(thisclass);
-                            Button phone_call = new Button(thisclass);
-                            first_name.setLayoutParams(new AppBarLayout.LayoutParams(width / 2, height / 8));
-                            first_status.setLayoutParams(new AppBarLayout.LayoutParams(width / 6, first_name.getLayoutParams().height));
-                            phone_call.setLayoutParams(new AppBarLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                            phone_call.getLayoutParams().height = height / 8;
-                            phone_call.getLayoutParams().width = width / 6;
-                            phone_call.setBackgroundResource(R.drawable.phone);
+                            ImageButton phone_call = new ImageButton(thisclass);
 
+                            first_name.setPadding(20,20,20,20);
+                            LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                                    ActionBar.LayoutParams.WRAP_CONTENT,
+                                    ActionBar.LayoutParams.WRAP_CONTENT,
+                                    2.0f
+                            );
+                            first_name.setWidth(width/4);
+                            first_name.setLayoutParams(param);
+
+
+                            first_name.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
+                            first_name.setTextColor(Color.BLACK);
+                            first_name.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+
+                            first_status.setPadding(20,20,20,20);
+                            first_status.setWidth(width/4);
+                            first_status.setLayoutParams(param);
+
+
+                            first_status.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
+
+                            first_status.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+                            phone_call.setLayoutParams(params);
+                            phone_call.setBackgroundResource(R.drawable.my_phone_button);
+
+                            phone_call.setImageResource(R.drawable.phone);
+                            //phone_call.setBackgroundResource(R.drawable.my_transaction_button);
                             phone_call.setVisibility(View.INVISIBLE);
 
-                            Button sendButton = new Button(thisclass);
-                            sendButton.setLayoutParams(new AppBarLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                            sendButton.setBackgroundResource(R.drawable.send);
-                            sendButton.getLayoutParams().height = height / 8;
-                            sendButton.getLayoutParams().width = width / 6;
-                            int difference = height / 8 - width / 6;
+                            //ImageButton sendButton = new ImageButton(thisclass);
+                            //sendButton.setImageResource(R.drawable.ic_menu_send);
+                            //sendButton.setLayoutParams(params);
+                            //sendButton.setBackgroundResource(R.drawable.my_transaction_button);
 
 
-                            sendButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View view) {
+                            //sendButton.setOnClickListener(new View.OnClickListener() {
+                              //  @Override
+                                //public void onClick(View view) {
 
-                                    Log.e("telbuton", "butona tiklandi");
+                                  //  Log.e("telbuton", "butona tiklandi");
                                     //method("first", uid);
-                                }
+                               // }
 
-                            });
+                           // });
                             String status = em5Object.getStatus() == 1 ? "Confirmed" : (em5Object.getStatus() == -1 ? "Rejected" : "Waiting");
                             first_status.setText(status);
 
                             //for phone number to be visible
                             if (em5Object.getStatus() == 1) {
+                                first_status.setTextColor(Color.GREEN);
                                 phone_call.setVisibility(View.VISIBLE);
                                 phone_call.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
                                         Log.e("telbutton", "button basildi");
-                                        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + em5Object.getTelephone()));
+                                        Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + em5Object.getTelephone()));
 
                                         if (ActivityCompat.checkSelfPermission(thisclass, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
                                         }
@@ -208,18 +235,15 @@ public class EmergencyFiveListActivity extends BaseActivity {
                                 //   } catch (JSONException e) {
                                 //  e.printStackTrace();
                             }
+                            else
+                                first_status.setTextColor(Color.RED);
 
-                            first_name.setText(em5Object.getFullname() + "   " + em5Object.getEmail());
-                            first_name.setPadding(0, 0, 0, 0);
-                            first_status.setPadding(0, difference / 2, 0, difference / 2);
-                            sendButton.setPadding(0, difference / 2, 0, difference / 2);
+                            first_name.setText(em5Object.getFullname()  );
 
-                            first_name.setBackgroundResource(R.drawable.rect_text_edit);
-                            first_status.setBackgroundResource(R.drawable.rect_text_edit);
-                            // phone_call.setBackgroundResource(R.drawable.rect_text_edit);
+
                             ll.addView(first_name);
                             ll.addView(first_status);
-                            ll.addView(sendButton);
+                            //ll.addView(sendButton);
                             ll.addView(phone_call);
 
 
@@ -234,17 +258,16 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             //addNewButton.setGravity(Gravity.RIGHT | Gravity.BOTTOM);
                             addNewButton.setText("+");
                             addNewButton.setTextColor(Color.WHITE);
-                            addNewButton.setBackgroundColor(Color.RED);
 
                             //addNewButton.setBackground(getResources().getDrawable(R.drawable.ic_add_white_24px));
                             //addNewButton.setBackgroundColor(Color.RED);
-                            addNewButton.getLayoutParams().height = height / 15;
-                            addNewButton.getLayoutParams().width = width / 10;
-                            //addNewButton.setGravity(Gravity.RIGHT |Gravity.BOTTOM);
-                            RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) addNewButton.getLayoutParams();
-                            params.addRule(RelativeLayout.ALIGN_RIGHT | RelativeLayout.ALIGN_BOTTOM);
 
-                            addNewButton.setLayoutParams(params);
+                            //addNewButton.setLayoutParams(params);
+                            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                                    150,150);
+
+                            layoutParams.setLayoutDirection(RTL);
+                            addNewButton.setBackgroundResource(R.drawable.my_addnew_button);
 
                             addNewButton.setOnClickListener(new View.OnClickListener() {
                                 @Override
@@ -256,11 +279,16 @@ public class EmergencyFiveListActivity extends BaseActivity {
                                 }
 
                             });
-                            LinearLayout l = new LinearLayout(thisclass);
-                            l.setOrientation(LinearLayout.HORIZONTAL);
-                            l.addView(addNewButton);
+                            layoutParams.setMargins(0,20,0,0);
+                            addNewButton.setLayoutParams(layoutParams);
+                            addNewButton.setBackgroundResource(R.drawable.my_addnew_button);
 
-                            lm.addView(l);
+                            LinearLayout addBtnLyt = new LinearLayout(thisclass);
+                            addBtnLyt.setOrientation(LinearLayout.HORIZONTAL);
+                            addBtnLyt.setLayoutDirection(View.LAYOUT_DIRECTION_RTL);
+                            addBtnLyt.addView(addNewButton);
+                            lm.addView(addBtnLyt);
+
                         }
                         /*((TextView)findViewById(R.id.textViewEM5List)).setText("Your EM5 List is as below");
 
@@ -377,7 +405,10 @@ public class EmergencyFiveListActivity extends BaseActivity {
                         //finish();
                         //startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     } else {
-                        ((TextView)findViewById(R.id.textViewEM5List)).setText("You dont have EM5 List . \n Lets create one...");
+                        TextView textViewEM5List = new TextView(thisclass);
+                        textViewEM5List.setText("You dont have EM5 List . \n Lets create one...");
+                        textViewEM5List.setTextColor(Color.BLACK);
+                        lm.addView(textViewEM5List);
                         Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {

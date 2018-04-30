@@ -11,5 +11,10 @@
     <color name="fabColor">#d32f2f</color>
     <color name="fabStrokeColor">#dadada</color>
     <color name="fabSelected">#ffffff</color>
+    <color name="sweetprimary">#f73b3b</color>
+    <color name="sweetgrey">#ccc1c1</color>
+
+    <color name="black">#000000</color>
+
 
 </resources>

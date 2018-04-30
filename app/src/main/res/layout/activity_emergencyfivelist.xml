@@ -17,20 +17,10 @@
             android:id="@+id/linearMain"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="20dp">
 
 
-        <TextView
-                android:id="@+id/textViewEM5List"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"
-                android:text="Emergency Five List"
-                android:textAlignment="center"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
 
            <!-- <com.bloodhub.android.views.FabView

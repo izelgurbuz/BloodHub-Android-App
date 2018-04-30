@@ -23,7 +23,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:textColor="@color/black"/>
         <LinearLayout
             android:id="@+id/linearButton"
             android:layout_width="match_parent"
@@ -39,7 +40,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Confirm" />
+                android:text="Confirm"
+                android:background="@color/colorPrimary"/>
 
             <Button
                 android:id="@+id/buttonReject"

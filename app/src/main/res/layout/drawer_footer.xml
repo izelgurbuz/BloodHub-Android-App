@@ -15,4 +15,5 @@
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:text="@string/logout"
     android:textAlignment="center"
-    android:textAppearance="@android:style/TextAppearance.Material.Large.Inverse" />
+    android:textAppearance="@android:style/TextAppearance.Material.Large.Inverse"
+    android:background="@color/colorPrimary"/>

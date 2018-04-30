@@ -4,12 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/sweetprimary">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/sweetprimary">
 
 
         <LinearLayout
@@ -17,7 +19,8 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:orientation="vertical"
-            android:padding="10dp">
+            android:padding="10dp"
+            android:background="@color/sweetprimary">
 
 
             <EditText
@@ -28,7 +31,8 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:hint="Your Full Name Surname"
-                android:inputType="text" />
+                android:inputType="text"
+                android:textColor="@color/text_color_primary"/>
 
             <TextView
                 android:id="@+id/textViewLocation"
@@ -38,13 +42,16 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/locationName"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:textColor="@color/text_color_primary"/>
 
             <Spinner
                 android:id="@+id/city_spinner"
                 style="@android:style/Widget.Material.Spinner.Underlined"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:textColor="@color/text_color_primary"
+
                 />
 
             <!--<EditText
@@ -75,7 +82,8 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/blo_type"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:textColor="@color/text_color_primary"/>
 
 
             <Spinner
@@ -83,7 +91,9 @@
                 style="@android:style/Widget.Material.Spinner.Underlined"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:entries="@array/bloodType_arrays" />
+                android:entries="@array/bloodType_arrays"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:textColor="@color/text_color_primary" />
 
 
             <TextView
@@ -94,7 +104,8 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/not_type"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:textColor="@color/text_color_primary"/>
 
             <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="fill_parent"
@@ -108,7 +119,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight=".33"
                     android:onClick="onCheckboxClicked"
-                    android:text="@string/sms" />
+                    android:text="@string/sms"
+                    android:textColor="@color/text_color_primary"/>
 
                 <CheckBox
                     android:id="@+id/checkbox_push"
@@ -117,7 +129,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight=".33"
                     android:onClick="onCheckboxClicked"
-                    android:text="@string/push" />
+                    android:text="@string/push"
+                    android:textColor="@color/text_color_primary"/>
 
                 <CheckBox
                     android:id="@+id/checkbox_mail"
@@ -126,7 +139,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight=".33"
                     android:onClick="onCheckboxClicked"
-                    android:text="@string/mail" />
+                    android:text="@string/mail"
+                    android:textColor="@color/text_color_primary"/>
 
             </LinearLayout>
 
@@ -137,7 +151,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Send Notification" />
+                android:text="Send Notification"
+                android:textColor="@color/text_color_primary"
+                android:background="@drawable/my_button_bg"
+                />
 
         </LinearLayout>
 
@@ -147,7 +164,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:background="@color/colorPrimary"/>
     </RelativeLayout>
 
 

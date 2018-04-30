@@ -47,7 +47,8 @@
                     android:layout_height="wrap_content"
                     android:text="My Alerts"
                     android:textAlignment="center"
-                    android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                   />
             </LinearLayout>
 
             <LinearLayout
@@ -73,7 +74,8 @@
                     android:layout_height="wrap_content"
                     android:text="Emergency 5 List"
                     android:textAlignment="center"
-                    android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    />
             </LinearLayout>
         </LinearLayout>
 
@@ -107,7 +109,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/received_notifications"
                     android:textAlignment="center"
-                    android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -134,7 +137,8 @@
                     android:layout_height="wrap_content"
                     android:text="Create New Blood Alert"
                     android:textAlignment="center"
-                    android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    />
             </LinearLayout>
         </LinearLayout>
 
@@ -168,7 +172,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/homepage"
                     android:textAlignment="center"
-                    android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -194,7 +199,8 @@
                     android:layout_height="wrap_content"
                     android:text="@string/blog"
                     android:textAlignment="center"
-                    android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+                    />
             </LinearLayout>
         </LinearLayout>
 
@@ -228,7 +234,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/event_map"
                     android:textAlignment="center"
-                    android:textAppearance="@android:style/TextAppearance.Material.Large" />
+                    android:textAppearance="@android:style/TextAppearance.Material.Large"
+
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -262,7 +270,8 @@
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:text="1"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    />
 
             </TableRow>
 

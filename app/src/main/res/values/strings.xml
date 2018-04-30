@@ -2,6 +2,8 @@
     <string name="app_name">BloodHub</string>
     <string name="bloodType_prompt">Choose a Blood Type</string>
 
+
+
     <string-array name="bloodType_arrays">
         <item>ABRh+</item>
         <item>ABRh-</item>
@@ -13,7 +15,8 @@
         <item>0Rh-</item>
     </string-array>
 
-    <string-array name="sehirler_arr">
+
+    <string-array name="sehirler_arr" >
         <item>Please Select One</item>
         <item>Adana</item>
         <item>Adıyaman</item>
