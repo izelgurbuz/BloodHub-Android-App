@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,7 +65,7 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
         // create the layout params that will be used to define how your
         // button will be displayed
         params = new LinearLayout.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT,1.0f);
+                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.MATCH_PARENT,1.0f);
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             finish();
             startActivity(new Intent(this, LoginActivity.class));
@@ -121,7 +122,10 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                             ll.setBackgroundResource(R.drawable.my_transaction_layout);
 
                             ll.setOrientation(LinearLayout.HORIZONTAL);
-                            ll.setPadding(10,10,10,10);
+                            LinearLayout.LayoutParams llparam = new LinearLayout.LayoutParams(
+                                    ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, 1.0f);
+                            llparam.setMargins(10,10,10,10);
+                            ll.setLayoutParams(llparam);
 
                             TextView name = new TextView(thisclass);
                             name.setText(jsonobject.getString("fullname"));
@@ -129,7 +133,7 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                             name.setPadding(20,20,20,20);
                             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                                     ActionBar.LayoutParams.WRAP_CONTENT,
-                                    ActionBar.LayoutParams.WRAP_CONTENT,
+                                    ActionBar.LayoutParams.MATCH_PARENT,
                                     2.0f
                             );
                             DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -138,17 +142,17 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                             int width = displayMetrics.widthPixels;
                             name.setWidth(width/4);
                             name.setLayoutParams(param);
+                            name.setGravity(Gravity.CENTER_VERTICAL );
+                            name.setTextColor(Color.DKGRAY);
 
-
-                            //name.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
-                            name.setTextColor(Color.BLACK);
-                            name.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
 
 
                             String statustext = jsonobject.getInt("status") == 1 ? "Confirmed" : (jsonobject.getInt("status") == -1 ? "Rejected" : "Waiting");
                             TextView status = new TextView(thisclass);
                             status.setText(statustext);
+                            status.setLayoutParams(param);
+                            status.setGravity(Gravity.CENTER_VERTICAL );
                             final String statusstr= statustext;
                             status.setTypeface(null, Typeface.BOLD);
                             if(statustext.equals("Confirmed"))
@@ -160,7 +164,7 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
 
 
                             ll.addView(status);
-                            status.setLayoutParams(param);
+
                             final String fullName= jsonobject.getString("fullname");
                             final int userID = jsonobject.getInt("id");
                             final String email = jsonobject.getString("email");
@@ -176,6 +180,17 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                             btn.setLayoutParams(params);
                             btn.setImageResource(R.drawable.ic_menu_send);
                             btn.setBackgroundResource(R.drawable.my_transaction_button);
+                            btn.setBackgroundResource(R.drawable.my_sentnoti_button);
+                            LinearLayout.LayoutParams btnparams = new LinearLayout.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT, 1.0f);
+                            btnparams.gravity = Gravity.CENTER;
+                            btnparams.setMargins(20,20,20,20);
+                            btn.setMaxHeight(20);
+                            btn.setMaxWidth(20);
+                            btn.setMinimumHeight(20);
+                            btn.setMinimumWidth(20);
+
+
+                            btn.setLayoutParams(btnparams);
 
 
                             final int index = j;

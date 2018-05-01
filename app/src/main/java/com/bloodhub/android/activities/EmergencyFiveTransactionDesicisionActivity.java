@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,7 +51,7 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
     int ownerID;
     String classname ;
     String email;
-    LinearLayout upperFrame;
+    LinearLayout upperFrame, middle;
 
     EmergencyFiveTransactionDesicisionActivity thisclass = this;
     @Override
@@ -73,12 +74,18 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
 
 
         upperFrame = (LinearLayout)findViewById(R.id.upperFrame) ;
+        middle = (LinearLayout)findViewById(R.id.middle) ;
+
         nameEmailText = (TextView) findViewById(R.id.transactionXMLname);
         emailText = (TextView) findViewById(R.id.transactionXMLemail);
         changePrompt = (TextView) findViewById(R.id.transactionXMLprompt);
         statusText = (TextView) findViewById(R.id.transactionXMLstatus);
         rjbtn = (Button)(findViewById(R.id.transactionXMLbuttonConfirm));
         cnfbtn= (Button)(findViewById(R.id.transactionXMLbuttonReject));
+
+        LinearLayout.LayoutParams btnparams = new LinearLayout.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT, 1.0f);
+        btnparams.gravity = Gravity.CENTER;
+        middle.setLayoutParams(btnparams);
 
         upperFrame.setBackgroundResource(R.drawable.my_fullframe_layout);
 
@@ -106,16 +113,21 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
         statusText.setLayoutParams(statusparam);
 
         nameEmailText.setText("Status of "+ fullName +" :" );
+        nameEmailText.setTextColor(Color.DKGRAY);
         emailText.setText("( "+ email +" ) ");
-        emailText.setTextColor(Color.BLACK);
+        emailText.setTextColor(Color.DKGRAY);
         changePrompt.setText("If you want to change your decision please press the button below :");
-        changePrompt.setTextColor(Color.RED);
+        changePrompt.setTextColor(Color.DKGRAY);
         statusText.setText(status);
 
 
 
 
+
+
         if(status.equals("Confirmed")){
+            cnfbtn.setBackgroundResource(R.drawable.my_confirm_button);
+            rjbtn.setBackgroundResource(R.drawable.my_reject_button);
             cnfbtn.setVisibility(View.GONE);
             rjbtn.setVisibility(View.VISIBLE);
             rjbtn.setText("REJECT");
@@ -127,7 +139,8 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
         }
         else if(status.equals("Rejected")){
             statusText.setTextColor(Color.RED);
-
+            cnfbtn.setBackgroundResource(R.drawable.my_confirm_button);
+            rjbtn.setBackgroundResource(R.drawable.my_reject_button);
             rjbtn.setVisibility(View.GONE);
             cnfbtn.setVisibility(View.VISIBLE);
             cnfbtn.setText("CONFIRM");
@@ -139,6 +152,8 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
 
         }
         else{
+            cnfbtn.setBackgroundResource(R.drawable.my_confirm_button);
+            rjbtn.setBackgroundResource(R.drawable.my_reject_button);
             cnfbtn.setVisibility(View.VISIBLE);
             rjbtn.setVisibility(View.VISIBLE);
             rjbtn.setText("REJECT");

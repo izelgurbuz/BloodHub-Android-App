@@ -186,7 +186,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
 
 
                             //first_name.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
-                            first_name.setTextColor(Color.BLACK);
+                            first_name.setTextColor(Color.DKGRAY);
                            // first_name.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
 
