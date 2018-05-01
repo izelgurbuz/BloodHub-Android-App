@@ -10,33 +10,57 @@
         android:layout_centerVertical="true"
         android:orientation="vertical"
         android:padding="10dp">
+        <LinearLayout
+            android:id="@+id/upperFrame"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:orientation="horizontal"
+            android:padding="10dp">
 
-        <EditText
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+        <TextView
             android:id="@+id/transactionXMLname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
             android:textAppearance="@android:style/TextAppearance.Material.Medium" />
-
-        <EditText
+        <TextView
             android:id="@+id/transactionXMLemail"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+            android:textAppearance="@android:style/TextAppearance.Material.Small" />
+        </LinearLayout>
 
-        <EditText
+        <TextView
             android:id="@+id/transactionXMLstatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
             android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+        </LinearLayout>
+
+
+
+        <TextView
+            android:id="@+id/transactionXMLprompt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textAppearance="@android:style/TextAppearance.Material.Small" />
+
 
         <LinearLayout
             android:id="@+id/linearButton"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerVertical="true"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:padding="10dp">
 
@@ -47,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Approve" />
+                />
 
             <Button
                 android:id="@+id/transactionXMLbuttonReject"
@@ -56,8 +80,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/colorPrimary"
-                android:text="Reject" />
+                />
         </LinearLayout>
 
     </LinearLayout>

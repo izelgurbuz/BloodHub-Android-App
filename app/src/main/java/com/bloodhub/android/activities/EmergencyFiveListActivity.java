@@ -5,6 +5,7 @@ import android.app.ActionBar;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -149,6 +150,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
                         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
                         int height = displayMetrics.heightPixels;
                         int width = displayMetrics.widthPixels;
+                        int count=0;
 
                         for (Map.Entry<Integer, EmergencyFive> entry : aEM5list.entrySet()) {
 
@@ -214,10 +216,12 @@ public class EmergencyFiveListActivity extends BaseActivity {
                            // });
                             String status = em5Object.getStatus() == 1 ? "Confirmed" : (em5Object.getStatus() == -1 ? "Rejected" : "Waiting");
                             first_status.setText(status);
+                            first_status.setTypeface(null, Typeface.BOLD);
 
                             //for phone number to be visible
                             if (em5Object.getStatus() == 1) {
                                 first_status.setTextColor(Color.GREEN);
+                                count++;
                                 phone_call.setVisibility(View.VISIBLE);
                                 phone_call.setOnClickListener(new View.OnClickListener() {
                                     @Override
@@ -235,8 +239,13 @@ public class EmergencyFiveListActivity extends BaseActivity {
                                 //   } catch (JSONException e) {
                                 //  e.printStackTrace();
                             }
-                            else
+                            else if(em5Object.getStatus() == -1)
                                 first_status.setTextColor(Color.RED);
+                            else{
+                                first_status.setTextColor(Color.BLUE);
+                                count++;
+                            }
+
 
                             first_name.setText(em5Object.getFullname()  );
 
@@ -251,7 +260,8 @@ public class EmergencyFiveListActivity extends BaseActivity {
 
 
                         }
-                        if(jsonarray.length() <5){
+
+                        if(count <5){
                             Button addNewButton = new Button(thisclass);
                             addNewButton.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
                             //addNewButton.setBackgroundResource(R.drawable.send);

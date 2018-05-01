@@ -2,6 +2,7 @@ package com.bloodhub.android.activities;
 
 import android.app.ActionBar;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
@@ -149,10 +150,11 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                             TextView status = new TextView(thisclass);
                             status.setText(statustext);
                             final String statusstr= statustext;
+                            status.setTypeface(null, Typeface.BOLD);
                             if(statustext.equals("Confirmed"))
                                 status.setTextColor(Color.GREEN);
                             else
-                                status.setTextColor(Color.BLACK);
+                                status.setTextColor(Color.RED);
 
                             ll.addView(status);
                             status.setLayoutParams(param);

@@ -1,5 +1,7 @@
 package com.bloodhub.android.activities;
 import android.app.ActionBar;
+import android.graphics.Color;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -10,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -30,6 +33,8 @@ import java.util.HashMap;
 import java.util.Map;
 import android.support.v7.app.AppCompatActivity;
 
+import static android.R.attr.name;
+
 
 /**
  * Created by izelgurbuz on 28.02.2018.
@@ -37,13 +42,15 @@ import android.support.v7.app.AppCompatActivity;
 
 public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivity {
 
-    EditText nameText, statusText, emailText;
+    TextView nameEmailText, statusText, changePrompt ,emailText;
+    Button rjbtn, cnfbtn;
     String status ;
     String fullName;
     int userID;
     int ownerID;
     String classname ;
     String email;
+    LinearLayout upperFrame;
 
     EmergencyFiveTransactionDesicisionActivity thisclass = this;
     @Override
@@ -65,33 +72,77 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
 
 
 
-        nameText = (EditText) findViewById(R.id.transactionXMLname);
-        emailText = (EditText) findViewById(R.id.transactionXMLemail);
-        statusText = (EditText) findViewById(R.id.transactionXMLstatus);
+        upperFrame = (LinearLayout)findViewById(R.id.upperFrame) ;
+        nameEmailText = (TextView) findViewById(R.id.transactionXMLname);
+        emailText = (TextView) findViewById(R.id.transactionXMLemail);
+        changePrompt = (TextView) findViewById(R.id.transactionXMLprompt);
+        statusText = (TextView) findViewById(R.id.transactionXMLstatus);
+        rjbtn = (Button)(findViewById(R.id.transactionXMLbuttonConfirm));
+        cnfbtn= (Button)(findViewById(R.id.transactionXMLbuttonReject));
 
-        nameText.setText(fullName);
-        emailText.setText(email);
+        upperFrame.setBackgroundResource(R.drawable.my_fullframe_layout);
+
+
+        LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT
+        );
+
+        LinearLayout.LayoutParams statusparam = new LinearLayout.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT
+        );
+
+        LinearLayout.LayoutParams promptparam = new LinearLayout.LayoutParams(
+                ActionBar.LayoutParams.WRAP_CONTENT,
+                ActionBar.LayoutParams.WRAP_CONTENT
+        );
+        param.setMargins(0,15,0,0);
+        statusparam.setMargins(5,50,5,0);
+        promptparam.setMargins(10,100,10,10);
+        nameEmailText.setLayoutParams(param);
+        emailText.setLayoutParams(param);
+        changePrompt.setLayoutParams(promptparam);
+        statusText.setLayoutParams(statusparam);
+
+        nameEmailText.setText("Status of "+ fullName +" :" );
+        emailText.setText("( "+ email +" ) ");
+        emailText.setTextColor(Color.BLACK);
+        changePrompt.setText("If you want to change your decision please press the button below :");
+        changePrompt.setTextColor(Color.RED);
         statusText.setText(status);
 
-        Button transactionXMLbuttonReject=(Button)findViewById(R.id.transactionXMLbuttonReject);
+
+
+
         if(status.equals("Confirmed")){
-            ((Button)(findViewById(R.id.transactionXMLbuttonConfirm))).setVisibility(View.INVISIBLE);
-            ((Button)(findViewById(R.id.transactionXMLbuttonReject))).setVisibility(View.VISIBLE);
+            cnfbtn.setVisibility(View.GONE);
+            rjbtn.setVisibility(View.VISIBLE);
+            rjbtn.setText("REJECT");
+            rjbtn.setTextColor(Color.WHITE);
+            rjbtn.setBackgroundColor(Color.RED);
+            statusText.setTextColor(Color.GREEN);
 
         }
         else if(status.equals("Rejected")){
-            ((Button)(findViewById(R.id.transactionXMLbuttonReject))).setVisibility(View.INVISIBLE);
-            ((Button)(findViewById(R.id.transactionXMLbuttonConfirm))).setVisibility(View.VISIBLE);
+            statusText.setTextColor(Color.RED);
+
+            rjbtn.setVisibility(View.GONE);
+            cnfbtn.setVisibility(View.VISIBLE);
+            cnfbtn.setText("CONFIRM");
+            cnfbtn.setTextColor(Color.WHITE);
+            cnfbtn.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.confgreen, null));
+            statusText.setTextColor(Color.RED);
 
 
         }
         else{
-            ((Button)(findViewById(R.id.transactionXMLbuttonConfirm))).setVisibility(View.VISIBLE);
-            ((Button)(findViewById(R.id.transactionXMLbuttonReject))).setVisibility(View.VISIBLE);
+            cnfbtn.setVisibility(View.VISIBLE);
+            rjbtn.setVisibility(View.VISIBLE);
 
         }
 
-        findViewById(R.id.transactionXMLbuttonReject).setOnClickListener(new View.OnClickListener() {
+        rjbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendTransactionChoice("-1");
@@ -99,7 +150,7 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
 
             }
         });
-        findViewById(R.id.transactionXMLbuttonConfirm).setOnClickListener(new View.OnClickListener() {
+        cnfbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 sendTransactionChoice("1");
