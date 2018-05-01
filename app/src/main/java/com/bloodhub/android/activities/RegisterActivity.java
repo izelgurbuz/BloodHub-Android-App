@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -106,8 +107,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
 
         editTextAddress = (EditText) findViewById(R.id.editTextAddress);
-        txtRegId = (TextView) findViewById(R.id.txt_reg_id);
-        txtMessage = (TextView) findViewById(R.id.txt_push_message);
+        //txtRegId = (TextView) findViewById(R.id.txt_reg_id);
+        //txtMessage = (TextView) findViewById(R.id.txt_push_message);
 
 
 
@@ -329,10 +330,10 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
         Log.e(TAG, "Firebase reg id: " + regId);
 
-        if (!TextUtils.isEmpty(regId))
-            txtRegId.setText("Firebase Reg Id: " + regId);
-        else
-            txtRegId.setText("Firebase Reg Id is not received yet!");
+        //if (!TextUtils.isEmpty(regId))
+          //  txtRegId.setText("Firebase Reg Id: " + regId);
+        //else
+            //txtRegId.setText("Firebase Reg Id is not received yet!");
     }
 
     @Override
