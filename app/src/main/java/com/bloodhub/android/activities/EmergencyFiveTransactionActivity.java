@@ -140,7 +140,7 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
 
 
                             name.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
-                            name.setTextColor(Color.RED);
+                            name.setTextColor(Color.BLACK);
                             name.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
 
