@@ -1,5 +1,6 @@
 package com.bloodhub.android.activities;
 import android.app.ActionBar;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -37,7 +38,7 @@ import android.support.v7.app.AppCompatActivity;
 
 public class notificationResponseActivity extends AppCompatActivity {
 
-    EditText title, msg;
+    TextView title, msg;
     int patientID;
     int bloodRequestID;
     String msgstr;
@@ -46,6 +47,7 @@ public class notificationResponseActivity extends AppCompatActivity {
     String classname ;
     double latitude, longitude;
     String placeName;
+    LinearLayout linearresponse;
 
     notificationResponseActivity thisclass = this;
     @Override
@@ -71,10 +73,22 @@ public class notificationResponseActivity extends AppCompatActivity {
 
         user = SharedPreferencesManager.getInstance(this).getUser();
 
-        title = (EditText) findViewById(R.id.title);
-        msg = (EditText) findViewById(R.id.msg);
+        title = (TextView) findViewById(R.id.title);
+        msg = (TextView) findViewById(R.id.msg);
+        linearresponse =(LinearLayout)findViewById(R.id.linearResponse);
+        linearresponse.setBackgroundResource(R.drawable.my_fullframe_layout);
+        LinearLayout.LayoutParams textparams = new LinearLayout.LayoutParams(ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
+        textparams.setMargins(10,20,10,10);
+        title.setLayoutParams(textparams);
+        msg.setLayoutParams(textparams);
+        linearresponse.setLayoutParams(textparams);
+
         title.setText(titlestr);
+        title.setTextColor(ResourcesCompat.getColor(getResources(), R.color.darkgray, null));
+
         msg.setText(msgstr);
+        msg.setTextColor(ResourcesCompat.getColor(getResources(), R.color.darkgray, null));
+
         if(classname.equals("r")){
             findViewById(R.id.buttonReject).setOnClickListener(new View.OnClickListener() {
                 @Override

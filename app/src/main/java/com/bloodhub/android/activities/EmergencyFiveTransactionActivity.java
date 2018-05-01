@@ -140,7 +140,7 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                             name.setLayoutParams(param);
 
 
-                            name.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
+                            //name.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
                             name.setTextColor(Color.BLACK);
                             name.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
@@ -153,8 +153,11 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                             status.setTypeface(null, Typeface.BOLD);
                             if(statustext.equals("Confirmed"))
                                 status.setTextColor(Color.GREEN);
-                            else
+                            else if(statustext.equals("Rejected"))
                                 status.setTextColor(Color.RED);
+                            else
+                                status.setTextColor(Color.BLUE);
+
 
                             ll.addView(status);
                             status.setLayoutParams(param);

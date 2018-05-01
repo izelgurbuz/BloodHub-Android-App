@@ -119,6 +119,7 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
             cnfbtn.setVisibility(View.GONE);
             rjbtn.setVisibility(View.VISIBLE);
             rjbtn.setText("REJECT");
+            rjbtn.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
             rjbtn.setTextColor(Color.WHITE);
             rjbtn.setBackgroundColor(Color.RED);
             statusText.setTextColor(Color.GREEN);
@@ -130,6 +131,7 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
             rjbtn.setVisibility(View.GONE);
             cnfbtn.setVisibility(View.VISIBLE);
             cnfbtn.setText("CONFIRM");
+            cnfbtn.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
             cnfbtn.setTextColor(Color.WHITE);
             cnfbtn.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.confgreen, null));
             statusText.setTextColor(Color.RED);
@@ -139,6 +141,15 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
         else{
             cnfbtn.setVisibility(View.VISIBLE);
             rjbtn.setVisibility(View.VISIBLE);
+            rjbtn.setText("REJECT");
+            rjbtn.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
+            rjbtn.setTextColor(Color.WHITE);
+            rjbtn.setBackgroundColor(Color.RED);
+            cnfbtn.setText("CONFIRM");
+            cnfbtn.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
+            cnfbtn.setTextColor(Color.WHITE);
+            cnfbtn.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.confgreen, null));
+            statusText.setTextColor(Color.BLUE);
 
         }
 

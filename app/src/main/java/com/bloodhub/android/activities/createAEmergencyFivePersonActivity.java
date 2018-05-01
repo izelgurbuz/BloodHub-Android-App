@@ -1,10 +1,12 @@
 package com.bloodhub.android.activities;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -53,9 +55,19 @@ public class createAEmergencyFivePersonActivity extends BaseActivity {
             startActivity(new Intent(this, LoginActivity.class));
         }
         buttonSendReq = (Button)findViewById(R.id.buttonSendReq);
-        email = (EditText)findViewById(R.id.EM5email);;
+        email = (EditText)findViewById(R.id.EM5email);
         user = SharedPreferencesManager.getInstance(this).getUser();
 
+
+        buttonSendReq.setBackgroundResource(R.drawable.new_em5person_btn);
+        LinearLayout.LayoutParams btnparams = new LinearLayout.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, 1.0f);
+        btnparams.gravity = Gravity.CENTER;
+        buttonSendReq.setLayoutParams(btnparams);
+        buttonSendReq.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+        LinearLayout.LayoutParams etxtparams = new LinearLayout.LayoutParams(ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, 1.0f);
+        etxtparams.gravity = Gravity.CENTER;
+        email.setLayoutParams(etxtparams);
         email.setBackgroundResource(R.drawable.rect_text_edit);
 
         buttonSendReq.setOnClickListener(new View.OnClickListener() {

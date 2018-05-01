@@ -15,6 +15,9 @@
     <color name="sweetgrey">#ccc1c1</color>
     <color name="confgreen">#2daf56</color>
     <color name="black">#000000</color>
+    <color name="darkgray">#848281</color>
+    <color name="lightgray">#bab7b6</color>
+
 
 
 </resources>

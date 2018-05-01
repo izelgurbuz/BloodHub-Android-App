@@ -162,7 +162,7 @@ public class myReceivedNotificationActivity extends BaseActivity {
 
 
 
-                            title.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Small);
+                            //title.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Small);
                             title.setTextColor(Color.GRAY);
 
 

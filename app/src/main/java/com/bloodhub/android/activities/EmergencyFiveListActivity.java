@@ -82,7 +82,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
         // button will be displayed
 
         params = new LinearLayout.LayoutParams(
-                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT,1.0f);
+                ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.MATCH_PARENT,1.0f);
 
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             finish();
@@ -161,6 +161,10 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             LinearLayout ll = new LinearLayout(thisclass);
                             ll.setOrientation(LinearLayout.HORIZONTAL);
                             ll.setBackgroundResource(R.drawable.my_transaction_layout);
+                            LinearLayout.LayoutParams llparam = new LinearLayout.LayoutParams(
+                                    ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, 1.0f);
+                            llparam.setMargins(10,10,10,10);
+                            ll.setLayoutParams(llparam);
 
 
                             // Create TextView
@@ -168,29 +172,32 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             TextView first_status = new TextView(thisclass);
                             ImageButton phone_call = new ImageButton(thisclass);
 
-                            first_name.setPadding(20,20,20,20);
+                            first_name.setGravity(Gravity.CENTER_VERTICAL );
+                            first_status.setGravity(Gravity.CENTER_VERTICAL );
+
+                            first_name.setPadding(20,10,10,10);
                             LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(
                                     ActionBar.LayoutParams.WRAP_CONTENT,
-                                    ActionBar.LayoutParams.WRAP_CONTENT,
+                                    ActionBar.LayoutParams.MATCH_PARENT,
                                     2.0f
                             );
                             first_name.setWidth(width/4);
                             first_name.setLayoutParams(param);
 
 
-                            first_name.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
+                            //first_name.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
                             first_name.setTextColor(Color.BLACK);
-                            first_name.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                           // first_name.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
 
-                            first_status.setPadding(20,20,20,20);
+                            first_status.setPadding(20,10,10,10);
                             first_status.setWidth(width/4);
                             first_status.setLayoutParams(param);
 
 
-                            first_status.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
+                            //first_status.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
 
-                            first_status.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                            //first_status.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
                             phone_call.setLayoutParams(params);
                             phone_call.setBackgroundResource(R.drawable.my_phone_button);
