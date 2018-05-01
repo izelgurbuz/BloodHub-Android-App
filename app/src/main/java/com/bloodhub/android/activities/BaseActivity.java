@@ -71,7 +71,7 @@ public class BaseActivity extends Activity {
 
     private void addDrawerItems() {
 
-        String[] drawerItems = {"Home", "My Alerts", "Emergency 5 List", "Emergency Five Transaction", "Received Notifications", "Create New Blood Alert", "Homepage", "Blog", "Event Map"};
+        String[] drawerItems = {"Home", "My Alerts", "Emergency 5 List", "Emergency Five Transaction", "Received Notifications", "Create New Blood Alert", "Homepage", "Blog", "Event Map", "Profile"};
         mAdapter = new ArrayAdapter<String>(this, R.layout.drawer_item, drawerItems);
         mDrawerList.setAdapter(mAdapter);
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -106,6 +106,9 @@ public class BaseActivity extends Activity {
                         break;
                     case 8:
                         startActivity(new Intent(getApplicationContext(), EventMap.class));
+                        break;
+                    case 9:
+                        startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
                         break;
 
                     default:

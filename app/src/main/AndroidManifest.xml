@@ -114,6 +114,11 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity android:name=".activities.EventMap" />
+
+        <activity
+            android:name=".activities.UserProfileActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>

@@ -173,6 +173,15 @@ public class ProfileActivity extends BaseActivity {
             }
         });
 
+        findViewById(R.id.userProfileButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //open register screen
+                startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
+
+            }
+        });
+
     }
 
 

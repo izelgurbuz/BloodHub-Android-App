@@ -167,5 +167,10 @@
     <string name="options_3">Opt 3</string>
     <string name="options_4">Opt 4</string>
     <string name="em5_transaction">Emergency 5 Transaction</string>
+    <string name="old_password">Your current password</string>
+    <string name="new_password">New password</string>
+    <string name="new_password_confirmation">Enter New password again</string>
+    <string name="change">Change Password</string>
+    <string name="user_profile">User Profile</string>
 
 </resources>
