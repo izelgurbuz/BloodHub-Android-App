@@ -164,7 +164,7 @@ public class createAEmergencyFivePersonActivity extends BaseActivity {
                         //
                         //startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     } else {
-                        Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_LONG).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

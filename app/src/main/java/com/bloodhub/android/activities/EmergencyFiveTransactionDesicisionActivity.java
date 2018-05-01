@@ -126,8 +126,7 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
 
 
         if(status.equals("Confirmed")){
-            cnfbtn.setBackgroundResource(R.drawable.my_confirm_button);
-            rjbtn.setBackgroundResource(R.drawable.my_reject_button);
+
             cnfbtn.setVisibility(View.GONE);
             rjbtn.setVisibility(View.VISIBLE);
             rjbtn.setText("REJECT");
@@ -135,25 +134,27 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
             rjbtn.setTextColor(Color.WHITE);
             rjbtn.setBackgroundColor(Color.RED);
             statusText.setTextColor(Color.GREEN);
+            cnfbtn.setBackgroundResource(R.drawable.my_confirm_button);
+            rjbtn.setBackgroundResource(R.drawable.my_reject_button);
 
         }
         else if(status.equals("Rejected")){
             statusText.setTextColor(Color.RED);
-            cnfbtn.setBackgroundResource(R.drawable.my_confirm_button);
-            rjbtn.setBackgroundResource(R.drawable.my_reject_button);
+
             rjbtn.setVisibility(View.GONE);
             cnfbtn.setVisibility(View.VISIBLE);
             cnfbtn.setText("CONFIRM");
             cnfbtn.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
             cnfbtn.setTextColor(Color.WHITE);
             cnfbtn.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.confgreen, null));
+            cnfbtn.setBackgroundResource(R.drawable.my_confirm_button);
+            rjbtn.setBackgroundResource(R.drawable.my_reject_button);
             statusText.setTextColor(Color.RED);
 
 
         }
         else{
-            cnfbtn.setBackgroundResource(R.drawable.my_confirm_button);
-            rjbtn.setBackgroundResource(R.drawable.my_reject_button);
+
             cnfbtn.setVisibility(View.VISIBLE);
             rjbtn.setVisibility(View.VISIBLE);
             rjbtn.setText("REJECT");
@@ -164,6 +165,8 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
             cnfbtn.setTextAlignment(TextView.TEXT_ALIGNMENT_CENTER);
             cnfbtn.setTextColor(Color.WHITE);
             cnfbtn.setBackgroundColor(ResourcesCompat.getColor(getResources(), R.color.confgreen, null));
+            cnfbtn.setBackgroundResource(R.drawable.my_confirm_button);
+            rjbtn.setBackgroundResource(R.drawable.my_reject_button);
             statusText.setTextColor(Color.BLUE);
 
         }

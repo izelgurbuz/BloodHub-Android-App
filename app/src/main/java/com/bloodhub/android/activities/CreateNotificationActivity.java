@@ -211,25 +211,25 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
         Spinnerblood_type = (String) parent.getItemAtPosition(pos);
         switch (Spinnerblood_type){
             case "ABRh+":
-                realBlood_Type = "AB%2B";
+                realBlood_Type = "AB+";
                 break;
             case "ABRh-":
                 realBlood_Type = "AB-";
                 break;
             case "ARh+":
-                realBlood_Type = "A%2B";
+                realBlood_Type = "A+";
                 break;
             case "ARh-":
                 realBlood_Type = "A-";
                 break;
             case "BRh+":
-                realBlood_Type = "B%2B";
+                realBlood_Type = "B+";
                 break;
             case "BRh-":
                 realBlood_Type = "B-";
                 break;
             case "0Rh+":
-                realBlood_Type = "0%2B";
+                realBlood_Type = "0+";
                 break;
             case "0Rh-":
                 realBlood_Type = "0-";
@@ -331,7 +331,7 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
 
                 params.put("name_surname", nameSurname);
                 params.put("notificationType", notification_type);
-                params.put("bloodType", realBlood_Type);
+                params.put("bloodType", realBlood_Type+"");
                 params.put("locationID", selectedLocationID+"");
                 params.put("hospitalName", selectedLocationName);
                 params.put("senderID", senderID+"");
