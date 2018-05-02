@@ -314,7 +314,15 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
                         //
                         //startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     } else {
-                        Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
+                        if(obj.has("block")){
+                            finish();
+                            SharedPreferencesManager.getInstance(getApplicationContext()).logout();
+                            Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
+                        }
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
