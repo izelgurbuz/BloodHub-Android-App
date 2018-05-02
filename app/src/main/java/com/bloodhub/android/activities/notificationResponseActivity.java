@@ -90,6 +90,7 @@ public class notificationResponseActivity extends AppCompatActivity {
         msg.setTextColor(ResourcesCompat.getColor(getResources(), R.color.darkgray, null));
 
         if(classname.equals("r")){
+            findViewById(R.id.buttonReject).setBackgroundResource(R.drawable.my_reject_button);
             findViewById(R.id.buttonReject).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -98,6 +99,7 @@ public class notificationResponseActivity extends AppCompatActivity {
 
                 }
             });
+            findViewById(R.id.buttonConfirm).setBackgroundResource(R.drawable.my_confirm_button);
             findViewById(R.id.buttonConfirm).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {

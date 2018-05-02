@@ -41,7 +41,9 @@
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 android:text="Confirm"
-                android:background="@color/colorPrimary"/>
+                android:textAlignment="center"
+                android:textColor="@color/text_color_primary"
+                />
 
             <Button
                 android:id="@+id/buttonReject"
@@ -50,7 +52,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/colorPrimary"
+                android:textAlignment="center"
+                android:textColor="@color/text_color_primary"
+
+
                 android:text="Reject" />
         </LinearLayout>
 

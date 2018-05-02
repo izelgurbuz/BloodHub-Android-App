@@ -38,7 +38,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/username"
-                android:inputType="textNoSuggestions" />
+                android:inputType="textNoSuggestions"
+                android:background="@drawable/my_transaction_layout"
+                android:layout_marginBottom="20dp"/>
 
 
             <EditText
@@ -48,7 +50,9 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="@string/password"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:background="@drawable/my_transaction_layout"
+                android:layout_marginBottom="20dp"/>
 
             <Button
                 android:id="@+id/buttonLogin"

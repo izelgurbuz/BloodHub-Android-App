@@ -256,9 +256,9 @@ public class myReceivedNotificationActivity extends BaseActivity {
 
 
                                     //Add button to LinearLayout defined in XML
-                                    Toast.makeText(getApplicationContext(),
-                                            "Clicked Button Index :" + index,
-                                            Toast.LENGTH_LONG).show();
+                                    //Toast.makeText(getApplicationContext(),
+                                      //      "Clicked Button Index :" + index,
+                                        //    Toast.LENGTH_LONG).show();
                                     //startActivity(new Intent(getApplicationContext(), notificationResponseActivity.class));
 
 
@@ -272,7 +272,7 @@ public class myReceivedNotificationActivity extends BaseActivity {
 
 
 
-                        Toast.makeText(getApplicationContext(), "halelujah", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "halelujah", Toast.LENGTH_SHORT).show();
 
                         Log.e("gulbelea","lala");
 

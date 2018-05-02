@@ -32,7 +32,10 @@
                 android:layout_marginTop="8dp"
                 android:hint="Your Full Name Surname"
                 android:inputType="text"
-                android:textColor="@color/text_color_primary"/>
+                android:textColor="@color/text_color_primary"
+                android:textColorHint="@color/text_color_primary"
+                android:theme="@style/MyWAccent"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"/>
 
             <TextView
                 android:id="@+id/textViewLocation"

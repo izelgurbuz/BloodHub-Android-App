@@ -247,7 +247,7 @@ public class mySentNotificationActivity extends BaseActivity {
 
 
 
-                        Toast.makeText(getApplicationContext(), "halelujah", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(), "halelujah", Toast.LENGTH_SHORT).show();
 
 
 
