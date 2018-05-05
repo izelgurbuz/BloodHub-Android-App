@@ -1,9 +1,12 @@
 package com.bloodhub.android.activities;
 
 import android.app.ActionBar;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.Image;
+import android.provider.ContactsContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -322,7 +325,24 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
                         //finish();
                         //startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     } else {
-                        Toast.makeText(getApplicationContext(), obj.getString("error"), Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder alert =  new AlertDialog.Builder(EmergencyFiveTransactionActivity.this, R.style.MyDialogTheme );
+                        alert.setTitle( "Info" );
+                        alert.setMessage( obj.getString("error") );
+                        alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+
+                            }
+                        });
+                        alert.setCancelable(false);
+                        alert.setIcon(R.drawable.cancel);
+
+                        AlertDialog alertDialog = alert.show();
+                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.show();
+
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -348,6 +368,12 @@ public class EmergencyFiveTransactionActivity extends BaseActivity {
         ul.execute();
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+        finish();
     }
 }
 

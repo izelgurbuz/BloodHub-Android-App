@@ -16,7 +16,9 @@
         android:orientation="vertical"
         android:background="@color/fabStrokeColor">
 
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <LinearLayout
             android:id="@+id/em5TransactionlinearMain"
             android:layout_width="match_parent"
@@ -33,9 +35,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
             android:layout_centerVertical="true"
-            android:visibility="gone" />
-
+            android:visibility="gone"
+            android:indeterminateTint="@color/colorPrimary"
+            android:indeterminateTintMode="multiply"
+            android:progressBackgroundTint="@color/colorPrimary"/>
+        </RelativeLayout>
     </LinearLayout>
     </ScrollView>
 

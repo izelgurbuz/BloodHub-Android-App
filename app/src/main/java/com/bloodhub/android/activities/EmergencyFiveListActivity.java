@@ -2,6 +2,7 @@ package com.bloodhub.android.activities;
 
 import android.Manifest;
 import android.app.ActionBar;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -13,6 +14,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.DisplayMetrics;
@@ -86,7 +88,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
 
         if (!SharedPreferencesManager.getInstance(this).isLoggedIn()) {
             finish();
-            startActivity(new Intent(this, LoginActivity.class));
+            startActivity(new Intent(this, MainActivity.class));
         }
 
 
@@ -129,6 +131,8 @@ public class EmergencyFiveListActivity extends BaseActivity {
                         JSONObject em5list = obj.getJSONObject("em5List"); //,"UTF-8" ;
                         JSONArray jsonarray = new JSONArray((em5list.getString("people")));
 
+
+
                         for (int i = 0; i < jsonarray.length(); i++) {
                             JSONObject jsonobject = jsonarray.getJSONObject(i);
                             aEM5list.put(jsonobject.getInt("id"),
@@ -163,7 +167,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             ll.setBackgroundResource(R.drawable.my_transaction_layout);
                             LinearLayout.LayoutParams llparam = new LinearLayout.LayoutParams(
                                     ActionBar.LayoutParams.MATCH_PARENT, ActionBar.LayoutParams.WRAP_CONTENT, 1.0f);
-                            llparam.setMargins(10,10,10,10);
+                            llparam.setMargins(0,10,0,10);
                             ll.setLayoutParams(llparam);
 
 
@@ -185,19 +189,13 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             first_name.setLayoutParams(param);
 
 
-                            //first_name.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
                             first_name.setTextColor(Color.DKGRAY);
-                           // first_name.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
 
                             first_status.setPadding(20,10,10,10);
                             first_status.setWidth(width/4);
                             first_status.setLayoutParams(param);
 
-
-                            //first_status.setTextAppearance(android.R.style.TextAppearance_DeviceDefault_Medium);
-
-                            //first_status.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
                             phone_call.setLayoutParams(params);
                             phone_call.setBackgroundResource(R.drawable.my_phone_button);
@@ -206,21 +204,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             //phone_call.setBackgroundResource(R.drawable.my_transaction_button);
                             phone_call.setVisibility(View.INVISIBLE);
 
-                            //ImageButton sendButton = new ImageButton(thisclass);
-                            //sendButton.setImageResource(R.drawable.ic_menu_send);
-                            //sendButton.setLayoutParams(params);
-                            //sendButton.setBackgroundResource(R.drawable.my_transaction_button);
 
-
-                            //sendButton.setOnClickListener(new View.OnClickListener() {
-                              //  @Override
-                                //public void onClick(View view) {
-
-                                  //  Log.e("telbuton", "butona tiklandi");
-                                    //method("first", uid);
-                               // }
-
-                           // });
                             String status = em5Object.getStatus() == 1 ? "Confirmed" : (em5Object.getStatus() == -1 ? "Rejected" : "Waiting");
                             first_status.setText(status);
                             first_status.setTypeface(null, Typeface.BOLD);
@@ -276,10 +260,7 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             addNewButton.setText("+");
                             addNewButton.setTextColor(Color.WHITE);
 
-                            //addNewButton.setBackground(getResources().getDrawable(R.drawable.ic_add_white_24px));
-                            //addNewButton.setBackgroundColor(Color.RED);
 
-                            //addNewButton.setLayoutParams(params);
                             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                                     150,150);
 
@@ -290,7 +271,6 @@ public class EmergencyFiveListActivity extends BaseActivity {
                                 @Override
                                 public void onClick(View view) {
                                     startActivity(new Intent(getApplicationContext(), createAEmergencyFivePersonActivity.class));
-                                    finish();
                                     Log.e("telbuton", "addNewButton tiklandi");
                                     //method("first", uid);
                                 }
@@ -307,126 +287,27 @@ public class EmergencyFiveListActivity extends BaseActivity {
                             lm.addView(addBtnLyt);
 
                         }
-                        /*((TextView)findViewById(R.id.textViewEM5List)).setText("Your EM5 List is as below");
 
-                        Toast.makeText(getApplicationContext(), em5list.getString("first_name"), Toast.LENGTH_SHORT).show();
-
-                        LinearLayout ll = new LinearLayout(thisclass);
-                        ll.setOrientation(LinearLayout.HORIZONTAL);
-
-
-
-
-
-                        // Create TextView
-                        EditText first_name = new EditText(thisclass);
-                        TextView first_status = new TextView(thisclass);
-                        //FloatingActionButton phone_call = new FloatingActionButton(thisclass);
-                        first_name.setLayoutParams(new AppBarLayout.LayoutParams(width/2,height/8));
-                        first_status.setLayoutParams(new AppBarLayout.LayoutParams(width/6, first_name.getLayoutParams().height));
-                        Button sendButton = new Button(thisclass);
-                        sendButton.setLayoutParams(new AppBarLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-                        sendButton.setBackgroundResource(R.drawable.send);
-                        sendButton.getLayoutParams().height=height/8;
-                        sendButton.getLayoutParams().width=width/6;
-                        int difference= height/8 - width/6;
-
-
-                        sendButton.setOnClickListener(new View.OnClickListener(){
-                          @Override
-                         public void onClick(View view) {
-                                //method("first", uid);
-                           }
-
-                         });
-                        String status = em5list.getInt("isApprovedforFirstPerson") == 1 ? "Confirmed" : (em5list.getInt("isApprovedforFirstPerson") == -1 ? "Rejected" : "Waiting") ;
-                        first_status.setText(status);
-                        if(status.equals("Confirmed"))
-                        {
-                            //phone_call.setImageResource(R.drawable.phone);
-                            //phone_call.setOnClickListener(new View.OnClickListener(){
-                              //  @Override
-                               // public void onClick(View view) {
-
-                             //   }
-
-                           // });
-                            //   } catch (JSONException e) {
-                            //  e.printStackTrace();
-                        }
-                        first_name.setText(em5list.getString("first_name") + "   " + em5list.getString("first_email") );
-                        first_name.setPadding(0,0,0,0);
-                        first_status.setPadding(0,difference/2,0,difference/2);
-                        sendButton.setPadding(0,difference/2,0,difference/2);
-
-                        first_name.setBackgroundResource(R.drawable.rect_text_edit);
-                        first_status.setBackgroundResource(R.drawable.rect_text_edit);
-                       // phone_call.setBackgroundResource(R.drawable.rect_text_edit);
-                        ll.addView(first_name);
-                        ll.addView(first_status);
-                        ll.addView(sendButton);
-
-
-
-
-                        lm.addView(ll);
-
-                        LinearLayout ll2 = new LinearLayout(thisclass);
-                        ll2.setOrientation(LinearLayout.HORIZONTAL);
-                        EditText second_name = new EditText(thisclass);
-                        second_name.setText(em5list.getString("second_name") + "   " + em5list.getString("second_email") + "     "+
-                                (em5list.getInt("isApprovedforSecondPerson") == 1 ? "Confirmed" : (em5list.getInt("isApprovedforSecondPerson") == -1 ? "Rejected" : "Waiting") ));
-                        second_name.setPadding(0,10,0,20);
-                        second_name.setBackgroundResource(R.drawable.rect_text_edit);
-
-                        ll2.addView(second_name);
-                        lm.addView(ll2);
-
-                        LinearLayout ll3 = new LinearLayout(thisclass);
-                        ll3.setOrientation(LinearLayout.HORIZONTAL);
-                        EditText third_name = new EditText(thisclass);
-                        third_name.setText(em5list.getString("third_name") + "   " + em5list.getString("third_email")+ "     "+
-                                (em5list.getInt("isApprovedforThirdPerson") == 1 ? "Confirmed" : (em5list.getInt("isApprovedforThirdPerson") == -1 ? "Rejected" : "Waiting") ));
-                        third_name.setPadding(0,10,0,20);
-                        third_name.setBackgroundResource(R.drawable.rect_text_edit);
-
-                        ll3.addView(third_name);
-                        lm.addView(ll3);
-
-                        LinearLayout ll4 = new LinearLayout(thisclass);
-                        ll4.setOrientation(LinearLayout.HORIZONTAL);
-                        EditText fourth_name = new EditText(thisclass);
-                        fourth_name.setText(em5list.getString("fourth_name") + "   " + em5list.getString("fourth_email")+ "     "+
-                                (em5list.getInt("isApprovedforFourthPerson") == 1 ? "Confirmed" : (em5list.getInt("isApprovedforFourthPerson") == -1 ? "Rejected" : "Waiting") ));
-                        fourth_name.setPadding(0,10,0,20);
-                        fourth_name.setBackgroundResource(R.drawable.rect_text_edit);
-
-                        ll4.addView(fourth_name);
-                        lm.addView(ll4);
-
-                        LinearLayout ll5 = new LinearLayout(thisclass);
-                        ll5.setOrientation(LinearLayout.HORIZONTAL);
-                        EditText fifth_name = new EditText(thisclass);
-                        fifth_name.setText(em5list.getString("fifth_name") + "   " + em5list.getString("fifth_email")+ "     "+
-                                (em5list.getInt("isApprovedforFifthPerson") == 1 ? "Confirmed" : (em5list.getInt("isApprovedforFifthPerson") == -1 ? "Rejected" : "Waiting") ));
-                        fifth_name.setPadding(0,10,0,10);
-                        fifth_name.setBackgroundResource(R.drawable.rect_text_edit);
-
-                        ll5.addView(fifth_name);
-                        lm.addView(ll5);
-
-                        */
-
-
-                        //starting the profile activity
-                        //finish();
-                        //startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     } else {
-                        TextView textViewEM5List = new TextView(thisclass);
-                        textViewEM5List.setText("You dont have EM5 List . \n Lets create one...");
-                        textViewEM5List.setTextColor(Color.BLACK);
-                        lm.addView(textViewEM5List);
-                        Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
+
+                        AlertDialog.Builder alert =  new AlertDialog.Builder(EmergencyFiveListActivity.this, R.style.MyDialogTheme );
+                        alert.setTitle( "Info" );
+                        alert.setMessage( "You don't have any person in your EM5 list. Please add someone." );
+                        alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), createAEmergencyFivePersonActivity.class));
+
+                            }
+                        });
+                        alert.setCancelable(false);
+                        alert.setIcon(R.drawable.cancel);
+
+                        AlertDialog alertDialog = alert.show();
+                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.show();
+
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -544,6 +425,11 @@ public class EmergencyFiveListActivity extends BaseActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+        finish();
     }
 }
 

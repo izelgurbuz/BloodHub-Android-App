@@ -207,7 +207,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                     alert.setTitle( "Terms and Conditions" );
                     alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            registerUser();
+                                registerUser();
                         }
                     });
                     alert.setNegativeButton( "Cancel", new DialogInterface.OnClickListener() {

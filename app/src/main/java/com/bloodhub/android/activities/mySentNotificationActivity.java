@@ -1,7 +1,9 @@
 package com.bloodhub.android.activities;
 import android.app.ActionBar;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -224,16 +226,12 @@ public class mySentNotificationActivity extends BaseActivity {
                                     i.putExtras(bundle);
                                     //i.putExtra("titlestr", titlestr);
                                     startActivity(i);
-                                    finish();
 
 
 
 
 
-                                    //Add button to LinearLayout defined in XML
-                                    Toast.makeText(getApplicationContext(),
-                                            "Clicked Button Index :" + index,
-                                            Toast.LENGTH_LONG).show();
+
                                     //startActivity(new Intent(getApplicationContext(), notificationResponseActivity.class));
 
 
@@ -255,7 +253,24 @@ public class mySentNotificationActivity extends BaseActivity {
                         //finish();
                         //startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     } else {
-                        Toast.makeText(getApplicationContext(), obj.getString("error"), Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder alert =  new AlertDialog.Builder(mySentNotificationActivity.this, R.style.MyDialogTheme );
+                        alert.setTitle( "Error" );
+                        alert.setMessage( obj.getString("error") );
+                        alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+
+                            }
+                        });
+
+                        alert.setCancelable(false);
+                        alert.setIcon(R.drawable.cancel);
+
+                        AlertDialog alertDialog = alert.show();
+                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.show();
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -281,6 +296,12 @@ public class mySentNotificationActivity extends BaseActivity {
         ul.execute();
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+        finish();
     }
 
 

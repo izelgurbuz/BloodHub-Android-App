@@ -20,7 +20,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp"
+            android:padding="10dp"
+            android:paddingTop="20dp"
             android:background="@color/fabStrokeColor">
 
 
@@ -40,7 +41,10 @@
                 fab:cSize="NORMAL"
                 fab:cRadius="100"
                 fab:cDrawable="@drawable/ic_add_white_24px"
+
+
                 />-->
+
         </LinearLayout>
 
 

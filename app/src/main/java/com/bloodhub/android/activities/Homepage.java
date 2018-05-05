@@ -1,5 +1,6 @@
 package com.bloodhub.android.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebSettings;
@@ -20,4 +21,10 @@ public class Homepage extends BaseActivity {
         webSettings.setJavaScriptEnabled(true);
         mWebView.loadUrl("http://cs491-2.mustafaculban.net/?isInsideApp=true");
     }
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+        finish();
+    }
+
 }

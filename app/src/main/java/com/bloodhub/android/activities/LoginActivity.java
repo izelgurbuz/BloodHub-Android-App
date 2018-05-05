@@ -99,9 +99,18 @@ public class LoginActivity extends AppCompatActivity{
 
             ProgressBar progressBar;
 
+            AlertDialog.Builder alert =  new AlertDialog.Builder(LoginActivity.this, R.style.MyDialogTheme );
+            AlertDialog alertDialog;
+
             @Override
             protected void onPreExecute() {
                 super.onPreExecute();
+                alert.setTitle( "Loading ..." );
+                alert.setMessage( "Please Wait" );
+                alert.setCancelable(false);
+                alertDialog = alert.show();
+                alertDialog.setCanceledOnTouchOutside(false);
+                alertDialog.show();
                 progressBar = (ProgressBar) findViewById(R.id.progressBar);
                 progressBar.setVisibility(View.VISIBLE);
             }
@@ -111,6 +120,7 @@ public class LoginActivity extends AppCompatActivity{
                // s = "{" + s + "}";
                 super.onPostExecute(s);
                 progressBar.setVisibility(View.GONE);
+                alertDialog.dismiss();
 
 
                 try {
@@ -200,5 +210,11 @@ public class LoginActivity extends AppCompatActivity{
         ul.execute();
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
     }
 }

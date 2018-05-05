@@ -1,9 +1,11 @@
 package com.bloodhub.android.activities;
 
 import android.app.ActionBar;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Gravity;
@@ -74,10 +76,42 @@ public class createAEmergencyFivePersonActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 if(isEmailValid(email.getText().toString())){
-                    sendNotificationResponse();
+                    AlertDialog.Builder alert =  new AlertDialog.Builder(createAEmergencyFivePersonActivity.this, R.style.MyDialogTheme );
+                    alert.setTitle( "Confirm" );
+                    alert.setMessage( "You are sending EM5 request to "+email.getText().toString()+". Do you confirm ?");
+                    alert.setPositiveButton( "Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            sendNotificationResponse();
+                        }
+                    });
+                    alert.setCancelable(false);
+                    alert.setIcon(R.drawable.cancel);
+
+                    alert.setNegativeButton( "No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    } );
+                    AlertDialog alertDialog = alert.show();
+                    alertDialog.setCanceledOnTouchOutside(false);
+                    alertDialog.show();
+
                 }
                 else{
-                    Toast.makeText(getApplicationContext(), "You entered wrong email. Please correct and try again", Toast.LENGTH_LONG).show();
+                    AlertDialog.Builder alert =  new AlertDialog.Builder(createAEmergencyFivePersonActivity.this, R.style.MyDialogTheme );
+                    alert.setTitle( "Error" );
+                    alert.setMessage( "You entered wrong email. Please correct and try again" );
+                    alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    alert.setCancelable(false);
+                    alert.setIcon(R.drawable.cancel);
+
+                    AlertDialog alertDialog = alert.show();
+                    alertDialog.setCanceledOnTouchOutside(false);
+                    alertDialog.show();
                 }
             }
         });
@@ -139,32 +173,39 @@ public class createAEmergencyFivePersonActivity extends BaseActivity {
                         //JSONObject userInstance = obj.getJSONObject("user");
 
 
-                        Toast.makeText(getApplicationContext(), obj.getString("success"), Toast.LENGTH_SHORT).show();
-                        startActivity(new Intent(getApplicationContext(), EmergencyFiveListActivity.class));
+                        AlertDialog.Builder alert =  new AlertDialog.Builder(createAEmergencyFivePersonActivity.this, R.style.MyDialogTheme );
+                        alert.setTitle( "Success" );
+                        alert.setMessage( obj.getString("success") );
+                        alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), EmergencyFiveListActivity.class));
+                            }
+                        });
+                        alert.setCancelable(false);
+                        alert.setIcon(R.drawable.cancel);
 
-                        finish();
-
-                        //finish();
-                        //startActivity(new Intent(getApplicationContext(), myReceivedNotificationActivity.class));
-                        //getting the user from the response
+                        AlertDialog alertDialog = alert.show();
+                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.show();
 
 
-                        //creating a new user object
-                        /*User user = new User(
-                                userInstance.getInt("id"),
-                                userInstance.getString("username"),
-                                userInstance.getString("email")
-
-                        );
-                        Log.e("USERNAME:  ", ""+user.getUsername());
-                        //storing the user in shared preferences
-                        SharedPreferencesManager.getInstance(getApplicationContext()).userLogin(user);
-                        */
-                        //starting the profile activity
-                        //
-                        //startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     } else {
-                        Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_LONG).show();
+                        AlertDialog.Builder alert =  new AlertDialog.Builder(createAEmergencyFivePersonActivity.this, R.style.MyDialogTheme );
+                        alert.setTitle( "Error" );
+                        alert.setMessage( obj.getString("error_msg") );
+                        alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), EmergencyFiveListActivity.class));
+                            }
+                        });
+                        alert.setCancelable(false);
+                        alert.setIcon(R.drawable.cancel);
+
+                        AlertDialog alertDialog = alert.show();
+                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

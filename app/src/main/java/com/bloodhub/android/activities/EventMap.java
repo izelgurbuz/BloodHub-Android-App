@@ -176,6 +176,7 @@ public class EventMap extends FragmentActivity
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
             finish();
         }
         return super.onKeyDown(keyCode, event);

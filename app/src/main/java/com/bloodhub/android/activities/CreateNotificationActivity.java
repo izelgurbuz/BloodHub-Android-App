@@ -81,13 +81,13 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
         citySpinner = (Spinner) findViewById(R.id.city_spinner);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.bloodType_arrays, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.bloodType_arrays, R.layout.spinner_itm);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
-        cityAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,cityList);
+        cityAdapter = new ArrayAdapter<String>(this,R.layout.spinner_itm,cityList);
         cityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         citySpinner.setAdapter(cityAdapter);
 
@@ -121,8 +121,6 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
 
         User user = SharedPreferencesManager.getInstance(this).getUser();
 
-        //editTextlocation = (EditText) findViewById(R.id.editTextlocation);
-        //editTexthospitalName = (EditText) findViewById(R.id.editTexthospitalName);
         editTextnameSurname = (EditText) findViewById(R.id.editTextnameSurname);
 
         editTextnameSurname.setText(user.getFirstname() + " " + user.getSurname());
@@ -133,14 +131,28 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
         checkBoxMail = (CheckBox) findViewById(R.id.checkbox_mail);
         checkBoxPush = (CheckBox) findViewById(R.id.checkbox_push);
 
-        //if user presses on login
-        //calling the method login
+
         findViewById(R.id.buttonNotification).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 if(!checkBoxSMS.isChecked() && !checkBoxMail.isChecked() && !checkBoxPush.isChecked()){
-                    checkBoxSMS.setError("You have to select One of the checkboxes");
+                    AlertDialog.Builder alert =  new AlertDialog.Builder(CreateNotificationActivity.this, R.style.MyDialogTheme );
+                    alert.setTitle( "Error" );
+                    alert.setMessage( "You have to select One of the checkboxes" );
+                    alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            checkBoxSMS.setError("You have to select One of the checkboxes");
+                            dialog.dismiss();
+                        }
+                    });
+                    alert.setCancelable(false);
+                    alert.setIcon(R.drawable.cancel);
+
+                    AlertDialog alertDialog = alert.show();
+                    alertDialog.setCanceledOnTouchOutside(false);
+                    alertDialog.show();
+
 
                 }
                 else if (TextUtils.isEmpty(editTextnameSurname.getText())){
@@ -160,9 +172,28 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
                     editTexthospitalName.requestFocus();
                 }*/
 
-                else
-                    sendBloodRequest();
+                else {
+                    AlertDialog.Builder alert =  new AlertDialog.Builder(CreateNotificationActivity.this, R.style.MyDialogTheme );
+                    alert.setTitle( "Confirm" );
+                    alert.setMessage( "Do you confirm your Notification Request??");
+                    alert.setPositiveButton( "Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            sendBloodRequest();
+                        }
+                    });
+                    alert.setCancelable(false);
+                    alert.setIcon(R.drawable.cancel);
 
+                    alert.setNegativeButton( "No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    } );
+                    AlertDialog alertDialog = alert.show();
+                    alertDialog.setCanceledOnTouchOutside(false);
+                    alertDialog.show();
+
+                }
 
             }
         });
@@ -244,26 +275,21 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
     }
 
     public void onNothingSelected(AdapterView<?> parent) {
-        // Another interface callback
+
     }
 
 
     @Override
     public void onBackPressed() {
+
         CreateNotificationActivity.this.finish();
+        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+
     }
 
     private void sendBloodRequest() {
 
-        //first getting the values
-        //final String location = editTextlocation.getText().toString();
-        //final String hospital = editTexthospitalName.getText().toString();
         final String nameSurname = editTextnameSurname.getText().toString();
-
-
-
-
-        //if everything is fine
 
         class BloodRequest extends AsyncTask<Void, Void, String> {
 
@@ -294,9 +320,6 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
                     if (obj.getString("error").equals("FALSE")) {
                         //JSONObject userInstance = obj.getJSONObject("user");
 
-
-                        //Toast.makeText(getApplicationContext(), obj.getString("success"), Toast.LENGTH_SHORT).show();
-
                         AlertDialog.Builder alert =  new AlertDialog.Builder(CreateNotificationActivity.this, R.style.MyDialogTheme );
                         alert.setTitle( "Success" );
                         alert.setMessage( obj.getString("success") );
@@ -319,23 +342,7 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
                         alertDialog.show();
 
 
-                        //getting the user from the response
 
-
-                        //creating a new user object
-                        /*User user = new User(
-                                userInstance.getInt("id"),
-                                userInstance.getString("username"),
-                                userInstance.getString("email")
-
-                        );
-                        Log.e("USERNAME:  ", ""+user.getUsername());
-                        //storing the user in shared preferences
-                        SharedPreferencesManager.getInstance(getApplicationContext()).userLogin(user);
-                        */
-                        //starting the profile activity
-                        //
-                        //startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     } else {
                         if(obj.has("block")){
                             AlertDialog.Builder alert =  new AlertDialog.Builder(CreateNotificationActivity.this, R.style.MyDialogTheme );
@@ -350,17 +357,11 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
                             alert.setCancelable(false);
                             alert.setIcon(R.drawable.cancel);
 
-                            /*alert.setNegativeButton( "Cancel", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Log.d( "AlertDialog", "Negative" );
-                                }
-                            } );*/
                             AlertDialog alertDialog = alert.show();
                             alertDialog.setCanceledOnTouchOutside(false);
                             alertDialog.show();
 
 
-                            //Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
                         }
                         else{
                             AlertDialog.Builder alert =  new AlertDialog.Builder(CreateNotificationActivity.this, R.style.MyDialogTheme );
@@ -374,15 +375,10 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
                             alert.setCancelable(false);
                             alert.setIcon(R.drawable.cancel);
 
-                            /*alert.setNegativeButton( "Cancel", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    Log.d( "AlertDialog", "Negative" );
-                                }
-                            } );*/
                             AlertDialog alertDialog = alert.show();
                             alertDialog.setCanceledOnTouchOutside(false);
                             alertDialog.show();
-                            //Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
+
                         }
 
                     }
@@ -474,8 +470,6 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
 
 
             }
-
-
 
             @Override
             protected String doInBackground(Void... voids) {

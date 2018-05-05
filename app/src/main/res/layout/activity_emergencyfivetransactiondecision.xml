@@ -3,6 +3,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
     <LinearLayout
         android:id="@+id/linearResponse"
         android:layout_width="match_parent"
@@ -75,16 +80,17 @@
                 android:id="@+id/transactionXMLbuttonConfirm"
                 style="@android:style/Widget.Material.Button.Colored"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
+
                 />
 
             <Button
                 android:id="@+id/transactionXMLbuttonReject"
                 style="@android:style/Widget.Material.Button.Colored"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
                 />
@@ -98,8 +104,13 @@
         style="@android:style/Widget.Material.ProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:visibility="gone" />
+        android:visibility="gone"
+        android:indeterminateTint="@color/colorPrimary"
+        android:indeterminateTintMode="multiply"
+        android:progressBackgroundTint="@color/colorPrimary"/>
 
+    </RelativeLayout>
 </LinearLayout>

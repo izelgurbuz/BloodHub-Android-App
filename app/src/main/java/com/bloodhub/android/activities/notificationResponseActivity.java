@@ -1,6 +1,8 @@
 package com.bloodhub.android.activities;
 import android.app.ActionBar;
+import android.content.DialogInterface;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -94,7 +96,29 @@ public class notificationResponseActivity extends AppCompatActivity {
             findViewById(R.id.buttonReject).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    sendNotificationResponse(-1);
+                    AlertDialog.Builder alert =  new AlertDialog.Builder(notificationResponseActivity.this, R.style.MyDialogTheme );
+                    alert.setTitle( "Rejecting" );
+                    alert.setMessage( "Do you reject Blood Request?" );
+                    alert.setPositiveButton( "Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            sendNotificationResponse(-1);
+
+                        }
+                    });
+                    alert.setNegativeButton( "No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                        }
+                    });
+
+                    alert.setCancelable(false);
+                    alert.setIcon(R.drawable.question_mark);
+
+                    AlertDialog alertDialog = alert.show();
+                    alertDialog.setCanceledOnTouchOutside(false);
+                    alertDialog.show();
+
 
 
                 }
@@ -103,16 +127,39 @@ public class notificationResponseActivity extends AppCompatActivity {
             findViewById(R.id.buttonConfirm).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    sendNotificationResponse(1);
-                    Bundle bundle = new Bundle();
-                    bundle.putDouble("latitude", latitude);
-                    bundle.putDouble("longitude", longitude);
-                    bundle.putString("placeName", placeName);
-                    Intent i = new Intent(thisclass, BloodRequestMapPointActivity.class);
-                    i.putExtras(bundle);
-                    //i.putExtra("titlestr", titlestr);
-                    startActivity(i);
-                    finish();
+                    AlertDialog.Builder alert =  new AlertDialog.Builder(notificationResponseActivity.this, R.style.MyDialogTheme );
+                    alert.setTitle( "Confirming" );
+                    alert.setMessage( "Do you confirm Blood Request?" );
+                    alert.setPositiveButton( "Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            sendNotificationResponse(1);
+                            Bundle bundle = new Bundle();
+                            bundle.putDouble("latitude", latitude);
+                            bundle.putDouble("longitude", longitude);
+                            bundle.putString("placeName", placeName);
+                            Intent i = new Intent(thisclass, BloodRequestMapPointActivity.class);
+                            i.putExtras(bundle);
+                            //i.putExtra("titlestr", titlestr);
+                            startActivity(i);
+                            finish();
+
+                        }
+                    });
+                    alert.setNegativeButton( "No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+
+                        }
+                    });
+
+                    alert.setCancelable(false);
+                    alert.setIcon(R.drawable.question_mark);
+
+                    AlertDialog alertDialog = alert.show();
+                    alertDialog.setCanceledOnTouchOutside(false);
+                    alertDialog.show();
+
+
 
 
                 }
@@ -168,29 +215,46 @@ public class notificationResponseActivity extends AppCompatActivity {
 
 
                         Toast.makeText(getApplicationContext(), obj.getString("success"), Toast.LENGTH_SHORT).show();
-                        if(response == -1)
-                            finish();
-                        //finish();
-                        //startActivity(new Intent(getApplicationContext(), myReceivedNotificationActivity.class));
-                        //getting the user from the response
+                        if(response == -1){
+                            AlertDialog.Builder alert =  new AlertDialog.Builder(notificationResponseActivity.this, R.style.MyDialogTheme );
+                            alert.setTitle( "Success" );
+                            alert.setMessage( obj.getString("success") );
+                            alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                                    finish();
+
+                                }
+                            });
 
 
-                        //creating a new user object
-                        /*User user = new User(
-                                userInstance.getInt("id"),
-                                userInstance.getString("username"),
-                                userInstance.getString("email")
+                            alert.setCancelable(false);
+                            alert.setIcon(R.drawable.check_icon);
 
-                        );
-                        Log.e("USERNAME:  ", ""+user.getUsername());
-                        //storing the user in shared preferences
-                        SharedPreferencesManager.getInstance(getApplicationContext()).userLogin(user);
-                        */
-                        //starting the profile activity
-                        //
-                        //startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            AlertDialog alertDialog = alert.show();
+                            alertDialog.setCanceledOnTouchOutside(false);
+                            alertDialog.show();
+                        }
+
                     } else {
-                        Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder alert =  new AlertDialog.Builder(notificationResponseActivity.this, R.style.MyDialogTheme );
+                        alert.setTitle( "Error" );
+                        alert.setMessage( obj.getString("error_msg") );
+                        alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                                finish();
+
+                            }
+                        });
+
+
+                        alert.setCancelable(false);
+                        alert.setIcon(R.drawable.cancel);
+
+                        AlertDialog alertDialog = alert.show();
+                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -222,5 +286,11 @@ public class notificationResponseActivity extends AppCompatActivity {
         ul.execute();
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
     }
 }

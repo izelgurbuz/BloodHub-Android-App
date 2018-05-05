@@ -1,5 +1,6 @@
 package com.bloodhub.android.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -46,7 +47,9 @@ public class Blog extends BaseActivity {
                     if (mWebView.canGoBack()) {
                         mWebView.goBack();
                     } else {
+                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                         finish();
+
                     }
                     return true;
             }

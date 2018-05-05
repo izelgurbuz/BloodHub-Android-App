@@ -3,6 +3,7 @@ package com.bloodhub.android.activities;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.database.SQLException;
@@ -44,6 +45,7 @@ public class BloodRequestMapPointActivity extends FragmentActivity
     double[] enlemler = new double[10];
     double[] boylamlar = new double[10];
 
+    boolean doubleBackToExitPressedOnce = false;
     double latitude, longitude;
     String placeName;
     int length;
@@ -111,7 +113,23 @@ public class BloodRequestMapPointActivity extends FragmentActivity
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if ((keyCode == KeyEvent.KEYCODE_BACK)) {
-            finish();
+            if (doubleBackToExitPressedOnce) {
+                finish();
+                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                return true;
+            }
+
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+            new Handler().postDelayed(new Runnable() {
+
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -126,6 +144,24 @@ public class BloodRequestMapPointActivity extends FragmentActivity
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    @Override
+    public void onBackPressed() {
+        if (doubleBackToExitPressedOnce) {
+            startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            return;
+        }
+
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+                doubleBackToExitPressedOnce = false;
+            }
+        }, 2000);
     }
 
 }

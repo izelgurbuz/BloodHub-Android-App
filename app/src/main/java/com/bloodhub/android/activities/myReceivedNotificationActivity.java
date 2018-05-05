@@ -249,7 +249,7 @@ public class myReceivedNotificationActivity extends BaseActivity {
                                     i.putExtras(bundle);
                                     //i.putExtra("titlestr", titlestr);
                                     startActivity(i);
-                                    finish();
+
 
 
 
@@ -306,6 +306,12 @@ public class myReceivedNotificationActivity extends BaseActivity {
         ul.execute();
 
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+        finish();
     }
 }
 

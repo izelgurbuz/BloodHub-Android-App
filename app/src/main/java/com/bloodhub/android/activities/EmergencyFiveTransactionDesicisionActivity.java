@@ -1,7 +1,9 @@
 package com.bloodhub.android.activities;
 import android.app.ActionBar;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -174,7 +176,28 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
         rjbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendTransactionChoice("-1");
+                AlertDialog.Builder alert =  new AlertDialog.Builder(EmergencyFiveTransactionDesicisionActivity.this, R.style.MyDialogTheme );
+                alert.setTitle( "Rejecting" );
+                alert.setMessage( "Do you confirm?" );
+                alert.setPositiveButton( "Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        sendTransactionChoice("-1");
+
+                    }
+                });
+                alert.setNegativeButton( "No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+                alert.setCancelable(false);
+                alert.setIcon(R.drawable.question_mark);
+
+                AlertDialog alertDialog = alert.show();
+                alertDialog.setCanceledOnTouchOutside(false);
+                alertDialog.show();
+
 
 
             }
@@ -182,7 +205,27 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
         cnfbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendTransactionChoice("1");
+                AlertDialog.Builder alert =  new AlertDialog.Builder(EmergencyFiveTransactionDesicisionActivity.this, R.style.MyDialogTheme );
+                alert.setTitle( "Confirming" );
+                alert.setMessage( "Do you confirm?" );
+                alert.setPositiveButton( "Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        sendTransactionChoice("1");
+
+                    }
+                });
+                alert.setNegativeButton( "No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+
+                    }
+                });
+                alert.setCancelable(false);
+                alert.setIcon(R.drawable.question_mark);
+
+                AlertDialog alertDialog = alert.show();
+                alertDialog.setCanceledOnTouchOutside(false);
+                alertDialog.show();
 
 
 
@@ -225,12 +268,44 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
 
                     if (obj.getString("error").equals("FALSE")) {
 
-                        Toast.makeText(getApplicationContext(), obj.getString("success"), Toast.LENGTH_SHORT).show();
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), EmergencyFiveTransactionActivity.class));
+                        AlertDialog.Builder alert =  new AlertDialog.Builder(EmergencyFiveTransactionDesicisionActivity.this, R.style.MyDialogTheme );
+                        alert.setTitle( "Success" );
+                        alert.setMessage( obj.getString("success") );
+                        alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), EmergencyFiveTransactionActivity.class));
+
+                            }
+                        });
+
+                        alert.setCancelable(false);
+                        alert.setIcon(R.drawable.check_icon);
+
+                        AlertDialog alertDialog = alert.show();
+                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.show();
+
+
 
                     } else {
-                        Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder alert =  new AlertDialog.Builder(EmergencyFiveTransactionDesicisionActivity.this, R.style.MyDialogTheme );
+                        alert.setTitle( "Error" );
+                        alert.setMessage( obj.getString("error_msg") );
+                        alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+
+                            }
+                        });
+
+                        alert.setCancelable(false);
+                        alert.setIcon(R.drawable.cancel);
+
+                        AlertDialog alertDialog = alert.show();
+                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.show();
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

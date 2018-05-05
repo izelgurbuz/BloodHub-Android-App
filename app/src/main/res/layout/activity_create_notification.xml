@@ -22,6 +22,17 @@
             android:padding="10dp"
             android:background="@color/sweetprimary">
 
+            <TextView
+                android:id="@+id/textViewPatientName2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Patient Name"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:textColor="@color/text_color_primary"/>
+
 
             <EditText
                 android:id="@+id/editTextnameSurname"
@@ -54,6 +65,8 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="@color/text_color_primary"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
+
 
                 />
 
@@ -95,7 +108,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/bloodType_arrays"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium"
+                android:textAppearance="@android:style/TextAppearance.Material.Small"
                 android:textColor="@color/text_color_primary" />
 
 
@@ -123,7 +136,8 @@
                     android:layout_weight=".33"
                     android:onClick="onCheckboxClicked"
                     android:text="@string/sms"
-                    android:textColor="@color/text_color_primary"/>
+                    android:textColor="@color/text_color_primary"
+                    android:buttonTint="@color/text_color_primary"/>
 
                 <CheckBox
                     android:id="@+id/checkbox_push"
@@ -133,7 +147,8 @@
                     android:layout_weight=".33"
                     android:onClick="onCheckboxClicked"
                     android:text="@string/push"
-                    android:textColor="@color/text_color_primary"/>
+                    android:textColor="@color/text_color_primary"
+                    android:buttonTint="@color/text_color_primary"/>
 
                 <CheckBox
                     android:id="@+id/checkbox_mail"
@@ -143,7 +158,8 @@
                     android:layout_weight=".33"
                     android:onClick="onCheckboxClicked"
                     android:text="@string/mail"
-                    android:textColor="@color/text_color_primary"/>
+                    android:textColor="@color/text_color_primary"
+                    android:buttonTint="@color/text_color_primary"/>
 
             </LinearLayout>
 
@@ -168,7 +184,9 @@
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:visibility="gone"
-            android:background="@color/colorPrimary"/>
+            android:indeterminateTint="@color/text_color_primary"
+            android:indeterminateTintMode="multiply"
+            android:progressBackgroundTint="@color/text_color_primary"/>
     </RelativeLayout>
 
 
