@@ -1,6 +1,8 @@
 package com.bloodhub.android.activities;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -293,9 +295,30 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
                         //JSONObject userInstance = obj.getJSONObject("user");
 
 
-                        Toast.makeText(getApplicationContext(), obj.getString("success"), Toast.LENGTH_SHORT).show();
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                        //Toast.makeText(getApplicationContext(), obj.getString("success"), Toast.LENGTH_SHORT).show();
+
+                        AlertDialog.Builder alert =  new AlertDialog.Builder(CreateNotificationActivity.this, R.style.MyDialogTheme );
+                        alert.setTitle( "Success" );
+                        alert.setMessage( obj.getString("success") );
+                        alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                            }
+                        });
+                        alert.setCancelable(false);
+                        alert.setIcon(R.drawable.check_icon);
+
+                        /*alert.setNegativeButton( "Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Log.d( "AlertDialog", "Negative" );
+                            }
+                        } );*/
+                        AlertDialog alertDialog = alert.show();
+                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.show();
+
+
                         //getting the user from the response
 
 
@@ -315,12 +338,51 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
                         //startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     } else {
                         if(obj.has("block")){
-                            finish();
-                            SharedPreferencesManager.getInstance(getApplicationContext()).logout();
-                            Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder alert =  new AlertDialog.Builder(CreateNotificationActivity.this, R.style.MyDialogTheme );
+                            alert.setTitle( "Error" );
+                            alert.setMessage( obj.getString("error_msg") );
+                            alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    finish();
+                                    SharedPreferencesManager.getInstance(getApplicationContext()).logout();
+                                }
+                            });
+                            alert.setCancelable(false);
+                            alert.setIcon(R.drawable.cancel);
+
+                            /*alert.setNegativeButton( "Cancel", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Log.d( "AlertDialog", "Negative" );
+                                }
+                            } );*/
+                            AlertDialog alertDialog = alert.show();
+                            alertDialog.setCanceledOnTouchOutside(false);
+                            alertDialog.show();
+
+
+                            //Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
+                            AlertDialog.Builder alert =  new AlertDialog.Builder(CreateNotificationActivity.this, R.style.MyDialogTheme );
+                            alert.setTitle( "Error" );
+                            alert.setMessage( obj.getString("error_msg") );
+                            alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                }
+                            });
+                            alert.setCancelable(false);
+                            alert.setIcon(R.drawable.cancel);
+
+                            /*alert.setNegativeButton( "Cancel", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Log.d( "AlertDialog", "Negative" );
+                                }
+                            } );*/
+                            AlertDialog alertDialog = alert.show();
+                            alertDialog.setCanceledOnTouchOutside(false);
+                            alertDialog.show();
+                            //Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
                         }
 
                     }

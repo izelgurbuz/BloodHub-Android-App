@@ -3,6 +3,7 @@ package com.bloodhub.android.activities;
 import android.app.DatePickerDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
@@ -11,12 +12,15 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -188,8 +192,42 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                     findViewById(R.id.city_spinner).requestFocus();
                     findViewById(R.id.city_spinner).performClick();
                 }
-                else
-                    registerUser();
+                else{
+                    WebView wv = new WebView(RegisterActivity.this);
+                    wv.loadUrl("http://cs491-2.mustafaculban.net/misc/tac.html");
+                    wv.setWebViewClient(new WebViewClient() {
+                        @Override
+                        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                            view.loadUrl(url);
+
+                            return true;
+                        }
+                    });
+                    AlertDialog.Builder alert =  new AlertDialog.Builder(RegisterActivity.this, R.style.MyDialogTheme );
+                    alert.setTitle( "Terms and Conditions" );
+                    alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            registerUser();
+                        }
+                    });
+                    alert.setNegativeButton( "Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                    } );
+
+                    alert.setView(wv);
+                    alert.setCancelable(false);
+                    alert.setIcon(R.drawable.check_icon);
+
+
+                    AlertDialog alertDialog = alert.show();
+                    alertDialog.setCanceledOnTouchOutside(false);
+                    alertDialog.show();
+
+
+
+                }
             }
         });
 
@@ -439,6 +477,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 progressBar.setVisibility(View.GONE);
 
                 try {
+                    Log.e("gelen",s);
                     //converting response to json object
 
                     JSONObject obj = new JSONObject(s);
@@ -468,10 +507,50 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                         SharedPreferencesManager.getInstance(getApplicationContext()).userLogin(user);
 
                         //starting the profile activity
-                        finish();
-                        startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+
+                        AlertDialog.Builder alert =  new AlertDialog.Builder(RegisterActivity.this, R.style.MyDialogTheme );
+                        alert.setTitle( "Success" );
+                        alert.setMessage( "You succesfully registered. Please go to your Email and confirm your account." );
+                        alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            }
+                        });
+                        alert.setCancelable(false);
+                        alert.setIcon(R.drawable.check_icon);
+
+                        /*alert.setNegativeButton( "Cancel", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                Log.d( "AlertDialog", "Negative" );
+                            }
+                        } );*/
+                        AlertDialog alertDialog = alert.show();
+                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.show();
+
+
                     } else {
-                        Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder alert =  new AlertDialog.Builder(RegisterActivity.this, R.style.MyDialogTheme );
+                        alert.setTitle( "Error" );
+                        alert.setMessage( obj.getString("error_msg") );
+                        alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                        alert.setCancelable(false);
+                        alert.setIcon(R.drawable.cancel);
+
+                            /*alert.setNegativeButton( "Cancel", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Log.d( "AlertDialog", "Negative" );
+                                }
+                            } );*/
+                        AlertDialog alertDialog = alert.show();
+                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.show();
+                        //Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();

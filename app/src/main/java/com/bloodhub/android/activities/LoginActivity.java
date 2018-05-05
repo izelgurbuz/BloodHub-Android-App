@@ -1,7 +1,9 @@
 package com.bloodhub.android.activities;
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -152,7 +154,27 @@ public class LoginActivity extends AppCompatActivity{
                         finish();
                         startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
                     } else {
-                        Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
+                        AlertDialog.Builder alert =  new AlertDialog.Builder(LoginActivity.this, R.style.MyDialogTheme );
+                        alert.setTitle( "Error" );
+                        alert.setMessage( obj.getString("error_msg") );
+                        alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                                SharedPreferencesManager.getInstance(getApplicationContext()).logout();
+                            }
+                        });
+                        alert.setCancelable(false);
+                        alert.setIcon(R.drawable.cancel);
+
+                            /*alert.setNegativeButton( "Cancel", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Log.d( "AlertDialog", "Negative" );
+                                }
+                            } );*/
+                        AlertDialog alertDialog = alert.show();
+                        alertDialog.setCanceledOnTouchOutside(false);
+                        alertDialog.show();
+                        //Toast.makeText(getApplicationContext(), obj.getString("error_msg"), Toast.LENGTH_SHORT).show();
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
