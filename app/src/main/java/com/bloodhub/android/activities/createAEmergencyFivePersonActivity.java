@@ -85,7 +85,7 @@ public class createAEmergencyFivePersonActivity extends BaseActivity {
                         }
                     });
                     alert.setCancelable(false);
-                    alert.setIcon(R.drawable.cancel);
+                    alert.setIcon(R.drawable.question_mark);
 
                     alert.setNegativeButton( "No", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -183,7 +183,7 @@ public class createAEmergencyFivePersonActivity extends BaseActivity {
                             }
                         });
                         alert.setCancelable(false);
-                        alert.setIcon(R.drawable.cancel);
+                        alert.setIcon(R.drawable.check_icon);
 
                         AlertDialog alertDialog = alert.show();
                         alertDialog.setCanceledOnTouchOutside(false);

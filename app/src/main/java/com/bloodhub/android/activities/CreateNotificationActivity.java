@@ -93,6 +93,7 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
 
         spinner.setOnItemSelectedListener(this);
 
+        selectedLocationName = "";
 
         citySpinner.setOnItemSelectedListener( new OnItemSelectedListener() {
 
@@ -139,10 +140,10 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
                 if(!checkBoxSMS.isChecked() && !checkBoxMail.isChecked() && !checkBoxPush.isChecked()){
                     AlertDialog.Builder alert =  new AlertDialog.Builder(CreateNotificationActivity.this, R.style.MyDialogTheme );
                     alert.setTitle( "Error" );
-                    alert.setMessage( "You have to select One of the checkboxes" );
+                    alert.setMessage( "You have to select one of the notification types." );
                     alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            checkBoxSMS.setError("You have to select One of the checkboxes");
+                            checkBoxSMS.setError("You have to select one of the notification types.");
                             dialog.dismiss();
                         }
                     });
@@ -161,11 +162,26 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
                     editTextnameSurname.requestFocus();
                 }
                 //validating inputs
-                /*else if (TextUtils.isEmpty(editTextlocation.getText())) {
-                    editTextlocation.setError("Please enter the Location");
-                    editTextlocation.requestFocus();
+                else if (selectedLocationName == "" || selectedLocationName.equalsIgnoreCase("Select Blood Center or Hospital")) {
+                    AlertDialog.Builder alert =  new AlertDialog.Builder(CreateNotificationActivity.this, R.style.MyDialogTheme );
+                    alert.setTitle( "Error" );
+                    alert.setMessage( "You have to select one of the hospitals or blood centers fron the list.." );
+                    alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            citySpinner.requestFocus();
+                            citySpinner.performClick();
+                            dialog.dismiss();
+                        }
+                    });
+                    alert.setCancelable(false);
+                    alert.setIcon(R.drawable.cancel);
 
-                }
+                    AlertDialog alertDialog = alert.show();
+                    alertDialog.setCanceledOnTouchOutside(false);
+                    alertDialog.show();
+
+
+                }/*
 
                 else if (TextUtils.isEmpty(editTexthospitalName.getText())) {
                     editTexthospitalName.setError("Please enter Hospital Name");
@@ -175,14 +191,14 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
                 else {
                     AlertDialog.Builder alert =  new AlertDialog.Builder(CreateNotificationActivity.this, R.style.MyDialogTheme );
                     alert.setTitle( "Confirm" );
-                    alert.setMessage( "Do you confirm your Notification Request??");
+                    alert.setMessage( "Do you confirm your Notification Request ?");
                     alert.setPositiveButton( "Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             sendBloodRequest();
                         }
                     });
                     alert.setCancelable(false);
-                    alert.setIcon(R.drawable.cancel);
+                    alert.setIcon(R.drawable.question_mark);
 
                     alert.setNegativeButton( "No", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
@@ -326,7 +342,7 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
                         alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 finish();
-                                startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                                startActivity(new Intent(getApplicationContext(), mySentNotificationActivity.class));
                             }
                         });
                         alert.setCancelable(false);

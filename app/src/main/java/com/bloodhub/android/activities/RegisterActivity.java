@@ -192,6 +192,55 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                     findViewById(R.id.city_spinner).requestFocus();
                     findViewById(R.id.city_spinner).performClick();
                 }
+
+                else if (TextUtils.isEmpty(editTextUsername.getText().toString().trim())) {
+                    editTextUsername.setError("Please enter your Username");
+                    editTextUsername.requestFocus();
+
+                }
+
+                else if (TextUtils.isEmpty(editTextFirstName.getText().toString().trim())) {
+                    editTextFirstName.setError("Please enter your First Name");
+                    editTextFirstName.requestFocus();
+
+                }
+
+                else if (TextUtils.isEmpty(editTextSurName.getText().toString().trim())) {
+                    editTextSurName.setError("Please enter your Last Name");
+                    editTextSurName.requestFocus();
+
+                }
+
+                else if (TextUtils.isEmpty(editTextIdentity.getText().toString().trim()) || editTextIdentity.getText().toString().trim().length() != 11) {
+                    editTextIdentity.setError("Please enter your Identity Number");
+                    editTextIdentity.requestFocus();
+
+                }
+
+                else if (TextUtils.isEmpty(editTextAddress.getText().toString().trim())) {
+                    editTextAddress.setError("Please enter your Address");
+                    editTextAddress.requestFocus();
+
+                }
+
+                else if (TextUtils.isEmpty(editTextBirthdate.getText().toString().trim()) ) {
+                    editTextBirthdate.setError("Please select your Birthdate");
+                    editTextBirthdate.requestFocus();
+
+                }
+
+                else if (TextUtils.isEmpty(editTextEmail.getText().toString().trim())) {
+                    editTextEmail.setError("Please enter your Email");
+                    editTextEmail.requestFocus();
+
+                }
+
+                else if (TextUtils.isEmpty(editTextPassword.getText().toString().trim())) {
+                    editTextPassword.setError("Please enter a password");
+                    editTextPassword.requestFocus();
+
+                }
+
                 else{
                     WebView wv = new WebView(RegisterActivity.this);
                     wv.loadUrl("http://cs491-2.mustafaculban.net/misc/tac.html");
@@ -411,29 +460,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         final String birthdate = editTextBirthdate.getText().toString().trim();
 
 
-    /*if (isEmpty(username)) {
-        editTextUsername.setError("Please enter username");
-        editTextUsername.requestFocus();
-        return;
-    }
 
-        if (isEmpty(email)) {
-        editTextEmail.setError("Please enter your email");
-        editTextEmail.requestFocus();
-        return;
-    }
-
-       // if (!email.matches(android.util.Patterns.EMAIL_ADDRESS)) {
-        //editTextEmail.setError("Enter a valid email");
-        //editTextEmail.requestFocus();
-        //return;
-   // }
-
-        if (isEmpty(password)) {
-        editTextPassword.setError("Enter a password");
-        editTextPassword.requestFocus();
-        return;
-    }*/
         class RegisterUser extends AsyncTask<Void, Void, String> {
 
             private ProgressBar progressBar;

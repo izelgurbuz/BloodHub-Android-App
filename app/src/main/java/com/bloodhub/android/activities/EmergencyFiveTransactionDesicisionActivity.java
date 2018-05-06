@@ -335,4 +335,10 @@ public class EmergencyFiveTransactionDesicisionActivity extends AppCompatActivit
 
 
     }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(getApplicationContext(), EmergencyFiveTransactionActivity.class));
+        finish();
+    }
 }

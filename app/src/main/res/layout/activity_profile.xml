@@ -45,7 +45,7 @@
 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="My Alerts"
+                    android:text="My Sent Notifications"
                     android:textAlignment="center"
                     android:textAppearance="@android:style/TextAppearance.Material.Large"
                    />
