@@ -540,8 +540,9 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                         alert.setMessage( "You succesfully registered. Please go to your Email and confirm your account." );
                         alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
-                                finish();
+
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                                finish();
                             }
                         });
                         alert.setCancelable(false);

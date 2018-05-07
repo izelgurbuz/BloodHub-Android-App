@@ -290,7 +290,13 @@ public class notificationResponseActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
-        finish();
+        if(classname.equalsIgnoreCase("r")) {
+            startActivity(new Intent(getApplicationContext(), myReceivedNotificationActivity.class));
+            finish();
+        }
+        else if(classname.equalsIgnoreCase("s")){
+            startActivity(new Intent(getApplicationContext(), mySentNotificationActivity.class));
+            finish();
+        }
     }
 }

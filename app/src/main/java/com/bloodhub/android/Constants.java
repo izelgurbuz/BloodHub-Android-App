@@ -41,6 +41,10 @@ public class Constants {
 
     public static final String URL_getCities = ROOT_URL + "getCities/" + secret_Key;
 
+    public static final String URL_changePassword = ROOT_URL + "updatePassword/" + secret_Key;
+
+    public static final String URL_setAvailability = ROOT_URL + "setAvailability/" + secret_Key;
+
 
 
 }

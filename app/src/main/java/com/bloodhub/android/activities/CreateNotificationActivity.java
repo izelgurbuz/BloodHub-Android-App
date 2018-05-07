@@ -386,6 +386,7 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
                             alert.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int which) {
 
+                                    dialog.dismiss();
                                 }
                             });
                             alert.setCancelable(false);

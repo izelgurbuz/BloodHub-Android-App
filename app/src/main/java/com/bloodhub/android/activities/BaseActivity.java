@@ -72,7 +72,7 @@ public class BaseActivity extends Activity {
 
     private void addDrawerItems() {
 
-        String[] drawerItems = {"Home", "My Sent Notifications", "Emergency 5 List", "Received EM5 Requests", "Received Notifications", "Create New Blood Alert", "Homepage", "Blog", "Event Map"};
+        String[] drawerItems = {"Home", "My Sent Notifications", "Emergency 5 List", "Received EM5 Requests", "Received Notifications", "Create New Blood Notification", "Homepage", "Blog", "Event Map", "Settings"};
         mAdapter = new ArrayAdapter<String>(this, R.layout.drawer_item, drawerItems);
         mDrawerList.setAdapter(mAdapter);
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -107,6 +107,9 @@ public class BaseActivity extends Activity {
                     case 8:
                         startActivity(new Intent(getApplicationContext(), EventMap.class));
                         break;
+                    case 9:
+                        startActivity(new Intent(getApplicationContext(), UserProfileActivity.class));
+                        break;
 
                     default:
                 }
@@ -118,9 +121,12 @@ public class BaseActivity extends Activity {
         findViewById(R.id.drawer_logout_button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+
                 //Log.d("asdasf", "onClick: asd");
                 SharedPreferencesManager.getInstance(getApplicationContext()).logout();
+                finish();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
             }
         });
 

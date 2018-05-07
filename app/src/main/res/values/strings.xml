@@ -169,5 +169,11 @@
     <string name="options_2">Opt 2</string>
     <string name="options_3">Opt 3</string>
     <string name="options_4">Opt 4</string>
+    <string name="title_activity_user_profile">UserProfileActivity</string>
+    <string name="old_password">Please enter your current password</string>
+    <string name="new_password">Enter new password</string>
+    <string name="new_password_confirmation">Enter the new password again</string>
+    <string name="change">Change Password</string>
+    <string name="profile">Profile</string>
 
 </resources>

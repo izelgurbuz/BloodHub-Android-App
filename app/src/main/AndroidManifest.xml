@@ -45,6 +45,11 @@
             android:name=".activities.RegisterActivity"
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait"/>
+
+        <activity
+            android:name=".activities.UserProfileActivity"
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".activities.myReceivedNotificationActivity"
             android:theme="@style/AppTheme.NoActionBar"
