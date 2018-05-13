@@ -56,6 +56,8 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
 
     int senderID;
 
+    int isTrombosit = 0;
+
     ArrayList<String> cityList=new ArrayList<>();
     ArrayList<String> cityTempList=new ArrayList<>();
 
@@ -189,9 +191,10 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
                 }*/
 
                 else {
+                    String message = (isTrombosit == 1) ? "Do you confirm your Thrombocyte notification with \"" +realBlood_Type + "\" blood type? ":"Do you confirm your notification with \"" +realBlood_Type + "\" blood type? ";
                     AlertDialog.Builder alert =  new AlertDialog.Builder(CreateNotificationActivity.this, R.style.MyDialogTheme );
                     alert.setTitle( "Confirm" );
-                    alert.setMessage( "Do you confirm your Notification Request ?");
+                    alert.setMessage( message);
                     alert.setPositiveButton( "Yes", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             sendBloodRequest();
@@ -225,10 +228,28 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
             case R.id.checkbox_sms:
                 if (checked) {
 
+
+                    AlertDialog.Builder alert2 =  new AlertDialog.Builder(CreateNotificationActivity.this, R.style.MyDialogTheme );
+                    alert2.setTitle( "Error" );
+                    alert2.setMessage( "We are sorry , this feature cannot be used right now. Please try again later.");
+                    alert2.setPositiveButton( "OK", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            checkBoxSMS.setChecked(false);
+                            notification_type = "non";
+                            dialog.dismiss();
+                        }
+                    });
+                    alert2.setCancelable(false);
+                    alert2.setIcon(R.drawable.cancel);
+
+                    AlertDialog alertDialog2 = alert2.show();
+                    alertDialog2.setCanceledOnTouchOutside(false);
+                    alertDialog2.show();
+
+                    //notification_type = "sms";
+
                     checkBoxPush.setChecked(false);
                     checkBoxMail.setChecked(false);
-                    notification_type = "sms";
-
                 }
                 break;
 
@@ -259,29 +280,80 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
         // An item was selected. You can retrieve the selected item using
         Spinnerblood_type = (String) parent.getItemAtPosition(pos);
         switch (Spinnerblood_type){
+            case "All Types":
+                realBlood_Type = "all";
+                isTrombosit = 0;
+                break;
             case "ABRh+":
                 realBlood_Type = "AB+";
+                isTrombosit = 0;
                 break;
             case "ABRh-":
                 realBlood_Type = "AB-";
+                isTrombosit = 0;
                 break;
             case "ARh+":
                 realBlood_Type = "A+";
+                isTrombosit = 0;
                 break;
             case "ARh-":
                 realBlood_Type = "A-";
+                isTrombosit = 0;
                 break;
             case "BRh+":
                 realBlood_Type = "B+";
+                isTrombosit = 0;
                 break;
             case "BRh-":
                 realBlood_Type = "B-";
+                isTrombosit = 0;
                 break;
             case "0Rh+":
                 realBlood_Type = "0+";
+                isTrombosit = 0;
                 break;
             case "0Rh-":
                 realBlood_Type = "0-";
+                isTrombosit = 0;
+                break;
+
+            case "Thrombocyte (All Types)":
+                realBlood_Type = "alltrombosit";
+                isTrombosit = 1;
+                break;
+            case "Thrombocyte ABRh+":
+                realBlood_Type = "AB+";
+                isTrombosit = 1;
+                break;
+            case "Thrombocyte ABRh-":
+                realBlood_Type = "AB-";
+                isTrombosit = 1;
+                break;
+            case "Thrombocyte ARh+":
+                realBlood_Type = "A+";
+                isTrombosit = 1;
+                break;
+            case "Thrombocyte ARh-":
+                realBlood_Type = "A-";
+                isTrombosit = 1;
+                break;
+            case "Thrombocyte BRh+":
+                realBlood_Type = "B+";
+                isTrombosit = 1;
+                break;
+            case "Thrombocyte BRh-":
+                realBlood_Type = "B-";
+                isTrombosit = 1;
+                break;
+            case "Thrombocyte 0Rh+":
+                realBlood_Type = "0+";
+                isTrombosit = 1;
+                break;
+            case "Thrombocyte 0Rh-":
+                realBlood_Type = "0-";
+                isTrombosit = 1;
+                break;
+            default:
                 break;
 
         }
@@ -418,6 +490,7 @@ public class CreateNotificationActivity extends BaseActivity implements AdapterV
                 params.put("locationID", selectedLocationID+"");
                 params.put("hospitalName", selectedLocationName);
                 params.put("senderID", senderID+"");
+                params.put("isTrombosit",isTrombosit+"");
 
                 //returing the response
                 return requestHandler.sendPostRequest(Constants.URL_sendBloodRequest, params);

@@ -5,6 +5,7 @@
 
 
     <string-array name="bloodType_arrays">
+        <item>All Types</item>
         <item>ABRh+</item>
         <item>ABRh-</item>
         <item>ARh+</item>
@@ -13,6 +14,15 @@
         <item>BRh-</item>
         <item>0Rh+</item>
         <item>0Rh-</item>
+        <item>Thrombocyte (All Types)</item>
+        <item>Thrombocyte ABRh+</item>
+        <item>Thrombocyte ABRh-</item>
+        <item>Thrombocyte ARh+</item>
+        <item>Thrombocyte ARh-</item>
+        <item>Thrombocyte BRh+</item>
+        <item>Thrombocyte BRh-</item>
+        <item>Thrombocyte 0Rh+</item>
+        <item>Thrombocyte 0Rh-</item>
     </string-array>
 
 
